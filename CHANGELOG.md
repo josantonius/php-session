@@ -3,6 +3,7 @@
 ## 1.0.0 - 2017-01-17
 * Added `Josantonius\Session\Session` class.
 * Added `Josantonius\Session\Session::init()` method.
+* Added `Josantonius\Session\Session::setPrefix()` method.
 * Added `Josantonius\Session\Session::set()` method.
 * Added `Josantonius\Session\Session::pull()` method.
 * Added `Josantonius\Session\Session::get()` method.
