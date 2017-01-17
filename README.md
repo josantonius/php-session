@@ -74,7 +74,7 @@ Session::init();
 
 Session::set('name', 'Joseph');
 
-var_dump(Session::get('name'));
+var_dump(Session::get('name')); # string(6) "Joseph"
 ```
 
 ### Tests 
@@ -104,7 +104,7 @@ SessionTest::testRegenerate();
 SessionTest::testDisplay();
 SessionTest::testDestroyOneKeySession();
 SessionTest::testDestroyAllSessions();
-SessionTest::testDestroyAllSessions();
+SessionTest::testDestroyAllSessionsWithPrefix();
 ```
 
 ### Exception Handler

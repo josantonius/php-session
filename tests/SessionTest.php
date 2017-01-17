@@ -175,7 +175,7 @@ class SessionTest {
      *
      * @since 1.0.0
      */
-    public static function testDestroyAllSessions() {
+    public static function testDestroyAllSessionsWithPrefix() {
 
         Session::init();
         
