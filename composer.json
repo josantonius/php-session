@@ -1,0 +1,40 @@
+{
+    "name":        "josantonius/session",
+    "version":     "1.0.0",
+    "type":        "library",
+    "description": "PHP library for handling sessions.",
+    "keywords": [
+        "Session",
+        "HHVM",
+        "PHP"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Josantonius",
+            "email":    "info@josantonius.com",
+            "homepage": "https://github.com/josantonius",
+            "role":     "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
+    "require": {
+        "php" : ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Josantonius\\Session\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Josantonius\\Session\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
