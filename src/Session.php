@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * PHP library for handling sessions.
  * 
@@ -9,9 +9,9 @@
  * @author     Josantonius - info@josantonius.com
  * @copyright  Copyright (c) 2017 JST PHP Framework
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @version    1.0.0
+ * @version    1.1.0
  * @link       https://github.com/Josantonius/PHP-Session
- * @since      File available since 1.0.0 - Update: 2017-01-17
+ * @since      File available since 1.0.0 - Update: 2017-01-30
  */
 
 namespace Josantonius\Session;
@@ -48,7 +48,7 @@ class Session {
      *
      * @since 1.0.0
      */
-    public static function setPrefix(string $prefix) {
+    public static function setPrefix($prefix) {
 
         static::$_prefix = $prefix;
     }
@@ -76,7 +76,7 @@ class Session {
      * @param mixed $key    → name the data to save
      * @param string $value → the data to save
      */
-    public static function set($key, string $value = false) {
+    public static function set($key, $value = false) {
 
         /**
         * Check whether session is set in array or not
@@ -104,7 +104,7 @@ class Session {
      *
      * @return mixed|null → return item or null when key does not exists
      */
-    public static function pull(string $key) {
+    public static function pull($key) {
 
         if (isset($_SESSION[static::$_prefix.$key])) {
 
@@ -138,7 +138,7 @@ class Session {
             }
         } 
         
-        return $_SESSION[static::$_prefix.$key] ?? null;
+        return (isset($_SESSION[static::$_prefix.$key])) ? $_SESSION[static::$_prefix.$key] : null;
     }
 
     /**
@@ -148,7 +148,7 @@ class Session {
      *
      * @return string → the session id
      */
-    public static function id(): string {
+    public static function id() {
 
         return session_id();
     }
@@ -160,7 +160,7 @@ class Session {
      *
      * @return string → session_id
      */
-    public static function regenerate(): string {
+    public static function regenerate() {
 
         session_regenerate_id(true);
         return session_id();
@@ -173,7 +173,7 @@ class Session {
      *
      * @return array → session indexes
      */
-    public static function display(): array {
+    public static function display() {
 
         return $_SESSION;
     }
@@ -187,7 +187,7 @@ class Session {
      * @param  string  $key    → session name to destroy
      * @param  boolean $prefix → if set to true clear all sessions for current prefix
      */
-    public static function destroy(string $key = '', bool $prefix = false) {
+    public static function destroy($key = '', $prefix = false) {
 
         if (static::$_sessionStarted == true) {
 

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * PHP library for handling sessions.
  * 
@@ -8,9 +8,9 @@
  * @author     Josantonius - info@josantonius.com
  * @copyright  Copyright (c) 2017 JST PHP Framework
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @version    1.0.0
+ * @version    1.1.0
  * @link       https://github.com/Josantonius/PHP-Session
- * @since      File available since 1.0.0 - Update: 2017-01-17
+ * @since      File available since 1.0.0 - Update: 2017-01-30
  */
 
 namespace Josantonius\Session\Exception;
@@ -35,7 +35,7 @@ class SessionException extends \Exception {
      * @param int    $error  → error code (Optional)
      * @param int    $status → HTTP response status code (Optional)
      */
-    public function __construct(string $msg = '', int $error = 0, int $status = 0) {
+    public function __construct($msg = '', $error = 0, $status = 0) {
 
         $this->message    = $msg;
         $this->code       = $error;

@@ -32,9 +32,7 @@ To install PHP Session library, simply:
 
 ### Requirements
 
-This library is supported by PHP versions 7.0 or higher and is compatible with HHVM versions 3.0 or higher.
-
-To use this library in HHVM (HipHop Virtual Machine) you will have to activate the scalar types. Add the following line "hhvm.php7.scalar_types = true" in your "/etc/hhvm/php.ini".
+This library is supported by PHP versions 5.6 or higher and is compatible with HHVM versions 3.0 or higher.
 
 ### Quick Start and Examples
 
