@@ -1,6 +1,6 @@
 {
     "name":        "josantonius/session",
-    "version":     "1.1.0",
+    "version":     "1.1.1",
     "type":        "library",
     "description": "PHP library for handling sessions.",
     "keywords": [
@@ -12,15 +12,20 @@
     "authors": [
         {
             "name":     "Josantonius",
-            "email":    "info@josantonius.com",
-            "homepage": "https://github.com/josantonius",
+            "email":    "hello@josantonius.com",
+            "homepage": "https://josantonius.com",
             "role":     "Developer"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable" : true,
+    "support": {
+        "source": "https://github.com/josantonius/php-session"
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "stable",
     "require": {
-        "php" : ">=5.6"
+        "php": "^5.6 || ^7.0"
     },
     "autoload": {
         "psr-4": {

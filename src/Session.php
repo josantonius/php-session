@@ -2,16 +2,12 @@
 /**
  * PHP library for handling sessions.
  * 
- * @category   JST
- * @package    Session
- * @subpackage Session
  * @author     David Carr  - info@daveismyname.blog
- * @author     Josantonius - info@josantonius.com
- * @copyright  Copyright (c) 2017 JST PHP Framework
+ * @author     Josantonius - hello@josantonius.com
+ * @copyright  Copyright (c) 2017
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @version    1.1.0
  * @link       https://github.com/Josantonius/PHP-Session
- * @since      File available since 1.0.0 - Update: 2017-01-30
+ * @since      1.0.0
  */
 
 namespace Josantonius\Session;
@@ -62,7 +58,7 @@ class Session {
 
         if (static::$_sessionStarted === false) {
 
-        	session_set_cookie_params(0);
+            session_set_cookie_params(0);
             session_start();
             static::$_sessionStarted = true;
         }
