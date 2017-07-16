@@ -12,8 +12,6 @@
 
 namespace Josantonius\Session;
 
-# use Josantonius\Session\Exception\SessionException;
-
 /**
  * Session handler.
  *
