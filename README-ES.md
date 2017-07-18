@@ -4,7 +4,7 @@
 
 [English version](README.md)
 
-Librería PHP para manejo de sesiones.
+Biblioteca PHP para manejo de sesiones.
 
 ---
 
@@ -24,7 +24,7 @@ Librería PHP para manejo de sesiones.
 <p align="center"><strong>Echa un vistazo al código</strong></p>
 
 <p align="center">
-  <a href="" title="Echa un vistazo al código">
+  <a href="https://youtu.be/3q6KRVGMj3w" title="Echa un vistazo al código">
   	<img src="https://raw.githubusercontent.com/Josantonius/PHP-Algorithm/master/resources/youtube-thumbnail.jpg">
   </a>
 </p>
@@ -53,7 +53,7 @@ Esta biblioteca es soportada por versiones de PHP 5.6 o superiores y es compatib
 
 ### Cómo empezar y ejemplos
 
-Para utilizar esta librería, simplemente:
+Para utilizar esta biblioteca, simplemente:
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
@@ -62,7 +62,7 @@ use Josantonius\Session\Session;
 ```
 ### Métodos disponibles
 
-Métodos disponibles en esta librería:
+Métodos disponibles en esta biblioteca:
 
 ```php
 Session::init();
@@ -77,7 +77,7 @@ Session::destroy();
 ```
 ### Uso
 
-Ejemplo de uso para esta librería:
+Ejemplo de uso para esta biblioteca:
 
 ```php
 <?php
@@ -104,7 +104,7 @@ $loader->addPsr4('Josantonius\\Session\\Tests\\', __DIR__ . '/vendor/josantonius
 
 use Josantonius\Session\Tests\SessionTest;
 ```
-Métodos de prueba disponibles en esta librería:
+Métodos de prueba disponibles en esta biblioteca:
 
 ```php
 SessionTest::testSetPrefix();
