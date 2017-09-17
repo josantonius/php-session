@@ -9,7 +9,7 @@
  * @since      1.1.3
  */
 
-namespace Josantonius\Session\Tests;
+namespace Josantonius\Session\Test;
 
 use Josantonius\Session\Session,
     PHPUnit\Framework\TestCase;
