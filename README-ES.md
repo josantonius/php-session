@@ -63,7 +63,6 @@ Session::pull();
 Session::get();
 Session::id();
 Session::regenerate();
-Session::display();
 Session::destroy();
 ```
 ### Uso

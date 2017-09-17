@@ -14,6 +14,8 @@
 * Added `Session/_config.yml` file.
 * Added `Session/.travis.yml` file.
 
+* Deleted `Josantonius\Session\Session::display()` method.
+
 * Deleted `Josantonius\Session\Tests\SessionTest` class.
 * Deleted `Josantonius\Session\Tests\SessionTest::testSetPrefix()` method.
 * Deleted `Josantonius\Session\Tests\SessionTest::testSet()` method.
