@@ -1,5 +1,50 @@
 # CHANGELOG
 
+## 1.1.3 - 2017-09-17
+
+* Unit tests supported by `PHPUnit` were added.
+
+* The repository was synchronized with `Travis CI` to implement continuous integration.
+ 
+* Added `Session/src/bootstrap.php` file
+
+* Added `Session/tests/bootstrap.php` file.
+
+* Added `Session/phpunit.xml.dist` file.
+* Added `Session/_config.yml` file.
+* Added `Session/.travis.yml` file.
+
+* Deleted `Josantonius\Session\Tests\SessionTest` class.
+* Deleted `Josantonius\Session\Tests\SessionTest::testSetPrefix()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testSet()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testSetMultiple()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testPull()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testGet()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testGetSecondKey()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testId()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testRegenerate()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testDisplay()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testDestroyOneKeySession()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testDestroyAllSessions()` method.
+* Deleted `Josantonius\Session\Tests\SessionTest::testDestroyAllSessions()` method.
+
+* Added `Josantonius\Session\Test\SessionTest` class.
+* Added `Josantonius\Session\Test\SessionTest::testSetPrefix()` method.
+* Added `Josantonius\Session\Test\SessionTest::testInit()` method.
+* Added `Josantonius\Session\Test\SessionTest::testSet()` method.
+* Added `Josantonius\Session\Test\SessionTest::testSetMultiple()` method.
+* Added `Josantonius\Session\Test\SessionTest::testPull()` method.
+* Added `Josantonius\Session\Test\SessionTest::testPullNonExistent()` method.
+* Added `Josantonius\Session\Test\SessionTest::testGet()` method.
+* Added `Josantonius\Session\Test\SessionTest::testGetNonExistent()` method.
+* Added `Josantonius\Session\Test\SessionTest::testGetWithSecondKey()` method.
+* Added `Josantonius\Session\Test\SessionTest::testGetWithSecondKeyNonExistent()` method.
+* Added `Josantonius\Session\Test\SessionTest::testGetAll()` method.
+* Added `Josantonius\Session\Test\SessionTest::testId()` method.
+* Added `Josantonius\Session\Test\SessionTest::testRegenerate()` method.
+* Added `Josantonius\Session\Test\SessionTest::testValidateRegenerateId()` method.
+* Added `Josantonius\Session\Test\SessionTest::testDestroy()` method.
+
 ## 1.1.2 - 2017-07-16
 * Added `Josantonius\Session\Exception\SessionException` class.
 * Added `Josantonius\Session\Exception\Exceptions` abstract class.

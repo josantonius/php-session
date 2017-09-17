@@ -1,6 +1,6 @@
 # PHP Session library
 
-[![Latest Stable Version](https://poser.pugx.org/josantonius/session/v/stable)](https://packagist.org/packages/josantonius/session) [![Total Downloads](https://poser.pugx.org/josantonius/session/downloads)](https://packagist.org/packages/josantonius/session) [![Latest Unstable Version](https://poser.pugx.org/josantonius/session/v/unstable)](https://packagist.org/packages/josantonius/session) [![License](https://poser.pugx.org/josantonius/session/license)](https://packagist.org/packages/josantonius/session)
+[![Latest Stable Version](https://poser.pugx.org/josantonius/session/v/stable)](https://packagist.org/packages/josantonius/session) [![Total Downloads](https://poser.pugx.org/josantonius/session/downloads)](https://packagist.org/packages/josantonius/session) [![Latest Unstable Version](https://poser.pugx.org/josantonius/session/v/unstable)](https://packagist.org/packages/josantonius/session) [![License](https://poser.pugx.org/josantonius/session/license)](https://packagist.org/packages/josantonius/session) [![Travis](https://travis-ci.org/Josantonius/PHP-Session.svg)](https://travis-ci.org/Josantonius/PHP-Session)
 
 [Versión en español](README-ES.md)
 
@@ -14,20 +14,11 @@ PHP library for handling sessions.
 - [Available Methods](#available-methods)
 - [Usage](#usage)
 - [Tests](#tests)
+- [TODO](#-todo)
 - [Contribute](#contribute)
 - [Repository](#repository)
 - [License](#license)
 - [Copyright](#copyright)
-
----
-
-<p align="center"><strong>Take a look at the code</strong></p>
-
-<p align="center">
-  <a href="https://youtu.be/3q6KRVGMj3w" title="Take a look at the code">
-  	<img src="https://raw.githubusercontent.com/Josantonius/PHP-Algorithm/master/resources/youtube-thumbnail.jpg">
-  </a>
-</p>
 
 ---
 
@@ -94,35 +85,21 @@ var_dump(Session::get('name')); # string(6) "Joseph"
 
 ### Tests 
 
-To use the [test](tests) class, simply:
+To run [tests](tests/Session/Test) simply:
 
-```php
-<?php
-$loader = require __DIR__ . '/vendor/autoload.php';
+    $ git clone https://github.com/Josantonius/PHP-Session.git
+    
+    $ cd PHP-Session
 
-$loader->addPsr4('Josantonius\\Session\\Tests\\', __DIR__ . '/vendor/josantonius/session/tests');
+    $ phpunit
 
-use Josantonius\Session\Tests\SessionTest;
+### ☑ TODO
 
-```
-Available test methods in this library:
-
-```php
-SessionTest::testSetPrefix();
-SessionTest::testSet();
-SessionTest::testSetMultiple();
-SessionTest::testPull();
-SessionTest::testGet();
-SessionTest::testGetSecondKey();
-SessionTest::testId();
-SessionTest::testRegenerate();
-SessionTest::testDisplay();
-SessionTest::testDestroyOneKeySession();
-SessionTest::testDestroyAllSessions();
-SessionTest::testDestroyAllSessionsWithPrefix();
-```
+- [x] Create tests
+- [ ] Improve documentation
 
 ### Contribute
+
 1. Check for open issues or open a new issue to start a discussion around a bug or feature.
 1. Fork the repository on GitHub to start making your changes.
 1. Write one or more tests for the new feature or that expose the bug.

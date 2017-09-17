@@ -1,6 +1,6 @@
 {
     "name":        "josantonius/session",
-    "version":     "1.1.2",
+    "version":     "1.1.3",
     "type":        "library",
     "description": "PHP library for handling sessions.",
     "keywords": [
@@ -18,6 +18,8 @@
         }
     ],
     "support": {
+        "issues": "https://github.com/josantonius/php-session/issues",
+        "forum":  "http://stackoverflow.com/tags/josantonius/php-session",
         "source": "https://github.com/josantonius/php-session"
     },
     "config": {
@@ -27,14 +29,12 @@
     "require": {
         "php": "^5.6 || ^7.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "5.7.*"
+    },
     "autoload": {
         "psr-4": {
-            "Josantonius\\Session\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Josantonius\\Session\\Tests\\": "tests/"
+            "Josantonius\\Session\\": "src/Session/"
         }
     },
     "extra": {
