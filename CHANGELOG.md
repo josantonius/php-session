@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## 1.1.4 - 2017-10-27
+
+* Implemented `PSR-4 autoloader standard` from all library files.
+
+* Implemented `PSR-2 coding standard` from all library PHP files.
+
+* Implemented `PHPCS` to ensure that PHP code complies with `PSR2` code standards.
+
+* Implemented `Codacy` to automates code reviews and monitors code quality over time.
+
+* Implemented `Codecov` to coverage reports.
+
+* Added `Session/phpcs.ruleset.xml` file.
+
+* Deleted `Session/src/bootstrap.php` file.
+
+* Deleted `Session/tests/bootstrap.php` file.
+
+* Deleted `Session/vendor` folder.
+
+* Changed `Josantonius\Session\Test\SessionTest` class to  `Josantonius\Session\SessionTest` class.
+
 ## 1.1.3 - 2017-09-17
 
 * Unit tests supported by `PHPUnit` were added.

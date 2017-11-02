@@ -4,6 +4,10 @@ sudo: false
 
 dist: trusty
 
+branches:
+  only:
+    - master
+
 git:
   depth: 5
 
@@ -11,18 +15,31 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
   - hhvm
   - nightly
 
 matrix:
   fast_finish: true
+  include:
+    - php: 7.1
+      env: PHPCS=PSR2
+
   allow_failures:
-    - php: hhvm
     - php: nightly
 
 before_script:
-  - composer self-update
-  - composer install
+  - export PATH="./vendor/bin:$PATH"
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-  - composer test
+  - phpunit
+  - |
+    if [[ "$PHPCS" ]] ; then
+      phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
+    fi
+    phpunit --coverage-clover=coverage.xml
+
+after_success:
+ - bash <(curl -s https://codecov.io/bash)
