@@ -247,7 +247,7 @@ Session::destroy();
 
 ## Tests 
 
-To run [tests](tests) you just need [Composer](http://getcomposer.org/download/) and to execute the following:
+To run [tests](tests) you just need [composer](http://getcomposer.org/download/) and to execute the following:
 
     $ git clone https://github.com/Josantonius/PHP-Session.git
     
@@ -263,28 +263,39 @@ Run [PSR2](http://www.php-fig.org/psr/psr-2/) code standard tests with [PHPCS](h
 
     $ composer phpcs
 
+Run [PHP Mess Detector](https://phpmd.org/) tests to detect inconsistencies in code style:
+
+    $ composer phpmd
+
 Run all previous tests:
 
     $ composer tests
 
 ## ☑ TODO
 
-- [x] Create tests
-- [x] Improve documentation
+- [ ] Add new feature
+- [ ] Improve tests
+- [ ] Improve documentation
+- [ ] Refactor code
 
 ## Contribute
 
-1. Check for open issues or open a new issue to start a discussion around a bug or feature.
-1. Fork the repository on GitHub to start making your changes.
-1. Write one or more tests for the new feature or that expose the bug.
-1. Make code changes to implement the feature or fix the bug.
-1. Send a pull request to get your changes merged and published.
+If you would like to help, please take a look at the list of
+[issues](https://github.com/Josantonius/PHP-Session/issues) or the [To Do](#-todo) checklist.
 
-This is intended for large and long-lived objects.
+**Pull requests**
+
+* [Fork and clone](https://help.github.com/articles/fork-a-repo).
+* Run the command `composer install` to install the dependencies.
+  This will also install the [dev dependencies](https://getcomposer.org/doc/03-cli.md#install).
+* Run the command `composer fix` to excute code standard fixers.
+* Run the [tests](#tests).
+* Create a **branch**, **commit**, **push** and send me a
+  [pull request](https://help.github.com/articles/using-pull-requests).
 
 ## Repository
 
-All files in this repository were created and uploaded automatically with [Reposgit Creator](https://github.com/Josantonius/BASH-Reposgit).
+The file structure from this repository was created with [PHP-Skeleton](https://github.com/Josantonius/PHP-Skeleton).
 
 ## License
 

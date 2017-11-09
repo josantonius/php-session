@@ -263,28 +263,39 @@ Ejecutar pruebas de estándares de código [PSR2](http://www.php-fig.org/psr/psr
 
     $ composer phpcs
 
+Ejecutar pruebas con [PHP Mess Detector](https://phpmd.org/) para detectar inconsistencias en el estilo de codificación:
+
+    $ composer phpmd
+
 Ejecutar todas las pruebas anteriores:
 
     $ composer tests
 
 ## ☑ Tareas pendientes
 
-- [x] Completar tests
-- [x] Mejorar la documentación
+- [ ] Añadir nueva funcionalidad
+- [ ] Mejorar pruebas
+- [ ] Mejorar documentación
+- [ ] Refactorizar código
 
 ## Contribuir
 
-1. Comprobar si hay incidencias abiertas o abrir una nueva para iniciar una discusión en torno a un fallo o función.
-1. Bifurca la rama del repositorio en GitHub para iniciar la operación de ajuste.
-1. Escribe una o más pruebas para la nueva característica o expón el error.
-1. Haz cambios en el código para implementar la característica o reparar el fallo.
-1. Envía pull request para fusionar los cambios y que sean publicados.
+Si deseas colaborar, puedes echar un vistazo a la lista de
+[issues](https://github.com/Josantonius/PHP-Session/issues) o [tareas pendientes](#-tareas-pendientes).
 
-Esto está pensado para proyectos grandes y de larga duración.
+**Pull requests**
+
+* [Fork and clone](https://help.github.com/articles/fork-a-repo).
+* Ejecuta el comando `composer install` para instalar dependencias.
+  Esto también instalará las [dependencias de desarrollo](https://getcomposer.org/doc/03-cli.md#install).
+* Ejecuta el comando `composer fix` para estandarizar el código.
+* Ejecuta las [pruebas](#tests).
+* Crea una nueva rama (**branch**), **commit**, **push** y envíame un
+  [pull request](https://help.github.com/articles/using-pull-requests).
 
 ## Repositorio
 
-Los archivos de este repositorio se crearon y subieron automáticamente con [Reposgit Creator](https://github.com/Josantonius/BASH-Reposgit).
+La estructura de archivos de este repositorio se creó con [PHP-Skeleton](https://github.com/Josantonius/PHP-Skeleton).
 
 ## Licencia
 

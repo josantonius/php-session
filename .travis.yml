@@ -2,6 +2,10 @@ language: php
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 dist: trusty
 
 branches:
@@ -18,7 +22,7 @@ php:
   - 7.2
   - hhvm
   - nightly
-
+  
 matrix:
   fast_finish: true
   include:
@@ -37,7 +41,8 @@ script:
   - phpunit
   - |
     if [[ "$PHPCS" ]] ; then
-      phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
+      phpcs --standard=phpcs.xml $(find . -name '*.php')
+      phpmd src,tests text ./phpmd.xml
     fi
     phpunit --coverage-clover=coverage.xml
 

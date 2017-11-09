@@ -9,7 +9,6 @@
  * @link      https://github.com/Josantonius/PHP-Session
  * @since     1.0.0
  */
-
 namespace Josantonius\Session;
 
 /**
@@ -25,8 +24,6 @@ class Session
      * @since 1.0.0
      *
      * @var string
-     *
-     * @return void
      */
     private static $prefix = 'jst_';
 
@@ -35,9 +32,7 @@ class Session
      *
      * @since 1.0.0
      *
-     * @var boolean
-     *
-     * @return void
+     * @var bool
      */
     private static $sessionStarted = false;
 
@@ -48,11 +43,11 @@ class Session
      *
      * @param mixed $prefix → prefix for sessions
      *
-     * @return boolean
+     * @return bool
      */
     public static function setPrefix($prefix)
     {
-        return (is_string(self::$prefix = $prefix));
+        return is_string(self::$prefix = $prefix);
     }
 
     /**
@@ -60,13 +55,14 @@ class Session
      *
      * @since 1.0.0
      *
-     * @return boolean
+     * @return bool
      */
     public static function init()
     {
         if (self::$sessionStarted == false) {
             session_set_cookie_params(0);
             session_start();
+
             return self::$sessionStarted = true;
         }
 
@@ -81,7 +77,7 @@ class Session
      * @param string $key   → name the data to save
      * @param mixed  $value → the data to save
      *
-     * @return boolean true
+     * @return bool true
      */
     public static function set($key, $value = false)
     {
@@ -110,6 +106,7 @@ class Session
         if (isset($_SESSION[self::$prefix . $key])) {
             $value = $_SESSION[self::$prefix . $key];
             unset($_SESSION[self::$prefix . $key]);
+
             return $value;
         }
 
@@ -121,8 +118,8 @@ class Session
      *
      * @since 1.0.0
      *
-     * @param string          $key       → item to look for in session
-     * @param string|boolean  $secondkey → if used then use as a second key
+     * @param string      $key       → item to look for in session
+     * @param string|bool $secondkey → if used then use as a second key
      *
      * @return mixed|null → key value, or null if key doesn't exists
      */
@@ -172,10 +169,10 @@ class Session
      *
      * @since 1.0.0
      *
-     * @param string  $key    → session name to destroy
-     * @param boolean $prefix → if true clear all sessions for current prefix
+     * @param string $key    → session name to destroy
+     * @param bool   $prefix → if true clear all sessions for current prefix
      *
-     * @return boolean
+     * @return bool
      */
     public static function destroy($key = '', $prefix = false)
     {

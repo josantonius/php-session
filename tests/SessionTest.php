@@ -8,7 +8,6 @@
  * @link      https://github.com/Josantonius/PHP-Session
  * @since     1.1.3
  */
-
 namespace Josantonius\Session;
 
 use PHPUnit\Framework\TestCase;
@@ -21,15 +20,45 @@ use PHPUnit\Framework\TestCase;
 class SessionTest extends TestCase
 {
     /**
+     * Session instance.
+     *
+     * @since 1.1.5
+     *
+     * @var object
+     */
+    protected $Session;
+
+    /**
+     * Set up.
+     *
+     * @since 1.1.5
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->Session = new Session;
+    }
+
+    /**
+     * Check if it is an instance of Session.
+     *
+     * @since 1.1.5
+     */
+    public function testIsInstanceOfSession()
+    {
+        $actual = $this->Session;
+        $this->assertInstanceOf('Josantonius\Session\Session', $actual);
+    }
+
+    /**
      * Set prefix for sessions.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testSetPrefix()
     {
-        $this->assertTrue(Session::setPrefix('ses_'));
+        $this->assertTrue($this->Session->setPrefix('ses_'));
     }
 
     /**
@@ -38,139 +67,116 @@ class SessionTest extends TestCase
      * @runInSeparateProcess
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testInit()
     {
-        $this->assertTrue(Session::init());
+        $this->assertTrue($this->Session->init());
     }
 
     /**
      * Add value to a session.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testSet()
     {
-        $this->assertTrue(Session::set('name', 'Joseph'));
+        $this->assertTrue($this->Session->set('name', 'Joseph'));
     }
 
     /**
      * Add multiple value to sessions.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testSetMultiple()
     {
         $data = [
-
-            'name'     => 'Joseph',
-            'age'      => '28',
+            'name' => 'Joseph',
+            'age' => '28',
             'business' => ['name' => 'Company'],
         ];
 
-        $this->assertTrue(Session::set($data));
+        $this->assertTrue($this->Session->set($data));
     }
 
     /**
      * Extract session item, delete session item and finally return the item.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testPull()
     {
-        $this->assertContains('28', Session::pull('age'));
+        $this->assertContains('28', $this->Session->pull('age'));
     }
 
     /**
      * Extract inexistent session item.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testPullNonExistent()
     {
-        $this->assertNull(Session::pull('???'));
+        $this->assertNull($this->Session->pull('???'));
     }
 
     /**
      * Get item from session.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testGet()
     {
-        $this->assertContains('Joseph', Session::get('name'));
+        $this->assertContains('Joseph', $this->Session->get('name'));
     }
 
     /**
      * Get inexistent session item from session.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testGetNonExistent()
     {
-        $this->assertNull(Session::get('age'));
+        $this->assertNull($this->Session->get('age'));
     }
 
     /**
      * Get item from session entering two indexes.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testGetWithSecondKey()
     {
-        $this->assertContains('Company', Session::get('business', 'name'));
+        $this->assertContains('Company', $this->Session->get('business', 'name'));
     }
 
     /**
      * Get inexistent item from session entering two indexes.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testGetWithSecondKeyNonExistent()
     {
-        $this->assertNull(Session::get('???', '???'));
+        $this->assertNull($this->Session->get('???', '???'));
     }
 
     /**
      * Return the session array.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testGetAll()
     {
-        $this->assertInternalType('array', Session::get());
+        $this->assertInternalType('array', $this->Session->get());
     }
 
     /**
      * Get session id.
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testId()
     {
-        $this->assertInternalType('string', Session::id());
+        $this->assertInternalType('string', $this->Session->id());
     }
 
     /**
@@ -179,14 +185,12 @@ class SessionTest extends TestCase
      * @runInSeparateProcess
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testRegenerate()
     {
-        $this->assertTrue(Session::init());
+        $this->assertTrue($this->Session->init());
 
-        $this->assertInternalType('string', Session::regenerate());
+        $this->assertInternalType('string', $this->Session->regenerate());
     }
 
     /**
@@ -195,22 +199,20 @@ class SessionTest extends TestCase
      * @runInSeparateProcess
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testValidateRegenerateId()
     {
-        $this->assertTrue(Session::init());
+        $this->assertTrue($this->Session->init());
 
-        $actualID = Session::id();
+        $actualID = $this->Session->id();
 
         $this->assertInternalType('string', $actualID);
 
-        $newID = Session::regenerate();
+        $newID = $this->Session->regenerate();
 
         $this->assertInternalType('string', $newID);
 
-        $this->assertNotEquals($actualID, $newID);
+        $this->assertNotSame($actualID, $newID);
     }
 
     /**
@@ -219,23 +221,21 @@ class SessionTest extends TestCase
      * @runInSeparateProcess
      *
      * @since 1.1.3
-     *
-     * @return void
      */
     public function testDestroy()
     {
-        $this->assertTrue(Session::init());
+        $this->assertTrue($this->Session->init());
 
-        $this->assertTrue(Session::set('name', 'Joseph'));
+        $this->assertTrue($this->Session->set('name', 'Joseph'));
 
-        $this->assertContains('Joseph', Session::get('name'));
+        $this->assertContains('Joseph', $this->Session->get('name'));
 
-        $this->assertTrue(Session::destroy('name'));
+        $this->assertTrue($this->Session->destroy('name'));
 
-        $this->assertNull(Session::get('name'));
+        $this->assertNull($this->Session->get('name'));
 
-        $this->assertTrue(Session::destroy('ses_', true));
+        $this->assertTrue($this->Session->destroy('ses_', true));
 
-        $this->assertTrue(Session::destroy());
+        $this->assertTrue($this->Session->destroy());
     }
 }
