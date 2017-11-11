@@ -51,6 +51,18 @@ class Session
     }
 
     /**
+     * Get prefix for sessions.
+     *
+     * @since 1.0.0
+     *
+     * @return string
+     */
+    public static function getPrefix()
+    {
+        return self::$prefix;
+    }
+
+    /**
      * If session has not started, start sessions.
      *
      * @since 1.0.0
