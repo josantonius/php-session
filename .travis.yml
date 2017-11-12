@@ -44,7 +44,6 @@ script:
       phpcs --standard=phpcs.xml $(find . -name '*.php')
       phpmd src,tests text ./phpmd.xml
     fi
-    phpunit --coverage-clover=coverage.xml
 
 after_success:
  - bash <(curl -s https://codecov.io/bash)
