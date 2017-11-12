@@ -29,17 +29,17 @@
     <rule ref="rulesets/naming.xml/BooleanGetMethodName"/>
     <!--unusedcode-->
     <rule ref="rulesets/unusedcode.xml/UnusedFormalParameter"/>
-    <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable"/>
+    <!--<rule ref="rulesets/unusedcode.xml/UnusedLocalVariable"/>-->
     <rule ref="rulesets/unusedcode.xml/UnusedPrivateField"/>
     <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod"/>
     <!--controversial-->
-    <rule ref="rulesets/controversial.xml/Superglobals"/>
+    <!--<rule ref="rulesets/controversial.xml/Superglobals"/>-->
     <rule ref="rulesets/controversial.xml/CamelCaseClassName"/>
     <rule ref="rulesets/controversial.xml/CamelCasePropertyName"/>
     <rule ref="rulesets/controversial.xml/CamelCaseMethodName"/>
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName"/>
     <rule ref="rulesets/controversial.xml/CamelCaseVariableName"/>
     <!--cleancode-->
-    <rule ref="rulesets/cleancode.xml/BooleanArgumentFlag"/>
-    <rule ref="rulesets/cleancode.xml/ElseExpression"/>
+    <!--<rule ref="rulesets/cleancode.xml/BooleanArgumentFlag"/>-->
+    <!--<rule ref="rulesets/cleancode.xml/ElseExpression"/>-->
 </ruleset>
