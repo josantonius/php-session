@@ -67,7 +67,7 @@ class SessionTest extends TestCase
     /**
      * Get prefix for sessions.
      *
-     * @since 1.1.3
+     * @since 1.1.6
      */
     public function testGetPrefix()
     {

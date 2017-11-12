@@ -64,6 +64,14 @@ Session::setPrefix($prefix);
 
 **# Return** (boolean)
 
+### - Get sessions prefix:
+
+```php
+Session::getPrefix();
+```
+
+**# Return** (string) → sessions prefix
+
 ### - Start session if session has not started:
 
 ```php
@@ -165,6 +173,12 @@ Example of use for this library:
 
 ```php
 Session::set('name', 'Joseph');
+```
+
+### - Get sessions prefix:
+
+```php
+Session::getPrefix();
 ```
 
 ### - Start session:

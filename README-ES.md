@@ -64,6 +64,14 @@ Session::setPrefix($prefix);
 
 **# Return** (boolean)
 
+### - Obtener prefijo de las sesiones:
+
+```php
+Session::getPrefix();
+```
+
+**# Return** (string) → prefijo de las sesiones
+
 ### - Iniciar sesión si la sesión no se ha iniciado:
 
 ```php
@@ -165,6 +173,12 @@ Ejemplo de uso para esta biblioteca:
 
 ```php
 Session::set('name', 'Joseph');
+```
+
+### - Obtener prefijo de las sesiones:
+
+```php
+Session::getPrefix();
 ```
 
 ### - Iniciar sesión:

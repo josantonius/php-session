@@ -53,7 +53,7 @@ class Session
     /**
      * Get prefix for sessions.
      *
-     * @since 1.0.0
+     * @since 1.1.6
      *
      * @return string
      */
@@ -141,7 +141,7 @@ class Session
 
         if (empty($key)) {
             return isset($_SESSION) ? $_SESSION : null;
-        } elseif ($secondkey) {
+        } elseif ($secondkey == true) {
             if (isset($_SESSION[$name][$secondkey])) {
                 return $_SESSION[$name][$secondkey];
             }

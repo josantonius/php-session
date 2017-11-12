@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.1.6 - 2017-11-12
+
+* Set the correct `phpcbf` fix command in `composer.json`.
+
+* Logical condition was unified.
+
+* Set static methods should in tests class. Use `::` instead of `->`.
+
+* Added `Josantonius\Session\Session::getPrefix()` method.
+
+* Added `Josantonius\Session\Tests\SessionTest::testSetPrefix()` method.
+
 ## 1.1.5 - 2017-11-09
 
 * Implemented `PHP Mess Detector` to detect inconsistencies in code styles.
