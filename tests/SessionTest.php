@@ -48,6 +48,7 @@ class SessionTest extends TestCase
     public function testIsInstanceOfSession()
     {
         $actual = $this->Session;
+
         $this->assertInstanceOf('Josantonius\Session\Session', $actual);
     }
 
@@ -58,7 +59,22 @@ class SessionTest extends TestCase
      */
     public function testSetPrefix()
     {
-        $this->assertTrue($this->Session->setPrefix('ses_'));
+        $session = $this->Session;
+
+        $this->assertTrue($session::setPrefix('ses_'));
+    }
+
+    /**
+     * Get prefix for sessions.
+     *
+     * @since 1.1.3
+     */
+    public function testGetPrefix()
+    {
+        $session = $this->Session;
+        $session::setPrefix('ses_');
+
+        $this->assertSame('ses_', $session::getPrefix());
     }
 
     /**
@@ -70,7 +86,10 @@ class SessionTest extends TestCase
      */
     public function testInit()
     {
-        $this->assertTrue($this->Session->init());
+        $session = $this->Session;
+
+        $this->assertTrue($session::init());
+        $this->assertFalse($session::init());
     }
 
     /**
@@ -80,7 +99,9 @@ class SessionTest extends TestCase
      */
     public function testSet()
     {
-        $this->assertTrue($this->Session->set('name', 'Joseph'));
+        $session = $this->Session;
+
+        $this->assertTrue($session::set('name', 'Joseph'));
     }
 
     /**
@@ -90,13 +111,14 @@ class SessionTest extends TestCase
      */
     public function testSetMultiple()
     {
+        $session = $this->Session;
         $data = [
             'name' => 'Joseph',
             'age' => '28',
             'business' => ['name' => 'Company'],
         ];
 
-        $this->assertTrue($this->Session->set($data));
+        $this->assertTrue($session::set($data));
     }
 
     /**
@@ -106,7 +128,9 @@ class SessionTest extends TestCase
      */
     public function testPull()
     {
-        $this->assertContains('28', $this->Session->pull('age'));
+        $session = $this->Session;
+
+        $this->assertContains('28', $session::pull('age'));
     }
 
     /**
@@ -116,7 +140,9 @@ class SessionTest extends TestCase
      */
     public function testPullNonExistent()
     {
-        $this->assertNull($this->Session->pull('???'));
+        $session = $this->Session;
+
+        $this->assertNull($session::pull('???'));
     }
 
     /**
@@ -126,7 +152,9 @@ class SessionTest extends TestCase
      */
     public function testGet()
     {
-        $this->assertContains('Joseph', $this->Session->get('name'));
+        $session = $this->Session;
+
+        $this->assertContains('Joseph', $session::get('name'));
     }
 
     /**
@@ -136,7 +164,9 @@ class SessionTest extends TestCase
      */
     public function testGetNonExistent()
     {
-        $this->assertNull($this->Session->get('age'));
+        $session = $this->Session;
+
+        $this->assertNull($session::get('age'));
     }
 
     /**
@@ -146,7 +176,9 @@ class SessionTest extends TestCase
      */
     public function testGetWithSecondKey()
     {
-        $this->assertContains('Company', $this->Session->get('business', 'name'));
+        $session = $this->Session;
+
+        $this->assertContains('Company', $session::get('business', 'name'));
     }
 
     /**
@@ -156,7 +188,9 @@ class SessionTest extends TestCase
      */
     public function testGetWithSecondKeyNonExistent()
     {
-        $this->assertNull($this->Session->get('???', '???'));
+        $session = $this->Session;
+
+        $this->assertNull($session::get('???', '???'));
     }
 
     /**
@@ -166,7 +200,9 @@ class SessionTest extends TestCase
      */
     public function testGetAll()
     {
-        $this->assertInternalType('array', $this->Session->get());
+        $session = $this->Session;
+
+        $this->assertInternalType('array', $session::get());
     }
 
     /**
@@ -176,7 +212,9 @@ class SessionTest extends TestCase
      */
     public function testId()
     {
-        $this->assertInternalType('string', $this->Session->id());
+        $session = $this->Session;
+
+        $this->assertInternalType('string', $session::id());
     }
 
     /**
@@ -188,9 +226,11 @@ class SessionTest extends TestCase
      */
     public function testRegenerate()
     {
-        $this->assertTrue($this->Session->init());
+        $session = $this->Session;
 
-        $this->assertInternalType('string', $this->Session->regenerate());
+        $this->assertTrue($session::init());
+
+        $this->assertInternalType('string', $session::regenerate());
     }
 
     /**
@@ -202,13 +242,15 @@ class SessionTest extends TestCase
      */
     public function testValidateRegenerateId()
     {
-        $this->assertTrue($this->Session->init());
+        $session = $this->Session;
 
-        $actualID = $this->Session->id();
+        $this->assertTrue($session::init());
+
+        $actualID = $session::id();
 
         $this->assertInternalType('string', $actualID);
 
-        $newID = $this->Session->regenerate();
+        $newID = $session::regenerate();
 
         $this->assertInternalType('string', $newID);
 
@@ -224,18 +266,24 @@ class SessionTest extends TestCase
      */
     public function testDestroy()
     {
-        $this->assertTrue($this->Session->init());
+        $session = $this->Session;
 
-        $this->assertTrue($this->Session->set('name', 'Joseph'));
+        $this->assertTrue($session::init());
 
-        $this->assertContains('Joseph', $this->Session->get('name'));
+        $this->assertTrue($session::set('name', 'Joseph'));
 
-        $this->assertTrue($this->Session->destroy('name'));
+        $this->assertContains('Joseph', $session::get('name'));
 
-        $this->assertNull($this->Session->get('name'));
+        $this->assertTrue($session::destroy('name'));
 
-        $this->assertTrue($this->Session->destroy('ses_', true));
+        $this->assertNull($session::get('name'));
 
-        $this->assertTrue($this->Session->destroy());
+        $this->assertTrue($session::destroy('ses_', true));
+
+        $this->assertTrue($session::set('name', 'Joseph'));
+
+        $this->assertTrue($session::destroy('name', true));
+
+        $this->assertTrue($session::destroy());
     }
 }
