@@ -24,7 +24,7 @@ PHP library for handling sessions.
 
 ## Requirements
 
-This library is supported by **PHP versions 5.6** or higher and is compatible with **HHVM versions 3.0** or higher.
+This library is supported by **PHP versions 5.6** or higher.
 
 ## Installation
 

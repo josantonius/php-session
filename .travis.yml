@@ -30,6 +30,7 @@ matrix:
       env: PHPCS=PSR2
 
   allow_failures:
+    - php: hhvm
     - php: nightly
 
 before_script:
