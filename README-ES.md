@@ -287,10 +287,10 @@ Ejecutar todas las pruebas anteriores:
 
 ## ☑ Tareas pendientes
 
-- [ ] Añadir nueva funcionalidad
-- [ ] Mejorar pruebas
-- [ ] Mejorar documentación
-- [ ] Refactorizar código
+- [ ] Añadir nueva funcionalidad.
+- [ ] Mejorar pruebas.
+- [ ] Mejorar documentación.
+- [ ] Refactorizar código para las reglas de estilo de código deshabilitadas. Ver [phpmd.xml](phpmd.xml) y [.php_cs.dist](.php_cs.dist).
 
 ## Contribuir
 
@@ -317,7 +317,7 @@ Este proyecto está licenciado bajo **licencia MIT**. Consulta el archivo [LICEN
 
 ## Copyright
 
-2017 Josantonius, [josantonius.com](https://josantonius.com/)
+2017 - 2018 Josantonius, [josantonius.com](https://josantonius.com/)
 
 Si te ha resultado útil, házmelo saber :wink:
 

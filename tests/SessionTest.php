@@ -3,7 +3,7 @@
  * PHP library for handling sessions.
  *
  * @author    Josantonius <hello@josantonius.com>
- * @copyright 2017 (c) Josantonius - PHP-Session
+ * @copyright 2017 - 2018 (c) Josantonius - PHP-Session
  * @license   https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link      https://github.com/Josantonius/PHP-Session
  * @since     1.1.3
@@ -47,15 +47,11 @@ class SessionTest extends TestCase
      */
     public function testIsInstanceOfSession()
     {
-        $actual = $this->Session;
-
-        $this->assertInstanceOf('Josantonius\Session\Session', $actual);
+        $this->assertInstanceOf('Josantonius\Session\Session', $this->Session);
     }
 
     /**
      * Set prefix for sessions.
-     *
-     * @since 1.1.3
      */
     public function testSetPrefix()
     {
@@ -81,8 +77,6 @@ class SessionTest extends TestCase
      * Start session.
      *
      * @runInSeparateProcess
-     *
-     * @since 1.1.3
      */
     public function testInit()
     {
@@ -94,8 +88,6 @@ class SessionTest extends TestCase
 
     /**
      * Add value to a session.
-     *
-     * @since 1.1.3
      */
     public function testSet()
     {
@@ -106,8 +98,6 @@ class SessionTest extends TestCase
 
     /**
      * Add multiple value to sessions.
-     *
-     * @since 1.1.3
      */
     public function testSetMultiple()
     {
@@ -123,8 +113,6 @@ class SessionTest extends TestCase
 
     /**
      * Extract session item, delete session item and finally return the item.
-     *
-     * @since 1.1.3
      */
     public function testPull()
     {
@@ -135,8 +123,6 @@ class SessionTest extends TestCase
 
     /**
      * Extract inexistent session item.
-     *
-     * @since 1.1.3
      */
     public function testPullNonExistent()
     {
@@ -147,8 +133,6 @@ class SessionTest extends TestCase
 
     /**
      * Get item from session.
-     *
-     * @since 1.1.3
      */
     public function testGet()
     {
@@ -159,8 +143,6 @@ class SessionTest extends TestCase
 
     /**
      * Get inexistent session item from session.
-     *
-     * @since 1.1.3
      */
     public function testGetNonExistent()
     {
@@ -171,8 +153,6 @@ class SessionTest extends TestCase
 
     /**
      * Get item from session entering two indexes.
-     *
-     * @since 1.1.3
      */
     public function testGetWithSecondKey()
     {
@@ -183,8 +163,6 @@ class SessionTest extends TestCase
 
     /**
      * Get inexistent item from session entering two indexes.
-     *
-     * @since 1.1.3
      */
     public function testGetWithSecondKeyNonExistent()
     {
@@ -195,8 +173,6 @@ class SessionTest extends TestCase
 
     /**
      * Return the session array.
-     *
-     * @since 1.1.3
      */
     public function testGetAll()
     {
@@ -207,8 +183,6 @@ class SessionTest extends TestCase
 
     /**
      * Get session id.
-     *
-     * @since 1.1.3
      */
     public function testId()
     {
@@ -221,8 +195,6 @@ class SessionTest extends TestCase
      * Regenerate session_id.
      *
      * @runInSeparateProcess
-     *
-     * @since 1.1.3
      */
     public function testRegenerate()
     {
@@ -237,8 +209,6 @@ class SessionTest extends TestCase
      * Validate that the id was regenerate.
      *
      * @runInSeparateProcess
-     *
-     * @since 1.1.3
      */
     public function testValidateRegenerateId()
     {
@@ -261,8 +231,6 @@ class SessionTest extends TestCase
      * Destroys one key session.
      *
      * @runInSeparateProcess
-     *
-     * @since 1.1.3
      */
     public function testDestroy()
     {

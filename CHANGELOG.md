@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.7 - 2018-01-07
+
+* The tests were fixed.
+
+* Changes in documentation.
+
 ## 1.1.6 - 2017-11-12
 
 * Set the correct `phpcbf` fix command in `composer.json`.

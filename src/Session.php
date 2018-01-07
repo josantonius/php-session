@@ -4,7 +4,7 @@
  *
  * @author    David Carr  <info@daveismyname.blog>
  * @author    Josantonius <hello@josantonius.com>
- * @copyright 2017 (c) Josantonius - PHP-Session
+ * @copyright 2017 - 2018 (c) Josantonius - PHP-Session
  * @license   https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link      https://github.com/Josantonius/PHP-Session
  * @since     1.0.0
@@ -13,15 +13,11 @@ namespace Josantonius\Session;
 
 /**
  * Session handler.
- *
- * @since 1.0.0
  */
 class Session
 {
     /**
      * Prefix for sessions.
-     *
-     * @since 1.0.0
      *
      * @var string
      */
@@ -30,16 +26,12 @@ class Session
     /**
      * Determine if session has started.
      *
-     * @since 1.0.0
-     *
      * @var bool
      */
     private static $sessionStarted = false;
 
     /**
      * Set prefix for sessions.
-     *
-     * @since 1.0.0
      *
      * @param mixed $prefix → prefix for sessions
      *
@@ -65,8 +57,6 @@ class Session
     /**
      * If session has not started, start sessions.
      *
-     * @since 1.0.0
-     *
      * @return bool
      */
     public static function init()
@@ -83,8 +73,6 @@ class Session
 
     /**
      * Add value to a session.
-     *
-     * @since 1.0.0
      *
      * @param string $key   → name the data to save
      * @param mixed  $value → the data to save
@@ -107,8 +95,6 @@ class Session
     /**
      * Extract session item, delete session item and finally return the item.
      *
-     * @since 1.0.0
-     *
      * @param string $key → item to extract
      *
      * @return mixed|null → return item or null when key does not exists
@@ -127,8 +113,6 @@ class Session
 
     /**
      * Get item from session.
-     *
-     * @since 1.0.0
      *
      * @param string      $key       → item to look for in session
      * @param string|bool $secondkey → if used then use as a second key
@@ -153,8 +137,6 @@ class Session
     /**
      * Get session id.
      *
-     * @since 1.0.0
-     *
      * @return string → the session id or empty
      */
     public static function id()
@@ -164,8 +146,6 @@ class Session
 
     /**
      * Regenerate session_id.
-     *
-     * @since 1.0.0
      *
      * @return string → session_id
      */
@@ -178,8 +158,6 @@ class Session
 
     /**
      * Empties and destroys the session.
-     *
-     * @since 1.0.0
      *
      * @param string $key    → session name to destroy
      * @param bool   $prefix → if true clear all sessions for current prefix
