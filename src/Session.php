@@ -61,10 +61,10 @@ class Session
      *
      * @return bool
      */
-    public static function init($LifeTime = 0)
+    public static function init($lifeTime = 0)
     {
         if (self::$sessionStarted == false) {
-            session_set_cookie_params($LifeTime);
+            session_set_cookie_params($lifeTime);
             session_start();
 
             return self::$sessionStarted = true;
