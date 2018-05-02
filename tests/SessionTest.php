@@ -85,8 +85,8 @@ class SessionTest extends TestCase
         $this->assertTrue($session::init());
         $this->assertFalse($session::init());
     }
-	
-	/**
+
+    /**
      * Start session with a max lifetime.
      *
      * @runInSeparateProcess
