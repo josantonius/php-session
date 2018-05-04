@@ -57,12 +57,14 @@ class Session
     /**
      * If session has not started, start sessions.
      *
+     * @param int $LifeTime → Lifetime of session in seconds
+     *
      * @return bool
      */
-    public static function init()
+    public static function init($lifeTime = 0)
     {
         if (self::$sessionStarted == false) {
-            session_set_cookie_params(0);
+            session_set_cookie_params($lifeTime);
             session_start();
 
             return self::$sessionStarted = true;

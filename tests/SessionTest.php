@@ -87,6 +87,19 @@ class SessionTest extends TestCase
     }
 
     /**
+     * Start session with a max lifetime.
+     *
+     * @runInSeparateProcess
+     */
+    public function testInitLifeTime()
+    {
+        $session = $this->Session;
+
+        $this->assertTrue($session::init(10));
+        $this->assertFalse($session::init(10));
+    }
+
+    /**
      * Add value to a session.
      */
     public function testSet()
