@@ -176,7 +176,7 @@ Ejemplo de uso para esta biblioteca:
 ### - Establecer prefijo para sesiones:
 
 ```php
-Session::set('name', 'Joseph');
+Session::setPrefix('_prefix');
 ```
 
 ### - Obtener prefijo de las sesiones:
@@ -191,10 +191,16 @@ Session::getPrefix();
 Session::init();
 ```
 
+### - Iniciar sesión estableciendo el tiempo de duración de la sessión:
+
+```php
+Session::init(3600);
+```
+
 ### - Añadir valor a una sesión:
 
 ```php
-Session::init();
+Session::set('name', 'Joseph');
 ```
 
 ### - Agregar valor múltiple a las sesiones:
@@ -314,13 +320,9 @@ Si deseas colaborar, puedes echar un vistazo a la lista de
 
 **¡Gracias a quienes ya habéis contribuido a este proyecto!**
 
-[<img alt="peter279k" src="https://avatars2.githubusercontent.com/u/9021747?v=4&s=117" height="117" width="117">](https://github.com/peter279k) |
-:---:|
-[peter279k](https://github.com/peter279k)|
-
-[<img alt="chrisrowley14" src="https://avatars1.githubusercontent.com/u/12914881?s=117&v=4" height="117" width="117">](https://github.com/chrisrowley14) |
-:---:|
-[chrisrowley14](https://github.com/chrisrowley14)|
+[<img alt="peter279k" src="https://avatars2.githubusercontent.com/u/9021747?v=4&s=117" height="117" width="117">](https://github.com/peter279k) | [<img alt="chrisrowley14" src="https://avatars1.githubusercontent.com/u/12914881?s=117&v=4" height="117" width="117">](https://github.com/chrisrowley14) |
+:---: | :---: |
+[peter279k](https://github.com/peter279k) | [chrisrowley14](https://github.com/chrisrowley14)|
 
 ## Repositorio
 

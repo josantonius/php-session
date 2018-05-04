@@ -176,7 +176,7 @@ Example of use for this library:
 ### - Set prefix for sessions:
 
 ```php
-Session::set('name', 'Joseph');
+Session::setPrefix('_prefix');
 ```
 
 ### - Get sessions prefix:
@@ -191,10 +191,16 @@ Session::getPrefix();
 Session::init();
 ```
 
+### - Start session by setting the session duration:
+
+```php
+Session::init(3600);
+```
+
 ### - Add value to a session:
 
 ```php
-Session::init();
+Session::set('name', 'Joseph');
 ```
 
 ### - Add multiple value to sessions:
@@ -314,13 +320,9 @@ If you would like to help, please take a look at the list of
 
 **Thank you to all the people who already contributed to this project!**
 
-[<img alt="peter279k" src="https://avatars2.githubusercontent.com/u/9021747?v=4&s=117" height="117" width="117">](https://github.com/peter279k) |
-:---:|
-[peter279k](https://github.com/peter279k)|
-
-[<img alt="chrisrowley14" src="https://avatars1.githubusercontent.com/u/12914881?s=117&v=4" height="117" width="117">](https://github.com/chrisrowley14) |
-:---:|
-[chrisrowley14](https://github.com/chrisrowley14)|
+[<img alt="peter279k" src="https://avatars2.githubusercontent.com/u/9021747?v=4&s=117" height="117" width="117">](https://github.com/peter279k) | [<img alt="chrisrowley14" src="https://avatars1.githubusercontent.com/u/12914881?s=117&v=4" height="117" width="117">](https://github.com/chrisrowley14) |
+:---: | :---: |
+[peter279k](https://github.com/peter279k) | [chrisrowley14](https://github.com/chrisrowley14)|
 
 ## Repository
 
