@@ -75,8 +75,12 @@ Session::getPrefix();
 ### - Iniciar sesión si la sesión no se ha iniciado:
 
 ```php
-Session::init();
+Session::init($lifeTime);
 ```
+
+| Atributo | Descripción | Tipo | Requerido | Predeterminado
+| --- | --- | --- | --- | --- |
+| $lifeTime | Duración de la sesión. | int | No | 0 |
 
 **# Return** (boolean)
 
@@ -291,6 +295,7 @@ Ejecutar todas las pruebas anteriores:
 - [ ] Mejorar pruebas.
 - [ ] Mejorar documentación.
 - [ ] Refactorizar código para las reglas de estilo de código deshabilitadas. Ver [phpmd.xml](phpmd.xml) y [.php_cs.dist](.php_cs.dist).
+- [ ] Agregar pruebas para la duración máxima de la sessión en el método init().
 
 ## Contribuir
 
@@ -312,6 +317,10 @@ Si deseas colaborar, puedes echar un vistazo a la lista de
 [<img alt="peter279k" src="https://avatars2.githubusercontent.com/u/9021747?v=4&s=117" height="117" width="117">](https://github.com/peter279k) |
 :---:|
 [peter279k](https://github.com/peter279k)|
+
+[<img alt="chrisrowley14" src="https://avatars1.githubusercontent.com/u/12914881?s=117&v=4" height="117" width="117">](https://github.com/chrisrowley14) |
+:---:|
+[chrisrowley14](https://github.com/chrisrowley14)|
 
 ## Repositorio
 

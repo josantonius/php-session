@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.8 - 2018-05-04
+
+* @chrisrowley14 added ability to set a lifeTime during session init and added tests.
+
 ## 1.1.7 - 2018-01-07
 
 * The tests were fixed.

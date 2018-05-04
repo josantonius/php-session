@@ -75,8 +75,12 @@ Session::getPrefix();
 ### - Start session if session has not started:
 
 ```php
-Session::init();
+Session::init($lifeTime);
 ```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $lifeTime | Life time during session. | int | No | 0 |
 
 **# Return** (boolean)
 
@@ -291,6 +295,7 @@ Run all previous tests:
 - [ ] Improve tests.
 - [ ] Improve documentation.
 - [ ] Refactor code for disabled code style rules. See [phpmd.xml](phpmd.xml) and [.php_cs.dist](.php_cs.dist).
+- [ ] Add tests for session duration in the init() method.
 
 ## Contribute
 
@@ -312,6 +317,10 @@ If you would like to help, please take a look at the list of
 [<img alt="peter279k" src="https://avatars2.githubusercontent.com/u/9021747?v=4&s=117" height="117" width="117">](https://github.com/peter279k) |
 :---:|
 [peter279k](https://github.com/peter279k)|
+
+[<img alt="chrisrowley14" src="https://avatars1.githubusercontent.com/u/12914881?s=117&v=4" height="117" width="117">](https://github.com/chrisrowley14) |
+:---:|
+[chrisrowley14](https://github.com/chrisrowley14)|
 
 ## Repository
 
