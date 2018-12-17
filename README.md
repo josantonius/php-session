@@ -40,7 +40,7 @@ The previous command will only install the necessary files, if you prefer to **d
 
 You can also **clone the complete repository** with Git:
 
-  $ git clone https://github.com/Josantonius/PHP-Session.git
+    $ git clone https://github.com/Josantonius/PHP-Session.git
 
 Or **install it manually**:
 
