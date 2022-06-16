@@ -57,14 +57,18 @@ class Session
     /**
      * If session has not started, start sessions.
      *
-     * @param int $lifeTime → lifetime of session in seconds
+     * @param int    $lifeTime → lifetime of session in seconds
+     * @param string $sameSite → sameSite option: None, Lax, Strict
+     * @param string $domain   → Cookie domain
+     * @param bool   $secure   → Cookie must be secure or not
+     * @param bool   $httpOnly → Cookie only available with http or not
      *
      * @return bool
      */
-    public static function init($lifeTime = 0)
+    public static function init($lifeTime = 0, $sameSite = 'Strict', $domain = '', $secure = false, $httpOnly = true)
     {
         if (self::$sessionStarted == false) {
-            session_set_cookie_params($lifeTime);
+            session_set_cookie_params($lifeTime, '/; samesite=' . $sameSite, $domain, $secure, $httpOnly);
             session_start();
 
             return self::$sessionStarted = true;
