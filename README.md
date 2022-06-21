@@ -1,10 +1,22 @@
 # PHP Session library
 
-[![Latest Stable Version](https://poser.pugx.org/josantonius/Session/v/stable)](https://packagist.org/packages/josantonius/Session) [![Latest Unstable Version](https://poser.pugx.org/josantonius/Session/v/unstable)](https://packagist.org/packages/josantonius/Session) [![License](https://poser.pugx.org/josantonius/Session/license)](LICENSE) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/37b8ff548b4841509d29e7079c8c7ee5)](https://www.codacy.com/app/Josantonius/PHP-Session?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Josantonius/PHP-Session&amp;utm_campaign=Badge_Grade) [![Total Downloads](https://poser.pugx.org/josantonius/Session/downloads)](https://packagist.org/packages/josantonius/Session) [![Travis](https://travis-ci.org/Josantonius/PHP-Session.svg)](https://travis-ci.org/Josantonius/PHP-Session) [![PSR2](https://img.shields.io/badge/PSR-2-1abc9c.svg)](http://www.php-fig.org/psr/psr-2/) [![PSR4](https://img.shields.io/badge/PSR-4-9b59b6.svg)](http://www.php-fig.org/psr/psr-4/) [![CodeCov](https://codecov.io/gh/Josantonius/PHP-Session/branch/master/graph/badge.svg)](https://codecov.io/gh/Josantonius/PHP-Session)
+[![Latest Stable Version](https://poser.pugx.org/josantonius/session/v/stable)](https://packagist.org/packages/josantonius/session)
+[![License](https://poser.pugx.org/josantonius/session/license)](LICENSE)
+[![Total Downloads](https://poser.pugx.org/josantonius/session/downloads)](https://packagist.org/packages/josantonius/session)
+[![CI](https://github.com/josantonius/php-session/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/josantonius/php-session/actions/workflows/ci.yml)
+[![PSR2](https://img.shields.io/badge/PSR-2-1abc9c.svg)](http://www.php-fig.org/psr/psr-2/)
+[![PSR4](https://img.shields.io/badge/PSR-4-9b59b6.svg)](http://www.php-fig.org/psr/psr-4/)
+[![CodeCov](https://codecov.io/gh/josantonius/php-session/branch/master/graph/badge.svg)](https://codecov.io/gh/josantonius/php-session)
 
-[Versión en español](README-ES.md)
+**Translations**: [Español](.github/lang/es-ES/README.md)
 
 PHP library for handling sessions.
+
+> Version 1.x is considered as deprecated and unsupported.
+> In the next version (2.x) the library will be completely restructured and will only be
+> compatible with PHP 8 or higher versions.
+> It is recommended to review the documentation for the next version and make the necessary changes
+> before starting to use it, as it will not be compatible with version 1.x.
 
 ---
 
@@ -15,16 +27,16 @@ PHP library for handling sessions.
 - [Usage](#usage)
 - [Tests](#tests)
 - [TODO](#-todo)
-- [Contribute](#contribute)
-- [Repository](#repository)
+- [Changelog](#changelog)
+- [Contribution](#contribution)
+- [Sponsor](#Sponsor)
 - [License](#license)
-- [Copyright](#copyright)
 
 ---
 
 ## Requirements
 
-This library is supported by **PHP versions 5.6** or higher.
+This library is compatible with the PHP versions: 5.6 | 7.0 | 7.1 | 7.2 | 7.3 | 7.4.
 
 ## Installation
 
@@ -32,27 +44,36 @@ The preferred way to install this extension is through [Composer](http://getcomp
 
 To install **PHP Session library**, simply:
 
-    $ composer require Josantonius/Session
+```console
+composer require josantonius/session
+```
 
-The previous command will only install the necessary files, if you prefer to **download the entire source code** you can use:
+The previous command will only install the necessary files,
+if you prefer to **download the entire source code** you can use:
 
-    $ composer require Josantonius/Session --prefer-source
+```console
+composer require josantonius/session --prefer-source
+```
 
 You can also **clone the complete repository** with Git:
 
-    $ git clone https://github.com/Josantonius/PHP-Session.git
+```console
+git clone https://github.com/josantonius/php-session.git
+```
 
 Or **install it manually**:
 
-[Download Session.php](https://raw.githubusercontent.com/Josantonius/PHP-Session/master/src/Session.php):
+[Download Session.php](https://raw.githubusercontent.com/josantonius/php-session/master/src/Session.php):
 
-    $ wget https://raw.githubusercontent.com/Josantonius/PHP-Session/master/src/Session.php
+```console
+wget https://raw.githubusercontent.com/josantonius/php-session/master/src/Session.php
+```
 
 ## Available Methods
 
 Available methods in this library:
 
-### - Set prefix for sessions:
+### Set prefix for sessions
 
 ```php
 Session::setPrefix($prefix);
@@ -64,7 +85,7 @@ Session::setPrefix($prefix);
 
 **# Return** (boolean)
 
-### - Get sessions prefix:
+### Get sessions prefix
 
 ```php
 Session::getPrefix();
@@ -72,7 +93,7 @@ Session::getPrefix();
 
 **# Return** (string) → sessions prefix
 
-### - Start session if session has not started:
+### Start session if session has not started
 
 ```php
 Session::init($lifeTime);
@@ -84,7 +105,7 @@ Session::init($lifeTime);
 
 **# Return** (boolean)
 
-### - Add value to a session:
+### Add value to a session
 
 ```php
 Session::set($key, $value);
@@ -97,7 +118,7 @@ Session::set($key, $value);
 
 **# Return** (boolean true)
 
-### - Extract session item, delete session item and finally return the item:
+### Extract session item, delete session item and finally return the item
 
 ```php
 Session::pull($key);
@@ -109,7 +130,7 @@ Session::pull($key);
 
 **# Return** (mixed|null) → return item or null when key does not exists
 
-### - Get item from session:
+### Get item from session
 
 ```php
 Session::get($key, $secondkey);
@@ -122,7 +143,7 @@ Session::get($key, $secondkey);
 
 **# Return** (mixed|null) → return item or null when key does not exists
 
-### - Get session id:
+### Get session id
 
 ```php
 Session::id();
@@ -130,7 +151,7 @@ Session::id();
 
 **# Return** (string) → the session id or empty
 
-### - Regenerate session_id:
+### Regenerate session_id
 
 ```php
 Session::regenerate();
@@ -138,7 +159,7 @@ Session::regenerate();
 
 **# Return** (string) → the new session id
 
-### - Empties and destroys the session:
+### Empties and destroys the session
 
 ```php
 Session::destroy($key, $prefix);
@@ -158,7 +179,7 @@ To use this library with **Composer**:
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-use Josantonius\Session\Session;
+use josantonius\Session\Session;
 ```
 
 Or If you installed it **manually**, use it:
@@ -166,44 +187,44 @@ Or If you installed it **manually**, use it:
 ```php
 require_once __DIR__ . '/Session.php';
 
-use Josantonius\Session\Session;
+use josantonius\Session\Session;
 ```
 
 ## Usage
 
 Example of use for this library:
 
-### - Set prefix for sessions:
+### - Set prefix for sessions
 
 ```php
 Session::setPrefix('_prefix');
 ```
 
-### - Get sessions prefix:
+### - Get sessions prefix
 
 ```php
 Session::getPrefix();
 ```
 
-### - Start session:
+### - Start session
 
 ```php
 Session::init();
 ```
 
-### - Start session by setting the session duration:
+### - Start session by setting the session duration
 
 ```php
 Session::init(3600);
 ```
 
-### - Add value to a session:
+### - Add value to a session
 
 ```php
 Session::set('name', 'Joseph');
 ```
 
-### - Add multiple value to sessions:
+### - Add multiple value to sessions
 
 ```php
 $data = [
@@ -215,127 +236,127 @@ $data = [
 Session::set($data);
 ```
 
-### - Extract session item, delete session item and finally return the item:
+### - Extract session item, delete session item and finally return the item
 
 ```php
 Session::pull('age');
 ```
 
-### - Get item from session:
+### - Get item from session
 
 ```php
 Session::get('name');
 ```
 
-### - Get item from session entering two indexes:
+### - Get item from session entering two indexes
 
 ```php
 Session::get('business', 'name');
 ```
 
-### - Return the session array:
+### - Return the session array
 
 ```php
 Session::get();
 ```
 
-### - Get session id:
+### - Get session id
 
 ```php
 Session::id();
 ```
 
-### - Regenerate session_id:
+### - Regenerate session_id
 
 ```php
 Session::regenerate();
 ```
 
-### - Destroys one key session:
+### - Destroys one key session
 
 ```php
 Session::destroy('name');
 ```
 
-### - Destroys sessions by prefix:
+### - Destroys sessions by prefix
 
 ```php
 Session::destroy('ses_', true);
 ```
 
-### - Destroys all sessions:
+### - Destroys all sessions
 
 ```php
 Session::destroy();
 ```
 
-## Tests 
+## Tests
 
 To run [tests](tests) you just need [composer](http://getcomposer.org/download/) and to execute the following:
 
-    $ git clone https://github.com/Josantonius/PHP-Session.git
-    
-    $ cd PHP-Session
+```console
+git clone https://github.com/josantonius/php-session.git
+```
 
-    $ composer install
+```console
+cd php-session
+```
+
+```console
+composer install
+```
 
 Run unit tests with [PHPUnit](https://phpunit.de/):
 
-    $ composer phpunit
+```console
+composer phpunit
+```
 
 Run [PSR2](http://www.php-fig.org/psr/psr-2/) code standard tests with [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer):
 
-    $ composer phpcs
+```console
+composer phpcs
+```
 
 Run [PHP Mess Detector](https://phpmd.org/) tests to detect inconsistencies in code style:
 
-    $ composer phpmd
+```console
+composer phpmd
+```
 
 Run all previous tests:
 
-    $ composer tests
+```console
+composer tests
+```
 
 ## ☑ TODO
 
 - [ ] Add new feature.
 - [ ] Improve tests.
 - [ ] Improve documentation.
-- [ ] Refactor code for disabled code style rules. See [phpmd.xml](phpmd.xml) and [.php_cs.dist](.php_cs.dist).
-- [ ] Add tests for session duration in the init() method.
+- [ ] Improve English translation in the README file.
+- [ ] Refactor code for disabled code style rules. See [phpmd.xml](phpmd.xml) and [phpcs.xml](phpcs.xml).
 
-## Contribute
+## Changelog
 
-If you would like to help, please take a look at the list of
-[issues](https://github.com/Josantonius/PHP-Session/issues) or the [To Do](#-todo) checklist.
+Detailed changes for each release are documented in the
+[release notes](https://github.com/josantonius/php-session/releases).
 
-**Pull requests**
+## Contribution
 
-* [Fork and clone](https://help.github.com/articles/fork-a-repo).
-* Run the command `composer install` to install the dependencies.
-  This will also install the [dev dependencies](https://getcomposer.org/doc/03-cli.md#install).
-* Run the command `composer fix` to excute code standard fixers.
-* Run the [tests](#tests).
-* Create a **branch**, **commit**, **push** and send me a
-  [pull request](https://help.github.com/articles/using-pull-requests).
+Please make sure to read the [Contributing Guide](.github/CONTRIBUTING.md), before making a pull
+request, start a discussion or report a issue.
 
-**Thank you to all the people who already contributed to this project!**
+Thanks to all [contributors](https://github.com/josantonius/php-session/graphs/contributors)! :heart:
 
-[<img alt="peter279k" src="https://avatars2.githubusercontent.com/u/9021747?v=4&s=117" height="117" width="117">](https://github.com/peter279k) | [<img alt="chrisrowley14" src="https://avatars1.githubusercontent.com/u/12914881?s=117&v=4" height="117" width="117">](https://github.com/chrisrowley14) |
-:---: | :---: |
-[peter279k](https://github.com/peter279k) | [chrisrowley14](https://github.com/chrisrowley14)|
+## Sponsor
 
-## Repository
-
-The file structure from this repository was created with [PHP-Skeleton](https://github.com/Josantonius/PHP-Skeleton).
+If this project helps you to reduce your development time,
+[you can sponsor me](https://github.com/josantonius#sponsor) to support my open source work :blush:
 
 ## License
 
-This project is licensed under **MIT license**. See the [LICENSE](LICENSE) file for more info.
+This repository is licensed under the [MIT License](LICENSE).
 
-## Copyright
-
-2017 - 2018 Josantonius, [josantonius.com](https://josantonius.com/)
-
-If you find it useful, let me know :wink:
-
-You can contact me on [Twitter](https://twitter.com/Josantonius) or through my [email](mailto:hello@josantonius.com).
+Copyright © 2017-present, [Josantonius](https://github.com/josantonius#contact)

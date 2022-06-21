@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+permissions:
+  contents: read
+
+jobs:
+
+  code-style:
+    runs-on: 'ubuntu-latest'
+    name: 'Coding style'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v2'
+
+      - name: 'Setup PHP'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '7.4'
+          coverage: 'none'
+          tools: 'composer:v2, composer-normalize'
+
+      - name: 'Install dependencies'
+        run: |
+          composer install --no-interaction --no-progress --ansi
+
+      - name: 'Check PHP code'
+        run: |
+          composer phpcs
+          composer phpmd
+
+      - name: 'Check composer.json'
+        run: 'composer-normalize --diff --dry-run --no-update-lock'
+        if: 'always()'
+
+  phpunit:
+    runs-on: ${{ matrix.system }}
+    name: 'PHPUnit (PHP ${{ matrix.php }} - ${{ matrix.system }})'
+    strategy:
+      matrix:
+        system: ['ubuntu-latest']
+        php:
+          - '5.6'
+          - '7.0'
+          - '7.1'
+          - '7.2'
+          - '7.3'
+          - '7.4'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: 'Setup PHP'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '${{ matrix.php }}'
+          coverage: 'none'
+          tools: 'composer:v2'
+
+      - name: 'Install dependencies'
+        run: |
+          composer install --no-interaction --no-progress --ansi
+      
+      - name: 'Run unit tests'
+        run: |
+          composer phpunit
+          
+  code-coverage:
+    runs-on: 'ubuntu-latest'
+    name: 'Code Coverage'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v2'
+
+      - name: 'Setup PHP'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '7.4'
+          tools: 'composer:v2'
+
+      - name: 'Install dependencies'
+        run: |
+          composer install --no-interaction --no-progress --ansi
+      
+      - name: 'Run code coverage'
+        run: |
+          composer coverage
+
+      - name: Send code coverage report to Codecov.io
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

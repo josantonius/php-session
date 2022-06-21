@@ -1,14 +1,16 @@
 <?php
+
 /**
  * PHP library for handling sessions.
  *
  * @author    David Carr  <info@daveismyname.blog>
- * @author    Josantonius <hello@josantonius.com>
- * @copyright 2017 - 2018 (c) Josantonius - PHP-Session
+ * @author    Josantonius <hello@josantonius.dev>
+ * @copyright 2017 (c) Josantonius
  * @license   https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @link      https://github.com/Josantonius/PHP-Session
+ * @link      https://github.com/josantonius/php-session
  * @since     1.0.0
  */
+
 namespace Josantonius\Session;
 
 /**
@@ -65,10 +67,10 @@ class Session
      *
      * @return bool
      */
-    public static function init($lifeTime = 0, $sameSite = 'Strict', $domain = '', $secure = false, $httpOnly = true)
+    public static function init($lifeTime = 0)
     {
         if (self::$sessionStarted == false) {
-            session_set_cookie_params($lifeTime, '/; samesite=' . $sameSite, $domain, $secure, $httpOnly);
+            session_set_cookie_params($lifeTime);
             session_start();
 
             return self::$sessionStarted = true;
