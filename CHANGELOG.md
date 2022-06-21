@@ -1,16 +1,57 @@
 # CHANGELOG
 
-## 1.1.8 - 2018-05-04
+## [1.1.9](https://github.com/josantonius/php-session/releases/tag/1.1.9) (2022-06-21)
+
+### IMPORTANT
+
+* Version 1.x is considered as deprecated and unsupported.
+
+* In the next version (2.x) the library will be completely restructured and will only be
+compatible with PHP 8 or higher versions.
+
+* It is recommended to review the documentation for the next version and make the necessary changes
+before starting to use it, as it will not be compatible with version 1.x.
+
+---
+
+* Improved documentation; `README.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md` and `CHANGELOG.md`.
+
+* Removed `Codacy`.
+
+* Removed `PHP Coding Standards Fixer`.
+
+* The `master` branch was renamed to `main`.
+
+* The `develop` branch was added to use a workflow based on `Git Flow`.
+
+* `Travis` is discontinued for continuous integration. `GitHub Actions` will be used from now on.
+
+* Added `.github/CODE_OF_CONDUCT.md` file.
+* Added `.github/CONTRIBUTING.md` file.
+* Added `.github/FUNDING.yml` file.
+* Added `.github/workflows/ci.yml` file.
+* Added `.github/lang/es-ES/CODE_OF_CONDUCT.md` file.
+* Added `.github/lang/es-ES/CONTRIBUTING.md` file.
+* Added `.github/lang/es-ES/LICENSE` file.
+* Added `.github/lang/es-ES/README` file.
+
+* Deleted `.travis.yml` file.
+* Deleted `.editorconfig` file.
+* Deleted `CONDUCT.MD` file.
+* Deleted `README-ES.MD` file.
+* Deleted `.php_cs.dist` file.
+
+## [1.1.8](https://github.com/josantonius/php-session/releases/tag/1.1.8) (2018-05-04)
 
 * @chrisrowley14 added ability to set a lifeTime during session init and added tests.
 
-## 1.1.7 - 2018-01-07
+## [1.1.7](https://github.com/josantonius/php-session/releases/tag/1.1.7) (2018-01-07)
 
 * The tests were fixed.
 
 * Changes in documentation.
 
-## 1.1.6 - 2017-11-12
+## [1.1.6](https://github.com/josantonius/php-session/releases/tag/1.1.6) (2017-11-12)
 
 * Set the correct `phpcbf` fix command in `composer.json`.
 
@@ -22,7 +63,7 @@
 
 * Added `Josantonius\Session\Tests\SessionTest::testSetPrefix()` method.
 
-## 1.1.5 - 2017-11-09
+## [1.1.5](https://github.com/josantonius/php-session/releases/tag/1.1.5) (2017-11-09)
 
 * Implemented `PHP Mess Detector` to detect inconsistencies in code styles.
 
@@ -30,7 +71,7 @@
 
 * Implemented `PHP Coding Standards Fixer` to organize PHP code automatically according to PSR standards.
 
-## 1.1.4 - 2017-10-27
+## [1.1.4](https://github.com/josantonius/php-session/releases/tag/1.1.4) (2017-10-27)
 
 * Implemented `PSR-4 autoloader standard` from all library files.
 
@@ -52,12 +93,12 @@
 
 * Changed `Josantonius\Session\Test\SessionTest` class to  `Josantonius\Session\SessionTest` class.
 
-## 1.1.3 - 2017-09-17
+## [1.1.3](https://github.com/josantonius/php-session/releases/tag/1.1.3) (2017-09-17)
 
 * Unit tests supported by `PHPUnit` were added.
 
 * The repository was synchronized with `Travis CI` to implement continuous integration.
- 
+
 * Added `Session/src/bootstrap.php` file
 
 * Added `Session/tests/bootstrap.php` file.
@@ -99,21 +140,26 @@
 * Added `Josantonius\Session\Test\SessionTest::testValidateRegenerateId()` method.
 * Added `Josantonius\Session\Test\SessionTest::testDestroy()` method.
 
-## 1.1.2 - 2017-07-16
+## [1.1.2](https://github.com/josantonius/php-session/releases/tag/1.1.2) (2017-07-16)
+
 * Added `Josantonius\Session\Exception\SessionException` class.
 * Added `Josantonius\Session\Exception\Exceptions` abstract class.
 * Added `Josantonius\Session\Exception\SessionException->__construct()` method.
 
-## 1.1.1 - 2017-03-18
+## [1.1.1](https://github.com/josantonius/php-session/releases/tag/1.1.1) (2017-03-18)
+
 * Some files were excluded from download and comments and readme files were updated.
 
-## 1.1.0 - 2017-01-30
+## [1.1.0](https://github.com/josantonius/php-session/releases/tag/1.1.0) (2017-01-30)
+
 * Compatible with PHP 5.6 or higher.
 
-## 1.0.0 - 2017-01-30
+## [1.0.0](https://github.com/josantonius/php-session/releases/tag/1.0.0) (2017-01-30)
+
 * Compatible only with PHP 7.0 or higher. In the next versions, the library will be modified to make it compatible with PHP 5.6 or higher.
 
-## 1.0.0 - 2017-01-17
+## [1.0.0](https://github.com/josantonius/php-session/releases/tag/1.0.0) (2017-01-17)
+
 * Added `Josantonius\Session\Session` class.
 * Added `Josantonius\Session\Session::init()` method.
 * Added `Josantonius\Session\Session::setPrefix()` method.
@@ -125,12 +171,10 @@
 * Added `Josantonius\Session\Session::display()` method.
 * Added `Josantonius\Session\Session::destroy()` method.
 
-## 1.0.0 - 2017-01-17
 * Added `Josantonius\Session\Exception\SessionException` class.
 * Added `Josantonius\Session\Exception\Exceptions` abstract class.
 * Added `Josantonius\Session\Exception\SessionException->__construct()` method.
 
-## 1.0.0 - 2017-01-17
 * Added `Josantonius\Session\Tests\SessionTest` class.
 * Added `Josantonius\Session\Tests\SessionTest::testSetPrefix()` method.
 * Added `Josantonius\Session\Tests\SessionTest::testSet()` method.
