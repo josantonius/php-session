@@ -4,19 +4,19 @@
 [![License](https://poser.pugx.org/josantonius/session/license)](LICENSE)
 [![Total Downloads](https://poser.pugx.org/josantonius/session/downloads)](https://packagist.org/packages/josantonius/session)
 [![CI](https://github.com/josantonius/php-session/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/josantonius/php-session/actions/workflows/ci.yml)
-[![PSR2](https://img.shields.io/badge/PSR-2-1abc9c.svg)](http://www.php-fig.org/psr/psr-2/)
-[![PSR4](https://img.shields.io/badge/PSR-4-9b59b6.svg)](http://www.php-fig.org/psr/psr-4/)
 [![CodeCov](https://codecov.io/gh/josantonius/php-session/branch/master/graph/badge.svg)](https://codecov.io/gh/josantonius/php-session)
+[![PSR1](https://img.shields.io/badge/PSR-1-f57046.svg)](https://www.php-fig.org/psr/psr-1/)
+[![PSR4](https://img.shields.io/badge/PSR-4-9b59b6.svg)](https://www.php-fig.org/psr/psr-4/)
+[![PSR12](https://img.shields.io/badge/PSR-12-1abc9c.svg)](https://www.php-fig.org/psr/psr-12/)
 
 **Traducciones**: [English](/README.md)
 
 Biblioteca PHP para manejo de sesiones.
 
 > La versión 1.x se considera obsoleta y sin soporte.
-> En la próxima versión (2.x) la biblioteca será completamente reestructurada y sólo será
-> compatible con PHP 8 o versiones superiores.
-> Se recomienda revisar la documentación de la próxima versión y hacer los cambios necesarios
-> antes de empezar a utilizarla, ya que no será compatible con la versión 1.x.
+> En esta versión (2.x) la biblioteca fue completamente reestructurada.
+> Se recomienda revisar la documentación de esta versión y hacer los cambios necesarios
+> antes de empezar a utilizarla, ya que no es compatible con la versión 1.x.
 
 ---
 
@@ -36,7 +36,7 @@ Biblioteca PHP para manejo de sesiones.
 
 ## Requisitos
 
-Esta biblioteca es compatible con las versiones de PHP: 5.6 | 7.0 | 7.1 | 7.2 | 7.3 | 7.4.
+Esta biblioteca es compatible con las versiones de PHP: 8.0 | 8.1 | 8.2.
 
 ## Instalación
 
@@ -61,230 +61,460 @@ También puedes **clonar el repositorio** completo con Git:
 git clone https://github.com/josantonius/php-session.git
 ```
 
-O **instalarlo manualmente**:
-
-[Descargar Session.php](https://raw.githubusercontent.com/Josantonius/PHP-Session/master/src/Session.php):
-
-```console
-wget https://raw.githubusercontent.com/josantonius/php-session/master/src/Session.php
-```
-
 ## Métodos disponibles
 
 Métodos disponibles en esta biblioteca:
 
-### Establecer prefijo para sesiones
+### Iniciar la sesión
 
 ```php
-Session::setPrefix($prefix);
+start(array $options = []);
 ```
 
-| Atributo | Descripción | Tipo | Requerido | Predeterminado
-| --- | --- | --- | --- | --- |
-| $prefix | Prefijo para las sesiones. | object | Sí | |
+**@see** <https://php.net/session.configuration>
+para ver la lista de las `$opciones` disponibles y sus valores por defecto.
 
-**# Return** (boolean)
+**@throws** `SessionException`
+Si las cabeceras ya se enviaron |
+Si la sesión ya está iniciada |
+Si hay algún fallo con las opciones
 
-### Obtener prefijo de las sesiones
+**@Return** `bool`
+
+### Comprobar si la sesión está iniciada
 
 ```php
-Session::getPrefix();
+isStarted();
 ```
 
-**# Return** (string) → prefijo de las sesiones
+**@Return** `bool`
 
-### Iniciar sesión si la sesión no se ha iniciado
+### Establecer un atributo por su nombre
 
 ```php
-Session::init($lifeTime);
+set(string $name, mixed $value = null);
 ```
 
-| Atributo | Descripción | Tipo | Requerido | Predeterminado
-| --- | --- | --- | --- | --- |
-| $lifeTime | Duración de la sesión. | int | No | 0 |
+**@throws** `SessionException` Si la sesión no está iniciada
 
-**# Return** (boolean)
+**@Return** `void`
 
-### Añadir valor a una sesión
+### Obtener un atributo por su nombre
+
+Opcionalmente define un valor por defecto cuando el atributo no existe.
 
 ```php
-Session::set($key, $value);
+get(string $name, mixed $default = null);
 ```
 
-| Atributo | Descripción | Tipo | Requerido | Predeterminado
-| --- | --- | --- | --- | --- |
-| $key | Nombre de la sesión. | string | Sí | |
-| $value | Datos a guardar. | mixed | No | false |
+**@Return** `mixed` Valor
 
-**# Return** (boolean true)
-
-### Extraer valor y borrar sesión
+### Obtener todos los atributos
 
 ```php
-Session::pull($key);
+all();
 ```
 
-| Atributo | Descripción | Tipo | Requerido | Predeterminado
-| --- | --- | --- | --- | --- |
-| $key | Nombre de la sesión a extraer. | string | Sí | |
+**@Return** `array` Contenido de la $_SESSION
 
-**# Return** (mixed|null) → valor de la sesión o null si no existe
-
-### Obtener el valor de la sesión
+### Comprobar si un atributo existe en la sesión
 
 ```php
-Session::get($key, $secondkey);
+has(string $name);
 ```
 
-| Atributo | Descripción | Tipo | Requerido | Predeterminado
-| --- | --- | --- | --- | --- |
-| $key | Nombre de la sesión. | string | No | '' |
-| $secondkey | Segunda clave de la sesión. | string|boolean | No | false |
+**@Return** `bool`
 
-**# Return** (mixed|null) → valor de la sesión o null si no existe
+### Establecer múltiples atributos de una vez
 
-### Obtener ID de la sesión
+Si los atributos existen se sustituyen, si no existen se crean.
 
 ```php
-Session::id();
+replace(array $data);
 ```
 
-**# Return** (string) → sesión ID o vacío
+**@throws** `SessionException` Si la sesión no está iniciada
 
-### Regenerar session_id
+**@Return** `void`
+
+### Eliminar un atributo por su nombre y devolver su valor
+
+Opcionalmente define un valor por defecto cuando el atributo no existe.
 
 ```php
-Session::regenerate();
+pull(string $name, mixed $default = null);
 ```
 
-**# Return** (string) → el nuevo ID de la sessión
+**@throws** `SessionException` Si la sesión no está iniciada
 
-### Vaciar y destruir sesiones
+**@Return** `mixed` Valor
+
+### Eliminar un atributo por su nombre
 
 ```php
-Session::destroy($key, $prefix);
+remove(string $name);
 ```
 
-| Atributo | Descripción | Tipo | Requerido | Predeterminado
-| --- | --- | --- | --- | --- |
-| $key | ID de la sesión a destruir. | string | No | '' |
-| $prefix | Si se establece en true, se eliminarán todas las sesiones con el prefijo indicado. | boolean | No | false |
+**@throws** `SessionException` Si la sesión no está iniciada
 
-**# Return** (boolean)
+**@Return** `void`
+
+### Liberar todas las variables de la sesión
+
+```php
+clear();
+```
+
+**@throws** `SessionException` Si la sesión no está iniciada
+
+**@Return** `void`
+
+### Obtiene el ID de la sesión
+
+```php
+getId();
+```
+
+**@Return** `string` ID de la sesión
+
+### Establecer el ID de la sesión
+
+```php
+setId(string $sessionId);
+```
+
+**@throws** `SessionException` Si la sesión ya está iniciada
+
+**@Return** `void`
+
+### Actualizar el ID de la sesión actual con uno recién generado
+
+```php
+regenerateId(bool $deleteOldSession = false);
+```
+
+**@throws** `SessionException` Si la sesión no está iniciada
+
+**@Return** `bool`
+
+### Obtener el nombre de la sesión
+
+```php
+getName();
+```
+
+**@Return** `string` Nombre de la sesión
+
+### Establecer el nombre de la sesión
+
+```php
+setName(string $name);
+```
+
+**@throws** `SessionException` Si la sesión ya está iniciada
+
+**@Return** `void`
+
+### Eliminar la sesión
+
+```php
+destroy();
+```
+
+**@throws** `SessionException` Si la sesión no está iniciada
+
+**@Return** `bool`
 
 ## Cómo empezar
 
 Para utilizar esta biblioteca con **Composer**:
 
 ```php
-require __DIR__ . '/vendor/autoload.php';
+use josantonius\Session\Session;
 
-use Josantonius\Session\Session;
+$session = new Session();
 ```
 
-Si la instalaste **manualmente**, utiliza:
+O puedes utilizar la fachada para acceder a los métodos de manera estática:
 
 ```php
-require_once __DIR__ . '/Session.php';
-
-use Josantonius\Session\Session;
+use josantonius\Session\Facades\Session;
 ```
 
 ## Uso
 
 Ejemplo de uso para esta biblioteca:
 
-### - Establecer prefijo para sesiones
+### - Iniciar la sesión
+
+Sin establecer opciones:
 
 ```php
-Session::setPrefix('_prefix');
+$session->start();
 ```
 
-### - Obtener prefijo de las sesiones
+Estableciendo opciones:
 
 ```php
-Session::getPrefix();
+$session->start([
+    // 'cache_expire' => 180,
+    // 'cache_limiter' => 'nocache',
+    // 'cookie_domain' => '',
+    'cookie_httponly' => true,
+    'cookie_lifetime' => 8000,
+    // 'cookie_path' => '/',
+    'cookie_samesite' => 'Strict',
+    'cookie_secure'   => true,
+    // 'gc_divisor' => 100,
+    // 'gc_maxlifetime' => 1440,
+    // 'gc_probability' => true,
+    // 'lazy_write' => true,
+    // 'name' => 'PHPSESSID',
+    // 'read_and_close' => false,
+    // 'referer_check' => '',
+    // 'save_handler' => 'files',
+    // 'save_path' => '',
+    // 'serialize_handler' => 'php',
+    // 'sid_bits_per_character' => 4,
+    // 'sid_length' => 32,
+    // 'trans_sid_hosts' => $_SERVER['HTTP_HOST'],
+    // 'trans_sid_tags' => 'a=href,area=href,frame=src,form=',
+    // 'use_cookies' => true,
+    // 'use_only_cookies' => true,
+    // 'use_strict_mode' => false,
+    // 'use_trans_sid' => false,
+]);
 ```
 
-### - Iniciar sesión
+Utilizando la fachada:
 
 ```php
-Session::init();
+Session::start();
 ```
 
-### - Iniciar sesión estableciendo el tiempo de duración de la sesión
+### - Comprobar si la sesión está iniciada
+
+Utilizando el objeto de sesión:
 
 ```php
-Session::init(3600);
+$session->isStarted();
 ```
 
-### - Añadir valor a una sesión
+Utilizando la fachada:
 
 ```php
-Session::set('name', 'Joseph');
+Session::isStarted();
 ```
 
-### - Agregar valor múltiple a las sesiones
+### - Establecer un atributo por su nombre
+
+Utilizando el objeto de sesión:
 
 ```php
-$data = [
-    'name'     => 'Joseph',
-    'age'      => '28',
-    'business' => ['name' => 'Company'],
-];
-
-Session::set($data);
+$session->set('foo', 'bar');
 ```
 
-### - Extraer y borrar sesión
+Utilizando la fachada:
 
 ```php
-Session::pull('age');
+Session::set('foo', 'bar');
 ```
 
-### - Obtener el valor de la sesión
+### - Obtener un atributo por su nombre
+
+Sin valor por defecto si el atributo no existe:
 
 ```php
-Session::get('name');
+$session->get('foo'); // null si el atributo no existe
 ```
 
-### - Obtener el valor de la sesión introduciendo dos índices
+Con valor por defecto si el atributo no existe:
 
 ```php
-Session::get('business', 'name');
+$session->get('foo', false); // false si el atributo no existe
 ```
 
-### - Obtener todos los elementos de la sesión
+Utilizando la fachada:
 
 ```php
-Session::get();
+Session::get('foo');
 ```
 
-### - Obtener ID de la sesión
+### - Obtener todos los atributos
+
+Utilizando el objeto de sesión:
 
 ```php
-Session::id();
+$session->all();
 ```
 
-### - Regenerar session_id
+Utilizando la fachada:
 
 ```php
-Session::regenerate();
+Session::all();
 ```
 
-### - Destruir un elemento de la sesión
+### - Comprobar si un atributo existe en la sesión
+
+Utilizando el objeto de sesión:
 
 ```php
-Session::destroy('name');
+$session->has('foo');
 ```
 
-### - Destruir todas las sesiones con determinado prefijo
+Utilizando la fachada:
 
 ```php
-Session::destroy('ses_', true);
+Session::has('foo');
 ```
 
-### - Destruir todas las sesiones
+### - Establecer múltiples atributos de una vez
+
+Utilizando el objeto de sesión:
+
+```php
+$session->replace(['foo' => 'bar', 'bar' => 'foo']);
+```
+
+Utilizando la fachada:
+
+```php
+Session::replace(['foo' => 'bar', 'bar' => 'foo']);
+```
+
+### - Eliminar un atributo por su nombre y devolver su valor
+
+Sin valor por defecto si el atributo no existe:
+
+```php
+$session->pull('foo'); // null si el atributo no existe
+```
+
+Con valor por defecto si el atributo no existe:
+
+```php
+$session->pull('foo', false); // false si el atributo no existe
+```
+
+Utilizando la fachada:
+
+```php
+Session::pull('foo');
+```
+
+### - Eliminar un atributo por su nombre
+
+Utilizando el objeto de sesión:
+
+```php
+$session->remove('foo');
+```
+
+Utilizando la fachada:
+
+```php
+Session::remove('foo');
+```
+
+### - Liberar todas las variables de la sesión
+
+Utilizando el objeto de sesión:
+
+```php
+$session->clear();
+```
+
+Utilizando la fachada:
+
+```php
+Session::clear();
+```
+
+### - Obtiene el ID de la sesión
+
+Utilizando el objeto de sesión:
+
+```php
+$session->getId();
+```
+
+Utilizando la fachada:
+
+```php
+Session::getId();
+```
+
+### - Establecer el ID de la sesión
+
+Utilizando el objeto de sesión:
+
+```php
+$session->setId('foo');
+```
+
+Utilizando la fachada:
+
+```php
+Session::setId('foo');
+```
+
+### - Actualizar el ID de la sesión actual con uno recién generado
+
+Regenerar el ID sin borrar la sesión anterior:
+
+```php
+$session->regenerateId();
+```
+
+Regenerar el ID borrando la sesión anterior:
+
+```php
+$session->regenerateId(true);
+```
+
+Utilizando la fachada:
+
+```php
+Session::regenerateId();
+```
+
+### - Obtener el nombre de la sesión
+
+Utilizando el objeto de sesión:
+
+```php
+$session->getName();
+```
+
+Utilizando la fachada:
+
+```php
+Session::getName();
+```
+
+### - Establecer el nombre de la sesión
+
+Utilizando el objeto de sesión:
+
+```php
+$session->setName('foo');
+```
+
+Utilizando la fachada:
+
+```php
+Session::setName('foo');
+```
+
+### - Eliminar la sesión
+
+Utilizando el objeto de sesión:
+
+```php
+$session->destroy();
+```
+
+Utilizando la fachada:
 
 ```php
 Session::destroy();
@@ -312,7 +542,7 @@ Ejecutar pruebas unitarias con [PHPUnit](https://phpunit.de/):
 composer phpunit
 ```
 
-Ejecutar pruebas de estándares de código [PSR2](http://www.php-fig.org/psr/psr-2/) con [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer):
+Ejecutar pruebas de estándares de código con [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer):
 
 ```console
 composer phpcs
@@ -338,6 +568,9 @@ composer tests
 - [ ] Mejorar la traducción al inglés en el archivo README.
 - [ ] Refactorizar código para las reglas de estilo de código deshabilitadas.
 Ver [phpmd.xml](phpmd.xml) y [phpcs.xml](phpcs.xml).
+- [ ] Mostrar un ejemplo de renovación de la duración de la sesión.
+- [ ] Funcionalidad para activar/desactivar excepciones?
+- [ ] Funcionalidad para añadir prefijos en los atributos de sesión?
 
 ## Registro de Cambios
 
