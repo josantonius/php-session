@@ -75,7 +75,9 @@ $session->start(array $options = []);
 for List of available `$options` and their default values
 
 **@throws** `SessionException` If headers already sent
+
 **@throws** `SessionException` If session already started
+
 **@throws** `SessionException` If setting options failed
 
 **@Return** `bool`

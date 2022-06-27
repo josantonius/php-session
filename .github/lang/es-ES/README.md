@@ -75,7 +75,9 @@ $session->start(array $options = []);
 para ver la lista de las `$opciones` disponibles y sus valores por defecto
 
 **@throws** `SessionException` Si los _headers_ ya se enviaron
+
 **@throws** `SessionException` Si la sesión ya está iniciada
+
 **@throws** `SessionException` Si hay algún fallo con las opciones
 
 **@Return** `bool`
