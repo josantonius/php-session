@@ -1,196 +1,254 @@
 <?php
 
-/**
- * PHP library for handling sessions.
+declare(strict_types=1);
+
+/*
+ * This file is part of https://github.com/josantonius/php-session repository.
  *
- * @author    David Carr  <info@daveismyname.blog>
- * @author    Josantonius <hello@josantonius.dev>
- * @copyright 2017 (c) Josantonius
- * @license   https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @link      https://github.com/josantonius/php-session
- * @since     1.0.0
+ * (c) Josantonius <hello@josantonius.dev>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Josantonius\Session;
+
+use Josantonius\Session\Exceptions\SessionException;
 
 /**
  * Session handler.
  */
 class Session
 {
-    /**
-     * Prefix for sessions.
-     *
-     * @var string
-     */
-    private static $prefix = 'jst_';
-
-    /**
-     * Determine if session has started.
-     *
-     * @var bool
-     */
-    private static $sessionStarted = false;
-
-    /**
-     * Set prefix for sessions.
-     *
-     * @param mixed $prefix → prefix for sessions
-     *
-     * @return bool
-     */
-    public static function setPrefix($prefix)
+    public function __construct()
     {
-        return is_string(self::$prefix = $prefix);
+        set_error_handler([$this, 'errorHandler']);
     }
 
     /**
-     * Get prefix for sessions.
+     * Starts the session.
      *
-     * @since 1.1.6
+     * List of available $options with their default values.
      *
-     * @return string
+     * @see https://php.net/session.configuration
+     *
+     * cache_expire: "180",
+     * cache_limiter: "nocache",
+     * cookie_domain: "",
+     * cookie_httponly: "0",
+     * cookie_lifetime: "0",
+     * cookie_path: "/",
+     * cookie_samesite: "",
+     * cookie_secure: "0",
+     * gc_divisor: "100",
+     * gc_maxlifetime: "1440",
+     * gc_probability: "1",
+     * lazy_write: "1",
+     * name: "PHPSESSID",
+     * read_and_close: "0",
+     * referer_check: "",
+     * save_handler: "files",
+     * save_path: "",
+     * serialize_handler: "php",
+     * sid_bits_per_character: "4",
+     * sid_length: "32",
+     * trans_sid_hosts: $_SERVER['HTTP_HOST'],
+     * trans_sid_tags: "a=href,area=href,frame=src,form=",
+     * use_cookies: "1",
+     * use_only_cookies: "1",
+     * use_strict_mode: "0",
+     * use_trans_sid: "0".
+     *
+     * @throws SessionException if headers already sent
+     * @throws SessionException if session already started
+     * @throws SessionException If setting options failed
      */
-    public static function getPrefix()
+    public function start(array $options = []): bool
     {
-        return self::$prefix;
+        return session_start($options);
     }
 
     /**
-     * If session has not started, start sessions.
-     *
-     * @param int    $lifeTime → lifetime of session in seconds
-     * @param string $sameSite → sameSite option: None, Lax, Strict
-     * @param string $domain   → Cookie domain
-     * @param bool   $secure   → Cookie must be secure or not
-     * @param bool   $httpOnly → Cookie only available with http or not
-     *
-     * @return bool
+     * Gets all attributes.
      */
-    public static function init($lifeTime = 0)
+    public function all(): array
     {
-        if (self::$sessionStarted == false) {
-            session_set_cookie_params($lifeTime);
-            session_start();
-
-            return self::$sessionStarted = true;
-        }
-
-        return false;
+        return $_SESSION ?? [];
     }
 
     /**
-     * Add value to a session.
-     *
-     * @param string $key   → name the data to save
-     * @param mixed  $value → the data to save
-     *
-     * @return bool true
+     * Check if an attribute exists in the session.
      */
-    public static function set($key, $value = false)
+    public function has(string $name): bool
     {
-        if (is_array($key) && $value == false) {
-            foreach ($key as $name => $value) {
-                $_SESSION[self::$prefix . $name] = $value;
-            }
-        } else {
-            $_SESSION[self::$prefix . $key] = $value;
-        }
-
-        return true;
+        return isset($_SESSION[$name]);
     }
 
     /**
-     * Extract session item, delete session item and finally return the item.
-     *
-     * @param string $key → item to extract
-     *
-     * @return mixed|null → return item or null when key does not exists
+     * Gets an attribute by name.
+     * Optionally defines a default value when the attribute does not exist.
      */
-    public static function pull($key)
+    public function get(string $name, mixed $default = null): mixed
     {
-        if (isset($_SESSION[self::$prefix . $key])) {
-            $value = $_SESSION[self::$prefix . $key];
-            unset($_SESSION[self::$prefix . $key]);
-
-            return $value;
-        }
-
-        return null;
+        return $_SESSION[$name] ?? $default;
     }
 
     /**
-     * Get item from session.
+     * Sets an attribute by name.
      *
-     * @param string      $key       → item to look for in session
-     * @param string|bool $secondkey → if used then use as a second key
-     *
-     * @return mixed|null → key value, or null if key doesn't exists
+     * @throws SessionException if session is unstarted
      */
-    public static function get($key = '', $secondkey = false)
+    public function set(string $name, mixed $value): void
     {
-        $name = self::$prefix . $key;
+        $this->failIfSessionWasNotStarted();
 
-        if (empty($key)) {
-            return isset($_SESSION) ? $_SESSION : null;
-        } elseif ($secondkey == true) {
-            if (isset($_SESSION[$name][$secondkey])) {
-                return $_SESSION[$name][$secondkey];
-            }
-        }
-
-        return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
+        $_SESSION[$name] = $value;
     }
 
     /**
-     * Get session id.
+     * Sets several attributes at once.
+     * If attributes exist they are replaced, if they do not exist they are created.
      *
-     * @return string → the session id or empty
+     * @throws SessionException if session is unstarted
      */
-    public static function id()
+    public function replace(array $data): void
+    {
+        $this->failIfSessionWasNotStarted();
+
+        $_SESSION = array_merge($_SESSION, $data);
+    }
+
+    /**
+     * Deletes an attribute by name and returns its value.
+     * Optionally defines a default value when the attribute does not exist.
+     *
+     * @throws SessionException if session is unstarted
+     */
+    public function pull(string $name, mixed $default = null): mixed
+    {
+        $this->failIfSessionWasNotStarted();
+
+        $value = $_SESSION[$name] ?? $default;
+
+        unset($_SESSION[$name]);
+
+        return $value;
+    }
+
+    /**
+     * Deletes an attribute by name.
+     *
+     * @throws SessionException if session is unstarted
+     */
+    public function remove(string $name): void
+    {
+        $this->failIfSessionWasNotStarted();
+
+        unset($_SESSION[$name]);
+    }
+
+    /**
+     * Free all session variables.
+     *
+     * @throws SessionException if session is unstarted
+     */
+    public function clear(): void
+    {
+        $this->failIfSessionWasNotStarted();
+
+        session_unset();
+    }
+
+    /**
+     * Gets the session ID.
+     */
+    public function getId(): string
     {
         return session_id();
     }
 
     /**
-     * Regenerate session_id.
+     * Sets the session ID.
      *
-     * @return string → session_id
+     * @throws SessionException if session already started
      */
-    public static function regenerate()
+    public function setId(string $sessionId): void
     {
-        session_regenerate_id(true);
-
-        return session_id();
+        session_id($sessionId);
     }
 
     /**
-     * Empties and destroys the session.
+     * Update the current session id with a newly generated one.
      *
-     * @param string $key    → session name to destroy
-     * @param bool   $prefix → if true clear all sessions for current prefix
-     *
-     * @return bool
+     * @throws SessionException if session is unstarted
      */
-    public static function destroy($key = '', $prefix = false)
+    public function regenerateId(bool $deleteOldSession = false): bool
     {
-        if (self::$sessionStarted == true) {
-            if ($key == '' && $prefix == false) {
-                session_unset();
-                session_destroy();
-            } elseif ($prefix == true) {
-                foreach ($_SESSION as $index => $value) {
-                    if (strpos($index, self::$prefix) === 0) {
-                        unset($_SESSION[$index]);
-                    }
-                }
-            } else {
-                unset($_SESSION[self::$prefix . $key]);
-            }
+        return session_regenerate_id($deleteOldSession);
+    }
 
-            return true;
+    /**
+     * Gets the session name.
+     */
+    public function getName(): string
+    {
+        $name = session_name();
+
+        return $name ? $name : '';
+    }
+
+    /**
+     * Sets the session name.
+     *
+     * @throws SessionException if session already started
+     */
+    public function setName(string $name): void
+    {
+        session_name($name);
+    }
+
+    /**
+     * Destroys the session.
+     *
+     * @throws SessionException if session is unstarted
+     */
+    public function destroy(): bool
+    {
+        return session_destroy();
+    }
+
+    /**
+     * Check if the session is started.
+     */
+    public function isStarted(): bool
+    {
+        return session_status() === PHP_SESSION_ACTIVE;
+    }
+
+    /**
+     * Session error handler.
+     *
+     * @throws SessionException
+     */
+    public function errorHandler(int $severity, string $message, string $file): void
+    {
+        if ($file === __FILE__) {
+            throw new SessionException($message);
         }
+    }
 
-        return false;
+    /**
+     * Show warning if the session is not started.
+     */
+    private function failIfSessionWasNotStarted(): void
+    {
+        if (!$this->isStarted()) {
+            $method = debug_backtrace()[1]['function'] ?? 'unknown';
+
+            trigger_error(
+                'Session->' . $method . '(): Changing $_SESSION when no started session.',
+                E_USER_WARNING
+            );
+        }
     }
 }
