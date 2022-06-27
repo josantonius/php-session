@@ -36,7 +36,7 @@ PHP library for handling sessions.
 
 ## Requirements
 
-This library is compatible with the PHP versions: 8.0 | 8.1 | 8.2.
+This library is compatible with the PHP versions: 8.0 | 8.1.
 
 ## Installation
 
