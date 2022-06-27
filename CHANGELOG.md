@@ -1,5 +1,58 @@
 # CHANGELOG
 
+## [v2.0.0](https://github.com/josantonius/php-session/releases/tag/v2.0.0) (2022-06-27)
+
+> Version 1.x is considered as deprecated and unsupported.
+> In this version (2.x) the library was completely restructured.
+> It is recommended to review the documentation for this version and make the necessary changes
+> before starting to use it, as it not be compatible with version 1.x.
+
+* Replaced all static methods in `Josantonius\Session\Session` class.
+
+  A facade class was added to access the methods statically: `Josantonius\Session\Facades\Session`.
+
+* ADDED:
+
+  `Josantonius\Session\Facades\Session` class.
+  
+  `Josantonius\Session\Exceptions\SessionException` class.
+  
+  `Josantonius\Session\Tests\AllMethodTest` class.
+  
+  `Josantonius\Session\Tests\ClearMethodTest` class.
+  
+  `Josantonius\Session\Tests\DestroyMethodTest` class.
+  
+  `Josantonius\Session\Tests\GetIdMethodTest` class.
+  
+  `Josantonius\Session\Tests\GetMethodTest` class.
+  
+  `Josantonius\Session\Tests\GetNameMethodTest` class.
+  
+  `Josantonius\Session\Tests\HasMethodTest` class.
+  
+  `Josantonius\Session\Tests\IsStartedMethodTest` class.
+  
+  `Josantonius\Session\Tests\PullMethodTest` class.
+  
+  `Josantonius\Session\Tests\RegenerateIdMethodTest` class.
+  
+  `Josantonius\Session\Tests\RemoveMethodTest` class.
+  
+  `Josantonius\Session\Tests\ReplaceMethodTest` class.
+  
+  `Josantonius\Session\Tests\SetIdMethodTest` class.
+  
+  `Josantonius\Session\Tests\SetMethodTest` class.
+  
+  `Josantonius\Session\Tests\SetNameMethodTest` class.
+  
+  `Josantonius\Session\Tests\StartMethodTest` class.
+
+* DELETED:
+  
+  `Josantonius\Session\Tests\SessionTest` class.
+
 ## [1.1.9](https://github.com/josantonius/php-session/releases/tag/1.1.9) (2022-06-21)
 
 ### IMPORTANT
