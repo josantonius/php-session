@@ -21,11 +21,11 @@
         "source": "https://github.com/josantonius/php-session"
     },
     "require": {
-        "php": "^5.6 || ^7.0"
+        "php": "^8.0"
     },
     "require-dev": {
-        "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "^5.7 || ^6.0",
+        "phpmd/phpmd": "^2.12",
+        "phpunit/phpunit": "^9.0",
         "squizlabs/php_codesniffer": "^3.7"
     },
     "minimum-stability": "stable",
@@ -48,14 +48,14 @@
         }
     },
     "scripts": {
-        "coverage": "vendor/bin/phpunit --stderr --coverage-clover=coverage.xml",
+        "coverage": "vendor/bin/phpunit --coverage-clover=coverage.xml",
         "fix": [
             "vendor/bin/phpcbf src tests"
         ],
         "htmlCoverage": "vendor/bin/phpunit --coverage-html coverage",
         "phpcs": "vendor/bin/phpcs --standard=phpcs.xml $(find . -name '*.php');",
         "phpmd": "vendor/bin/phpmd src,tests text ./phpmd.xml",
-        "phpunit": "vendor/bin/phpunit --stderr --colors=always;",
+        "phpunit": "vendor/bin/phpunit --colors=always;",
         "tests": [
             "clear",
             "@phpmd",
