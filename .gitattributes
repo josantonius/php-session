@@ -1,7 +1,6 @@
 /.github export-ignore
 /tests export-ignore
 CHANGELOG.md export-ignore
-README.md export-ignore
 phpcs.xml export-ignore
 phpunit.xml export-ignore
 phpmd.xml export-ignore
