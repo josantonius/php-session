@@ -68,23 +68,22 @@ Available methods in this library:
 ### Starts the session
 
 ```php
-start(array $options = []);
+$session->start(array $options = []);
 ```
 
 **@see** <https://php.net/session.configuration>
-for List of available `$options` and their default values.
+for List of available `$options` and their default values
 
-**@throws** `SessionException`
-If headers already sent |
-If session already started |
-If setting options failed
+**@throws** `SessionException` If headers already sent
+**@throws** `SessionException` If session already started
+**@throws** `SessionException` If setting options failed
 
 **@Return** `bool`
 
 ### Check if the session is started
 
 ```php
-isStarted();
+$session->isStarted();
 ```
 
 **@Return** `bool`
@@ -92,7 +91,7 @@ isStarted();
 ### Sets an attribute by name
 
 ```php
-set(string $name, mixed $value = null);
+$session->set(string $name, mixed $value = null);
 ```
 
 **@throws** `SessionException` If session is unstarted
@@ -104,7 +103,7 @@ set(string $name, mixed $value = null);
 Optionally defines a default value when the attribute does not exist.
 
 ```php
-get(string $name, mixed $default = null);
+$session->get(string $name, mixed $default = null);
 ```
 
 **@Return** `mixed` Value
@@ -112,7 +111,7 @@ get(string $name, mixed $default = null);
 ### Gets all attributes
 
 ```php
-all();
+$session->all();
 ```
 
 **@Return** `array` $_SESSION content
@@ -120,7 +119,7 @@ all();
 ### Check if an attribute exists in the session
 
 ```php
-has(string $name);
+$session->has(string $name);
 ```
 
 **@Return** `bool`
@@ -130,7 +129,7 @@ has(string $name);
 If attributes exist they are replaced, if they do not exist they are created.
 
 ```php
-replace(array $data);
+$session->replace(array $data);
 ```
 
 **@throws** `SessionException` If session is unstarted
@@ -142,7 +141,7 @@ replace(array $data);
 Optionally defines a default value when the attribute does not exist.
 
 ```php
-pull(string $name, mixed $default = null);
+$session->pull(string $name, mixed $default = null);
 ```
 
 **@throws** `SessionException` If session is unstarted
@@ -152,7 +151,7 @@ pull(string $name, mixed $default = null);
 ### Deletes an attribute by name
 
 ```php
-remove(string $name);
+$session->remove(string $name);
 ```
 
 **@throws** `SessionException` If session is unstarted
@@ -162,7 +161,7 @@ remove(string $name);
 ### Free all session variables
 
 ```php
-clear();
+$session->clear();
 ```
 
 **@throws** `SessionException` If session is unstarted
@@ -172,7 +171,7 @@ clear();
 ### Gets the session ID
 
 ```php
-getId();
+$session->getId();
 ```
 
 **@Return** `string` Session ID
@@ -180,7 +179,7 @@ getId();
 ### Sets the session ID
 
 ```php
-setId(string $sessionId);
+$session->setId(string $sessionId);
 ```
 
 **@throws** `SessionException` If session already started
@@ -190,7 +189,7 @@ setId(string $sessionId);
 ### Update the current session id with a newly generated one
 
 ```php
-regenerateId(bool $deleteOldSession = false);
+$session->regenerateId(bool $deleteOldSession = false);
 ```
 
 **@throws** `SessionException` If session is unstarted
@@ -200,7 +199,7 @@ regenerateId(bool $deleteOldSession = false);
 ### Gets the session name
 
 ```php
-getName();
+$session->getName();
 ```
 
 **@Return** `string` Session name
@@ -208,7 +207,7 @@ getName();
 ### Sets the session name
 
 ```php
-setName(string $name);
+$session->setName(string $name);
 ```
 
 **@throws** `SessionException` If session already started
@@ -218,7 +217,7 @@ setName(string $name);
 ### Destroys the session
 
 ```php
-destroy();
+$session->destroy();
 ```
 
 **@throws** `SessionException` If session is unstarted

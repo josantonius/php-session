@@ -68,23 +68,22 @@ Métodos disponibles en esta biblioteca:
 ### Iniciar la sesión
 
 ```php
-start(array $options = []);
+$session->start(array $options = []);
 ```
 
 **@see** <https://php.net/session.configuration>
-para ver la lista de las `$opciones` disponibles y sus valores por defecto.
+para ver la lista de las `$opciones` disponibles y sus valores por defecto
 
-**@throws** `SessionException`
-Si las cabeceras ya se enviaron |
-Si la sesión ya está iniciada |
-Si hay algún fallo con las opciones
+**@throws** `SessionException` Si los _headers_ ya se enviaron
+**@throws** `SessionException` Si la sesión ya está iniciada
+**@throws** `SessionException` Si hay algún fallo con las opciones
 
 **@Return** `bool`
 
 ### Comprobar si la sesión está iniciada
 
 ```php
-isStarted();
+$session->isStarted();
 ```
 
 **@Return** `bool`
@@ -92,7 +91,7 @@ isStarted();
 ### Establecer un atributo por su nombre
 
 ```php
-set(string $name, mixed $value = null);
+$session->set(string $name, mixed $value = null);
 ```
 
 **@throws** `SessionException` Si la sesión no está iniciada
@@ -104,7 +103,7 @@ set(string $name, mixed $value = null);
 Opcionalmente define un valor por defecto cuando el atributo no existe.
 
 ```php
-get(string $name, mixed $default = null);
+$session->get(string $name, mixed $default = null);
 ```
 
 **@Return** `mixed` Valor
@@ -112,7 +111,7 @@ get(string $name, mixed $default = null);
 ### Obtener todos los atributos
 
 ```php
-all();
+$session->all();
 ```
 
 **@Return** `array` Contenido de la $_SESSION
@@ -120,7 +119,7 @@ all();
 ### Comprobar si un atributo existe en la sesión
 
 ```php
-has(string $name);
+$session->has(string $name);
 ```
 
 **@Return** `bool`
@@ -130,7 +129,7 @@ has(string $name);
 Si los atributos existen se sustituyen, si no existen se crean.
 
 ```php
-replace(array $data);
+$session->replace(array $data);
 ```
 
 **@throws** `SessionException` Si la sesión no está iniciada
@@ -142,7 +141,7 @@ replace(array $data);
 Opcionalmente define un valor por defecto cuando el atributo no existe.
 
 ```php
-pull(string $name, mixed $default = null);
+$session->pull(string $name, mixed $default = null);
 ```
 
 **@throws** `SessionException` Si la sesión no está iniciada
@@ -152,7 +151,7 @@ pull(string $name, mixed $default = null);
 ### Eliminar un atributo por su nombre
 
 ```php
-remove(string $name);
+$session->remove(string $name);
 ```
 
 **@throws** `SessionException` Si la sesión no está iniciada
@@ -162,7 +161,7 @@ remove(string $name);
 ### Liberar todas las variables de la sesión
 
 ```php
-clear();
+$session->clear();
 ```
 
 **@throws** `SessionException` Si la sesión no está iniciada
@@ -172,7 +171,7 @@ clear();
 ### Obtiene el ID de la sesión
 
 ```php
-getId();
+$session->getId();
 ```
 
 **@Return** `string` ID de la sesión
@@ -180,7 +179,7 @@ getId();
 ### Establecer el ID de la sesión
 
 ```php
-setId(string $sessionId);
+$session->setId(string $sessionId);
 ```
 
 **@throws** `SessionException` Si la sesión ya está iniciada
@@ -190,7 +189,7 @@ setId(string $sessionId);
 ### Actualizar el ID de la sesión actual con uno recién generado
 
 ```php
-regenerateId(bool $deleteOldSession = false);
+$session->regenerateId(bool $deleteOldSession = false);
 ```
 
 **@throws** `SessionException` Si la sesión no está iniciada
@@ -200,7 +199,7 @@ regenerateId(bool $deleteOldSession = false);
 ### Obtener el nombre de la sesión
 
 ```php
-getName();
+$session->getName();
 ```
 
 **@Return** `string` Nombre de la sesión
@@ -208,7 +207,7 @@ getName();
 ### Establecer el nombre de la sesión
 
 ```php
-setName(string $name);
+$session->setName(string $name);
 ```
 
 **@throws** `SessionException` Si la sesión ya está iniciada
@@ -218,7 +217,7 @@ setName(string $name);
 ### Eliminar la sesión
 
 ```php
-destroy();
+$session->destroy();
 ```
 
 **@throws** `SessionException` Si la sesión no está iniciada
