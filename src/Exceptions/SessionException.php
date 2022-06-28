@@ -14,7 +14,7 @@ namespace Josantonius\Session\Exceptions;
 /**
  * You can use an exception and error handler with this library.
  *
- * @link https://github.com/josantonius/php-errorhandler
+ * @link https://github.com/josantonius/php-error-handler
  */
 class SessionException extends \Exception
 {
