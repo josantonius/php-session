@@ -17,7 +17,7 @@
     ],
     "support": {
         "issues": "https://github.com/josantonius/php-session/issues",
-        "forum": "http://stackoverflow.com/tags/josantonius/php-session",
+        "discussions": "https://github.com/josantonius/php-session/discussions",
         "source": "https://github.com/josantonius/php-session"
     },
     "require": {
