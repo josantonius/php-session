@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## [v2.0.0](https://github.com/josantonius/php-session/releases/tag/v2.0.0) (2022-06-27)
+## [v2.0.1](https://github.com/josantonius/php-session/releases/tag/v2.0.1) (2022-06-28)
+
+* Changes in documentation.
+
+## [2.0.0](https://github.com/josantonius/php-session/releases/tag/2.0.0) (2022-06-27)
 
 > Version 1.x is considered as deprecated and unsupported.
 > In this version (2.x) the library was completely restructured.
