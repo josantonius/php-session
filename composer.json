@@ -16,8 +16,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/josantonius/php-session/issues",
         "discussions": "https://github.com/josantonius/php-session/discussions",
+        "issues": "https://github.com/josantonius/php-session/issues",
         "source": "https://github.com/josantonius/php-session"
     },
     "require": {
