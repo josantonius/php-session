@@ -231,7 +231,7 @@ $session->destroy();
 To use this library with **Composer**:
 
 ```php
-use josantonius\Session\Session;
+use Josantonius\Session\Session;
 
 $session = new Session();
 ```
@@ -239,7 +239,7 @@ $session = new Session();
 Or instead you can use a facade to access the methods statically:
 
 ```php
-use josantonius\Session\Facades\Session;
+use Josantonius\Session\Facades\Session;
 ```
 
 ## Usage
