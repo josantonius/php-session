@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [v2.0.2](https://github.com/josantonius/php-session/releases/tag/v2.0.2) (2022-06-29)
+## [v2.0.2](https://github.com/josantonius/php-session/releases/tag/v2.0.2) (2022-06-30)
 
 * Fix readme namespace. Fixes [#13](https://github.com/josantonius/php-session/issues/13).
 
