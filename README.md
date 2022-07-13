@@ -68,55 +68,45 @@ Available methods in this library:
 ### Starts the session
 
 ```php
-$session->start(array $options = []);
+$session->start(array $options = []): bool
 ```
 
 **@see** <https://php.net/session.configuration>
-for List of available `$options` and their default values
+for List of available `$options` and their default values.
 
-**@throws** `SessionException` If headers already sent
+**@throws** `SessionException` if headers already sent.
 
-**@throws** `SessionException` If session already started
+**@throws** `SessionException` if session already started.
 
-**@throws** `SessionException` If setting options failed
-
-**@Return** `bool`
+**@throws** `SessionException` if setting options failed.
 
 ### Check if the session is started
 
 ```php
-$session->isStarted();
+$session->isStarted(): bool
 ```
-
-**@Return** `bool`
 
 ### Sets an attribute by name
 
 ```php
-$session->set(string $name, mixed $value = null);
+$session->set(string $name, mixed $value): void
 ```
 
-**@throws** `SessionException` If session is unstarted
-
-**@Return** `void`
+**@throws** `SessionException` if session is unstarted.
 
 ### Gets an attribute by name
 
 Optionally defines a default value when the attribute does not exist.
 
 ```php
-$session->get(string $name, mixed $default = null);
+$session->get(string $name, mixed $default = null): mixed
 ```
-
-**@Return** `mixed` Value
 
 ### Gets all attributes
 
 ```php
-$session->all();
+$session->all(): array
 ```
-
-**@Return** `array` $_SESSION content
 
 ### Check if an attribute exists in the session
 
@@ -124,107 +114,85 @@ $session->all();
 $session->has(string $name);
 ```
 
-**@Return** `bool`
-
 ### Sets several attributes at once
 
 If attributes exist they are replaced, if they do not exist they are created.
 
 ```php
-$session->replace(array $data);
+$session->replace(array $data): void
 ```
 
-**@throws** `SessionException` If session is unstarted
-
-**@Return** `void`
+**@throws** `SessionException` if session is unstarted.
 
 ### Deletes an attribute by name and returns its value
 
 Optionally defines a default value when the attribute does not exist.
 
 ```php
-$session->pull(string $name, mixed $default = null);
+$session->pull(string $name, mixed $default = null): mixed
 ```
 
-**@throws** `SessionException` If session is unstarted
-
-**@Return** `mixed` Attribute value
+**@throws** `SessionException` if session is unstarted.
 
 ### Deletes an attribute by name
 
 ```php
-$session->remove(string $name);
+$session->remove(string $name): void
 ```
 
-**@throws** `SessionException` If session is unstarted
-
-**@Return** `void`
+**@throws** `SessionException` if session is unstarted.
 
 ### Free all session variables
 
 ```php
-$session->clear();
+$session->clear(): void
 ```
 
-**@throws** `SessionException` If session is unstarted
-
-**@Return** `void`
+**@throws** `SessionException` if session is unstarted.
 
 ### Gets the session ID
 
 ```php
-$session->getId();
+$session->getId() string
 ```
-
-**@Return** `string` Session ID
 
 ### Sets the session ID
 
 ```php
-$session->setId(string $sessionId);
+$session->setId(string $sessionId): void
 ```
 
-**@throws** `SessionException` If session already started
-
-**@Return** `void`
+**@throws** `SessionException` if session already started.
 
 ### Update the current session id with a newly generated one
 
 ```php
-$session->regenerateId(bool $deleteOldSession = false);
+$session->regenerateId(bool $deleteOldSession = false): bool
 ```
 
-**@throws** `SessionException` If session is unstarted
-
-**@Return** `bool`
+**@throws** `SessionException` if session is unstarted.
 
 ### Gets the session name
 
 ```php
-$session->getName();
+$session->getName(): string
 ```
-
-**@Return** `string` Session name
 
 ### Sets the session name
 
 ```php
-$session->setName(string $name);
+$session->setName(string $name): void
 ```
 
-**@throws** `SessionException` If session already started
-
-**@Return** `void`
+**@throws** `SessionException` if session already started.
 
 ### Destroys the session
 
 ```php
-$session->destroy();
+$session->destroy(): bool
 ```
 
-**@throws** `SessionException` If session is unstarted
-
-**@Return** `bool`
+**@throws** `SessionException` if session is unstarted.
 
 ## Quick Start
 
@@ -567,7 +535,7 @@ composer tests
 - [ ] Improve tests
 - [ ] Improve documentation
 - [ ] Improve English translation in the README file
-- [ ] Refactor code for disabled code style rules. See [phpmd.xml](phpmd.xml) and [phpcs.xml](phpcs.xml)
+- [ ] Refactor code for disabled code style rules (see phpmd.xml and phpcs.xml)
 - [ ] Show an example of renewing the session lifetime
 - [ ] Feature to enable/disable exceptions?
 - [ ] Feature to add prefixes in session attributes?

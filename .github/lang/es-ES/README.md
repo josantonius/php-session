@@ -26,7 +26,7 @@ Biblioteca PHP para manejo de sesiones.
 - [Cómo empezar](#cómo-empezar)
 - [Uso](#uso)
 - [Tests](#tests)
-- [Tareas pendientes](#-tareas-pendientes)
+- [Tareas pendientes](#tareas-pendientes)
 - [Registro de Cambios](#registro-de-cambios)
 - [Contribuir](#contribuir)
 - [Patrocinar](#patrocinar)
@@ -68,163 +68,131 @@ Métodos disponibles en esta biblioteca:
 ### Iniciar la sesión
 
 ```php
-$session->start(array $options = []);
+$session->start(array $options = []): bool
 ```
 
 **@see** <https://php.net/session.configuration>
-para ver la lista de las `$opciones` disponibles y sus valores por defecto
+para ver la lista de las `$opciones` disponibles y sus valores por defecto.
 
-**@throws** `SessionException` Si los _headers_ ya se enviaron
+**@throws** `SessionException` si los _headers_ ya se enviaron.
 
-**@throws** `SessionException` Si la sesión ya está iniciada
+**@throws** `SessionException` si la sesión ya está iniciada.
 
-**@throws** `SessionException` Si hay algún fallo con las opciones
-
-**@Return** `bool`
+**@throws** `SessionException` si hay algún fallo con las opciones.
 
 ### Comprobar si la sesión está iniciada
 
 ```php
-$session->isStarted();
+$session->isStarted(): bool
 ```
-
-**@Return** `bool`
 
 ### Establecer un atributo por su nombre
 
 ```php
-$session->set(string $name, mixed $value = null);
+$session->set(string $name, mixed $value): void
 ```
 
-**@throws** `SessionException` Si la sesión no está iniciada
-
-**@Return** `void`
+**@throws** `SessionException` si la sesión no está iniciada.
 
 ### Obtener un atributo por su nombre
 
 Opcionalmente define un valor por defecto cuando el atributo no existe.
 
 ```php
-$session->get(string $name, mixed $default = null);
+$session->get(string $name, mixed $default = null): mixed
 ```
-
-**@Return** `mixed` Valor
 
 ### Obtener todos los atributos
 
 ```php
-$session->all();
+$session->all(): array
 ```
-
-**@Return** `array` Contenido de la $_SESSION
 
 ### Comprobar si un atributo existe en la sesión
 
 ```php
-$session->has(string $name);
+$session->has(string $name): bool
 ```
-
-**@Return** `bool`
 
 ### Establecer múltiples atributos de una vez
 
 Si los atributos existen se sustituyen, si no existen se crean.
 
 ```php
-$session->replace(array $data);
+$session->replace(array $data): void
 ```
 
-**@throws** `SessionException` Si la sesión no está iniciada
-
-**@Return** `void`
+**@throws** `SessionException` si la sesión no está iniciada.
 
 ### Eliminar un atributo por su nombre y devolver su valor
 
 Opcionalmente define un valor por defecto cuando el atributo no existe.
 
 ```php
-$session->pull(string $name, mixed $default = null);
+$session->pull(string $name, mixed $default = null): mixed
 ```
 
-**@throws** `SessionException` Si la sesión no está iniciada
-
-**@Return** `mixed` Valor
+**@throws** `SessionException` si la sesión no está iniciada.
 
 ### Eliminar un atributo por su nombre
 
 ```php
-$session->remove(string $name);
+$session->remove(string $name): void
 ```
 
-**@throws** `SessionException` Si la sesión no está iniciada
-
-**@Return** `void`
+**@throws** `SessionException` si la sesión no está iniciada.
 
 ### Liberar todas las variables de la sesión
 
 ```php
-$session->clear();
+$session->clear(): void
 ```
 
-**@throws** `SessionException` Si la sesión no está iniciada
-
-**@Return** `void`
+**@throws** `SessionException` si la sesión no está iniciada.
 
 ### Obtiene el ID de la sesión
 
 ```php
-$session->getId();
+$session->getId(): string
 ```
-
-**@Return** `string` ID de la sesión
 
 ### Establecer el ID de la sesión
 
 ```php
-$session->setId(string $sessionId);
+$session->setId(string $sessionId): void
 ```
 
-**@throws** `SessionException` Si la sesión ya está iniciada
-
-**@Return** `void`
+**@throws** `SessionException` si la sesión ya está iniciada.
 
 ### Actualizar el ID de la sesión actual con uno recién generado
 
 ```php
-$session->regenerateId(bool $deleteOldSession = false);
+$session->regenerateId(bool $deleteOldSession = false): bool
 ```
 
-**@throws** `SessionException` Si la sesión no está iniciada
-
-**@Return** `bool`
+**@throws** `SessionException` si la sesión no está iniciada.
 
 ### Obtener el nombre de la sesión
 
 ```php
-$session->getName();
+$session->getName(): string
 ```
-
-**@Return** `string` Nombre de la sesión
 
 ### Establecer el nombre de la sesión
 
 ```php
-$session->setName(string $name);
+$session->setName(string $name): void
 ```
 
-**@throws** `SessionException` Si la sesión ya está iniciada
-
-**@Return** `void`
+**@throws** `SessionException` si la sesión ya está iniciada.
 
 ### Eliminar la sesión
 
 ```php
-$session->destroy();
+$session->destroy(): bool
 ```
 
-**@throws** `SessionException` Si la sesión no está iniciada
-
-**@Return** `bool`
+**@throws** `SessionException` si la sesión no está iniciada.
 
 ## Cómo empezar
 
@@ -561,17 +529,17 @@ Ejecutar todas las pruebas anteriores:
 composer tests
 ```
 
-## ☑ Tareas pendientes
+## Tareas pendientes
 
-- [ ] Añadir nueva funcionalidad.
-- [ ] Mejorar pruebas.
-- [ ] Mejorar documentación.
-- [ ] Mejorar la traducción al inglés en el archivo README.
-- [ ] Refactorizar código para las reglas de estilo de código deshabilitadas.
-Ver [phpmd.xml](phpmd.xml) y [phpcs.xml](phpcs.xml).
-- [ ] Mostrar un ejemplo de renovación de la duración de la sesión.
-- [ ] Funcionalidad para activar/desactivar excepciones?
-- [ ] Funcionalidad para añadir prefijos en los atributos de sesión?
+- [ ] Añadir nueva funcionalidad
+- [ ] Mejorar pruebas
+- [ ] Mejorar documentación
+- [ ] Mejorar la traducción al inglés en el archivo README
+- [ ] Refactorizar código para las reglas de estilo de código deshabilitadas
+(ver [phpmd.xml](phpmd.xml) y [phpcs.xml](phpcs.xml))
+- [ ] Mostrar un ejemplo de renovación de la duración de la sesión
+- [ ] ¿Funcionalidad para activar/desactivar excepciones?
+- [ ] ¿Funcionalidad para añadir prefijos en los atributos de sesión?
 
 ## Registro de Cambios
 
@@ -583,7 +551,7 @@ Los cambios detallados de cada versión se documentan en las
 Por favor, asegúrate de leer la [Guía de contribución](CONTRIBUTING.md) antes de hacer un
 _pull request_, comenzar una discusión o reportar un _issue_.
 
-¡Gracias por [colaborar](https://github.com/josantonius/php-json/graphs/contributors)! :heart:
+¡Gracias por [colaborar](https://github.com/josantonius/php-session/graphs/contributors)! :heart:
 
 ## Patrocinar
 
