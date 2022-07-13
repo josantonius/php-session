@@ -198,13 +198,17 @@ $session->destroy(): bool
 
 To use this library with **Composer**:
 
+### Using objects
+
 ```php
 use Josantonius\Session\Session;
 
 $session = new Session();
 ```
 
-Or instead you can use a facade to access the methods statically:
+### Using the facade
+
+Alternatively you can use a facade to access the methods statically:
 
 ```php
 use Josantonius\Session\Facades\Session;
@@ -215,6 +219,8 @@ use Josantonius\Session\Facades\Session;
 Example of use for this library:
 
 ### - Starts the session
+
+[Using objects](#using-objects):
 
 Without setting options:
 
@@ -255,7 +261,7 @@ $session->start([
 ]);
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::start();
@@ -263,13 +269,13 @@ Session::start();
 
 ### - Check if the session is started
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->isStarted();
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::isStarted();
@@ -277,19 +283,21 @@ Session::isStarted();
 
 ### - Sets an attribute by name
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->set('foo', 'bar');
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::set('foo', 'bar');
 ```
 
 ### - Gets an attribute by name
+
+[Using objects](#using-objects):
 
 Without default value if attribute does not exist:
 
@@ -303,7 +311,7 @@ With default value if attribute does not exist:
 $session->get('foo', false); // false if attribute does not exist
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::get('foo');
@@ -311,13 +319,13 @@ Session::get('foo');
 
 ### - Gets all attributes
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->all();
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::all();
@@ -325,13 +333,13 @@ Session::all();
 
 ### - Check if an attribute exists in the session
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->has('foo');
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::has('foo');
@@ -339,19 +347,21 @@ Session::has('foo');
 
 ### - Sets several attributes at once
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
 ### - Deletes an attribute by name and returns its value
+
+[Using objects](#using-objects):
 
 Without default value if attribute does not exist:
 
@@ -365,7 +375,7 @@ With default value if attribute does not exist:
 $session->pull('foo', false); // false if attribute does not exist
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::pull('foo');
@@ -373,13 +383,13 @@ Session::pull('foo');
 
 ### - Deletes an attribute by name
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->remove('foo');
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::remove('foo');
@@ -387,13 +397,13 @@ Session::remove('foo');
 
 ### - Free all session variables
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->clear();
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::clear();
@@ -401,13 +411,13 @@ Session::clear();
 
 ### - Gets the session ID
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->getId();
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::getId();
@@ -415,19 +425,21 @@ Session::getId();
 
 ### - Sets the session ID
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->setId('foo');
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::setId('foo');
 ```
 
 ### - Update the current session id with a newly generated one
+
+[Using objects](#using-objects):
 
 Regenerate ID without deleting the old session:
 
@@ -441,7 +453,7 @@ Regenerate ID by deleting the old session:
 $session->regenerateId(true);
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::regenerateId();
@@ -449,13 +461,13 @@ Session::regenerateId();
 
 ### - Gets the session name
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->getName();
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::getName();
@@ -463,13 +475,13 @@ Session::getName();
 
 ### - Sets the session name
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->setName('foo');
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::setName('foo');
@@ -477,13 +489,13 @@ Session::setName('foo');
 
 ### - Destroys the session
 
-Using session object:
+[Using objects](#using-objects):
 
 ```php
 $session->destroy();
 ```
 
-Using the facade:
+[Using the facade](#using-the-facade):
 
 ```php
 Session::destroy();

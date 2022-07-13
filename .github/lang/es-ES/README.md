@@ -196,7 +196,7 @@ $session->destroy(): bool
 
 ## Cómo empezar
 
-Para utilizar esta biblioteca con **Composer**:
+### Utilizando objetos
 
 ```php
 use Josantonius\Session\Session;
@@ -204,7 +204,9 @@ use Josantonius\Session\Session;
 $session = new Session();
 ```
 
-O puedes utilizar la fachada para acceder a los métodos de manera estática:
+### Utilizando la fachada
+
+Alternativamente puedes utilizar la fachada para acceder a los métodos de manera estática:
 
 ```php
 use Josantonius\Session\Facades\Session;
@@ -215,6 +217,8 @@ use Josantonius\Session\Facades\Session;
 Ejemplo de uso para esta biblioteca:
 
 ### - Iniciar la sesión
+
+[Utilizando objetos](#utilizando-objetos):
 
 Sin establecer opciones:
 
@@ -255,7 +259,7 @@ $session->start([
 ]);
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::start();
@@ -263,13 +267,13 @@ Session::start();
 
 ### - Comprobar si la sesión está iniciada
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->isStarted();
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::isStarted();
@@ -277,19 +281,21 @@ Session::isStarted();
 
 ### - Establecer un atributo por su nombre
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->set('foo', 'bar');
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::set('foo', 'bar');
 ```
 
 ### - Obtener un atributo por su nombre
+
+[Utilizando objetos](#utilizando-objetos):
 
 Sin valor por defecto si el atributo no existe:
 
@@ -303,7 +309,7 @@ Con valor por defecto si el atributo no existe:
 $session->get('foo', false); // false si el atributo no existe
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::get('foo');
@@ -311,13 +317,13 @@ Session::get('foo');
 
 ### - Obtener todos los atributos
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->all();
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::all();
@@ -325,13 +331,13 @@ Session::all();
 
 ### - Comprobar si un atributo existe en la sesión
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->has('foo');
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::has('foo');
@@ -339,19 +345,21 @@ Session::has('foo');
 
 ### - Establecer múltiples atributos de una vez
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
 ### - Eliminar un atributo por su nombre y devolver su valor
+
+[Utilizando objetos](#utilizando-objetos):
 
 Sin valor por defecto si el atributo no existe:
 
@@ -365,7 +373,7 @@ Con valor por defecto si el atributo no existe:
 $session->pull('foo', false); // false si el atributo no existe
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::pull('foo');
@@ -373,13 +381,13 @@ Session::pull('foo');
 
 ### - Eliminar un atributo por su nombre
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->remove('foo');
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::remove('foo');
@@ -387,13 +395,13 @@ Session::remove('foo');
 
 ### - Liberar todas las variables de la sesión
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->clear();
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::clear();
@@ -401,13 +409,13 @@ Session::clear();
 
 ### - Obtiene el ID de la sesión
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->getId();
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::getId();
@@ -415,19 +423,21 @@ Session::getId();
 
 ### - Establecer el ID de la sesión
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->setId('foo');
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::setId('foo');
 ```
 
 ### - Actualizar el ID de la sesión actual con uno recién generado
+
+[Utilizando objetos](#utilizando-objetos):
 
 Regenerar el ID sin borrar la sesión anterior:
 
@@ -441,7 +451,7 @@ Regenerar el ID borrando la sesión anterior:
 $session->regenerateId(true);
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::regenerateId();
@@ -449,13 +459,13 @@ Session::regenerateId();
 
 ### - Obtener el nombre de la sesión
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->getName();
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::getName();
@@ -463,13 +473,13 @@ Session::getName();
 
 ### - Establecer el nombre de la sesión
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->setName('foo');
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::setName('foo');
@@ -477,13 +487,13 @@ Session::setName('foo');
 
 ### - Eliminar la sesión
 
-Utilizando el objeto de sesión:
+[Utilizando objetos](#utilizando-objetos):
 
 ```php
 $session->destroy();
 ```
 
-Utilizando la fachada:
+[Utilizando la fachada](#utilizando-la-fachada):
 
 ```php
 Session::destroy();
