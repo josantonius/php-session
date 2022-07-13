@@ -22,7 +22,10 @@ class Session
 {
     public function __construct()
     {
-        set_error_handler([$this, 'errorHandler']);
+        set_error_handler(
+            fn (int $severity, string $message, string $file) =>
+            $file === __FILE__ && throw new SessionException($message)
+        );
     }
 
     /**
@@ -223,18 +226,6 @@ class Session
     public function isStarted(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
-    }
-
-    /**
-     * Session error handler.
-     *
-     * @throws SessionException
-     */
-    public function errorHandler(int $severity, string $message, string $file): void
-    {
-        if ($file === __FILE__) {
-            throw new SessionException($message);
-        }
     }
 
     /**
