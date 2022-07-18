@@ -111,7 +111,7 @@ $session->all(): array
 ### Check if an attribute exists in the session
 
 ```php
-$session->has(string $name);
+$session->has(string $name): bool
 ```
 
 ### Sets several attributes at once
@@ -153,7 +153,7 @@ $session->clear(): void
 ### Gets the session ID
 
 ```php
-$session->getId() string
+$session->getId(): string
 ```
 
 ### Sets the session ID
