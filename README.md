@@ -13,11 +13,6 @@
 
 PHP library for handling sessions.
 
-> Version 1.x is considered as deprecated and unsupported.
-> In this version (2.x) the library was completely restructured.
-> It is recommended to review the documentation for this version and make the necessary changes
-> before starting to use it, as it not be compatible with version 1.x.
-
 ---
 
 - [Requirements](#requirements)
@@ -503,7 +498,8 @@ Session::destroy();
 
 ## Tests
 
-To run [tests](tests) you just need [composer](http://getcomposer.org/download/) and to execute the following:
+To run [tests](tests) you just need [composer](http://getcomposer.org/download/)
+and to execute the following:
 
 ```console
 git clone https://github.com/josantonius/php-session.git
