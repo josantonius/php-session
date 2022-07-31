@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## [v2.0.5](https://github.com/josantonius/php-session/releases/tag/v2.0.5) (2022-07-31)
+
+* Fix documentation on available methods in `README.md`.
+
+* Removed the warning about version 1.x in the `README.md` files.
+
+* Fix exception comment.
+
+* The namespaces in the test classes were sorted.
+
+* Added return value in the test classes.
+
+* Changed the PHPUnit version from `9.0` to `9.5`.
+
+* Fixed blank line at the beginning of the file in `FUNDING.yml`.
+
 ## [v2.0.4](https://github.com/josantonius/php-session/releases/tag/v2.0.4) (2022-07-13)
 
 * Changes in documentation.
