@@ -11,10 +11,10 @@
 
 namespace Josantonius\Session\Tests;
 
-use Josantonius\Session\Exceptions\SessionException;
-use Josantonius\Session\Session;
-use Josantonius\Session\Facades\Session as SessionFacade;
 use PHPUnit\Framework\TestCase;
+use Josantonius\Session\Session;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Facades\Session as SessionFacade;
 
 class SetIdMethodTest extends TestCase
 {
@@ -30,7 +30,7 @@ class SetIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldSetSessionId()
+    public function testShouldSetSessionId(): void
     {
         $this->session->setId('foo');
 
@@ -42,7 +42,7 @@ class SetIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailWhenSessionIsStarted()
+    public function testShouldFailWhenSessionIsStarted(): void
     {
         $this->session->start();
 
@@ -54,7 +54,7 @@ class SetIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

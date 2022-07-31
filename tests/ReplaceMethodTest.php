@@ -11,10 +11,10 @@
 
 namespace Josantonius\Session\Tests;
 
-use Josantonius\Session\Exceptions\SessionException;
-use Josantonius\Session\Session;
-use Josantonius\Session\Facades\Session as SessionFacade;
 use PHPUnit\Framework\TestCase;
+use Josantonius\Session\Session;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Facades\Session as SessionFacade;
 
 class ReplaceMethodTest extends TestCase
 {
@@ -30,7 +30,7 @@ class ReplaceMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldAddAttributesIfNotExist()
+    public function testShouldAddAttributesIfNotExist(): void
     {
         $this->session->start();
 
@@ -47,7 +47,7 @@ class ReplaceMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReplaceAttributesIfExist()
+    public function testShouldReplaceAttributesIfExist(): void
     {
         $this->session->start();
 
@@ -65,7 +65,7 @@ class ReplaceMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailIfSessionIsUnstarted()
+    public function testShouldFailIfSessionIsUnstarted(): void
     {
         $this->expectException(SessionException::class);
 
@@ -75,7 +75,7 @@ class ReplaceMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

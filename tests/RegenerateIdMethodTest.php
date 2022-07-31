@@ -11,10 +11,10 @@
 
 namespace Josantonius\Session\Tests;
 
-use Josantonius\Session\Exceptions\SessionException;
-use Josantonius\Session\Session;
-use Josantonius\Session\Facades\Session as SessionFacade;
 use PHPUnit\Framework\TestCase;
+use Josantonius\Session\Session;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Facades\Session as SessionFacade;
 
 class RegenerateIdMethodTest extends TestCase
 {
@@ -30,7 +30,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldRegenerateSessionIdWithoutDeletingOldSession()
+    public function testShouldRegenerateSessionIdWithoutDeletingOldSession(): void
     {
         $this->session->start();
 
@@ -44,7 +44,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldRegenerateSessionIdDeletingOldSession()
+    public function testShouldRegenerateSessionIdDeletingOldSession(): void
     {
         $this->session->start();
 
@@ -58,7 +58,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailWhenRegenerateIdIfSessionIsUnstarted()
+    public function testShouldFailWhenRegenerateIdIfSessionIsUnstarted(): void
     {
         $this->expectException(SessionException::class);
 
@@ -68,7 +68,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

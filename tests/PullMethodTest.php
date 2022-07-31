@@ -11,10 +11,10 @@
 
 namespace Josantonius\Session\Tests;
 
-use Josantonius\Session\Exceptions\SessionException;
-use Josantonius\Session\Session;
-use Josantonius\Session\Facades\Session as SessionFacade;
 use PHPUnit\Framework\TestCase;
+use Josantonius\Session\Session;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Facades\Session as SessionFacade;
 
 class PullMethodTest extends TestCase
 {
@@ -30,7 +30,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldPullAttributeAndReturnTheValueIfExists()
+    public function testShouldPullAttributeAndReturnTheValueIfExists(): void
     {
         $this->session->start();
 
@@ -44,7 +44,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnDefaultValueIfAttributeNotExists()
+    public function testShouldReturnDefaultValueIfAttributeNotExists(): void
     {
         $this->session->start();
 
@@ -54,7 +54,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnCustomDefaultValueIfAttributeNotExists()
+    public function testShouldReturnCustomDefaultValueIfAttributeNotExists(): void
     {
         $this->session->start();
 
@@ -74,7 +74,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

@@ -11,9 +11,9 @@
 
 namespace Josantonius\Session\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
 use Josantonius\Session\Facades\Session as SessionFacade;
-use PHPUnit\Framework\TestCase;
 
 class GetMethodTest extends TestCase
 {
@@ -29,7 +29,7 @@ class GetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetAttributeIfExists()
+    public function testShouldGetAttributeIfExists(): void
     {
         $this->session->start();
 
@@ -41,7 +41,7 @@ class GetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetDefaultValueIfNotExists()
+    public function testShouldGetDefaultValueIfNotExists(): void
     {
         $this->session->start();
 
@@ -51,7 +51,7 @@ class GetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetCustomDefaultValueIfNotExists()
+    public function testShouldGetCustomDefaultValueIfNotExists(): void
     {
         $this->session->start();
 
@@ -61,7 +61,7 @@ class GetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetAttributeDefinedOutsideLibrary()
+    public function testShouldGetAttributeDefinedOutsideLibrary(): void
     {
         session_start();
 
@@ -73,7 +73,7 @@ class GetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

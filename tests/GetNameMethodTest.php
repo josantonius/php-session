@@ -11,9 +11,9 @@
 
 namespace Josantonius\Session\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
 use Josantonius\Session\Facades\Session as SessionFacade;
-use PHPUnit\Framework\TestCase;
 
 class GetNameMethodTest extends TestCase
 {
@@ -29,7 +29,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetSessionName()
+    public function testShouldGetSessionName(): void
     {
         $this->session->start();
 
@@ -39,7 +39,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetSessionNameIfNativeSessionWasStarted()
+    public function testShouldGetSessionNameIfNativeSessionWasStarted(): void
     {
         session_start();
 
@@ -49,7 +49,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnEmptyStringIfSessionIsUnstarted()
+    public function testShouldReturnEmptyStringIfSessionIsUnstarted(): void
     {
         $this->assertEquals('PHPSESSID', $this->session->getName());
     }
@@ -57,7 +57,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 
