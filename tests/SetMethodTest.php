@@ -11,10 +11,10 @@
 
 namespace Josantonius\Session\Tests;
 
-use Josantonius\Session\Exceptions\SessionException;
-use Josantonius\Session\Session;
-use Josantonius\Session\Facades\Session as SessionFacade;
 use PHPUnit\Framework\TestCase;
+use Josantonius\Session\Session;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Facades\Session as SessionFacade;
 
 class SetMethodTest extends TestCase
 {
@@ -30,7 +30,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldSetAttributeIfSessionWasStarted()
+    public function testShouldSetAttributeIfSessionWasStarted(): void
     {
         $this->session->start();
 
@@ -42,7 +42,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldSetAttributeIfNativeSessionWasStarted()
+    public function testShouldSetAttributeIfNativeSessionWasStarted(): void
     {
         session_start();
 
@@ -54,7 +54,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailIfSessionIsUnstarted()
+    public function testShouldFailIfSessionIsUnstarted(): void
     {
         $this->expectException(SessionException::class);
 
@@ -64,7 +64,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

@@ -11,9 +11,9 @@
 
 namespace Josantonius\Session\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
 use Josantonius\Session\Facades\Session as SessionFacade;
-use PHPUnit\Framework\TestCase;
 
 class IsActiveMethodTest extends TestCase
 {
@@ -29,7 +29,7 @@ class IsActiveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldCheckIfSessionIsActive()
+    public function testShouldCheckIfSessionIsActive(): void
     {
         $this->assertFalse($this->session->isStarted());
 
@@ -41,7 +41,7 @@ class IsActiveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

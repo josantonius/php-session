@@ -11,10 +11,10 @@
 
 namespace Josantonius\Session\Tests;
 
-use Josantonius\Session\Exceptions\SessionException;
-use Josantonius\Session\Session;
-use Josantonius\Session\Facades\Session as SessionFacade;
 use PHPUnit\Framework\TestCase;
+use Josantonius\Session\Session;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Facades\Session as SessionFacade;
 
 class StartMethodTest extends TestCase
 {
@@ -30,7 +30,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldStartSession()
+    public function testShouldStartSession(): void
     {
         $this->assertTrue($this->session->start());
 
@@ -42,7 +42,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldAcceptOptions()
+    public function testShouldAcceptOptions(): void
     {
         $this->session->start(['cookie_lifetime' => 8000]);
 
@@ -52,7 +52,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailWithWrongOptions()
+    public function testShouldFailWithWrongOptions(): void
     {
         $this->expectException(SessionException::class);
 
@@ -62,7 +62,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailWhenSessionIsAlreadyActive()
+    public function testShouldFailWhenSessionIsAlreadyActive(): void
     {
         $this->session->start();
 
@@ -71,7 +71,7 @@ class StartMethodTest extends TestCase
         $this->session->start();
     }
 
-    public function testShouldFailWhenHeadersSent()
+    public function testShouldFailWhenHeadersSent(): void
     {
         $this->expectException(SessionException::class);
 
@@ -81,7 +81,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

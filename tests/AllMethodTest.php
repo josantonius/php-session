@@ -11,9 +11,9 @@
 
 namespace Josantonius\Session\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
 use Josantonius\Session\Facades\Session as SessionFacade;
-use PHPUnit\Framework\TestCase;
 
 class AllMethodTest extends TestCase
 {
@@ -29,7 +29,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetAllAttributes()
+    public function testShouldGetAllAttributes(): void
     {
         $this->session->start();
 
@@ -41,7 +41,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetAllAttributesDefinedOutsideLibrary()
+    public function testShouldGetAllAttributesDefinedOutsideLibrary(): void
     {
         session_start();
 
@@ -53,7 +53,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnEmptyArrayWhenUnstartedSession()
+    public function testShouldReturnEmptyArrayWhenUnstartedSession(): void
     {
         $this->assertIsArray($this->session->all());
     }
@@ -61,7 +61,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 

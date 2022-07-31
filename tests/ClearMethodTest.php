@@ -11,10 +11,10 @@
 
 namespace Josantonius\Session\Tests;
 
-use Josantonius\Session\Exceptions\SessionException;
-use Josantonius\Session\Session;
-use Josantonius\Session\Facades\Session as SessionFacade;
 use PHPUnit\Framework\TestCase;
+use Josantonius\Session\Session;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Facades\Session as SessionFacade;
 
 class ClearMethodTest extends TestCase
 {
@@ -30,7 +30,7 @@ class ClearMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldClearSession()
+    public function testShouldClearSession(): void
     {
         $this->session->start();
 
@@ -44,7 +44,7 @@ class ClearMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldClearSessionWhenNativeSessionWasStarted()
+    public function testShouldClearSessionWhenNativeSessionWasStarted(): void
     {
         session_start();
 
@@ -58,7 +58,7 @@ class ClearMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailIfSessionIsUnstarted()
+    public function testShouldFailIfSessionIsUnstarted(): void
     {
         $this->expectException(SessionException::class);
 
@@ -68,7 +68,7 @@ class ClearMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade()
+    public function testShouldBeAvailableFromTheFacade(): void
     {
         $facade = new SessionFacade();
 
