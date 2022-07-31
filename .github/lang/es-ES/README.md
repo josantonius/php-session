@@ -13,11 +13,6 @@
 
 Biblioteca PHP para manejo de sesiones.
 
-> La versión 1.x se considera obsoleta y sin soporte.
-> En esta versión (2.x) la biblioteca fue completamente reestructurada.
-> Se recomienda revisar la documentación de esta versión y hacer los cambios necesarios
-> antes de empezar a utilizarla, ya que no es compatible con la versión 1.x.
-
 ---
 
 - [Requisitos](#requisitos)
@@ -501,7 +496,8 @@ Session::destroy();
 
 ## Tests
 
-Para ejecutar las [pruebas](tests) necesitarás [Composer](http://getcomposer.org/download/) y seguir los siguientes pasos:
+Para ejecutar las [pruebas](tests) necesitarás [Composer](http://getcomposer.org/download/)
+y seguir los siguientes pasos:
 
 ```console
 git clone https://github.com/josantonius/php-session.git
@@ -527,7 +523,8 @@ Ejecutar pruebas de estándares de código con [PHPCS](https://github.com/squizl
 composer phpcs
 ```
 
-Ejecutar pruebas con [PHP Mess Detector](https://phpmd.org/) para detectar inconsistencias en el estilo de codificación:
+Ejecutar pruebas con [PHP Mess Detector](https://phpmd.org/)
+para detectar inconsistencias en el estilo de codificación:
 
 ```console
 composer phpmd
