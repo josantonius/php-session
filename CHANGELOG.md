@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## [v2.0.6](https://github.com/josantonius/php-session/releases/tag/v2.0.6) (2022-08-07)
+
+* The error handler was removed as it could override a previously created error handler or be
+easily overridden by another error handler.
+
+* Functions were added to perform what was done from the error handler.
+
+* `Josantonius\Session\SessionException` was deprecated and will be removed in the next version.
+
+* It is recommended to use the new exceptions added to catch exceptions:
+
+  * `Josantonius\Session\ExceptionsHeadersSentException`;
+  * `Josantonius\Session\SessionNotStartedException`;
+  * `Josantonius\Session\SessionNotStartedException`;
+  * `Josantonius\Session\SessionStartedException`;
+  * `Josantonius\Session\WrongSessionOptionException`;
+
+* Documents and comments on these changes were updated.
+
+* There have been no major changes from the previous version.
+
 ## [v2.0.5](https://github.com/josantonius/php-session/releases/tag/v2.0.5) (2022-07-31)
 
 * Fix documentation on available methods in `README.md`.
