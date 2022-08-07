@@ -13,8 +13,10 @@ namespace Josantonius\Session\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
-use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Exceptions\HeadersSentException;
 use Josantonius\Session\Facades\Session as SessionFacade;
+use Josantonius\Session\Exceptions\SessionStartedException;
+use Josantonius\Session\Exceptions\WrongSessionOptionException;
 
 class StartMethodTest extends TestCase
 {
@@ -54,7 +56,7 @@ class StartMethodTest extends TestCase
      */
     public function testShouldFailWithWrongOptions(): void
     {
-        $this->expectException(SessionException::class);
+        $this->expectException(WrongSessionOptionException::class);
 
         $this->session->start(['foo' => 'bar']);
     }
@@ -66,14 +68,14 @@ class StartMethodTest extends TestCase
     {
         $this->session->start();
 
-        $this->expectException(SessionException::class);
+        $this->expectException(SessionStartedException::class);
 
         $this->session->start();
     }
 
     public function testShouldFailWhenHeadersSent(): void
     {
-        $this->expectException(SessionException::class);
+        $this->expectException(HeadersSentException::class);
 
         $this->session->start();
     }

@@ -13,8 +13,8 @@ namespace Josantonius\Session\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
-use Josantonius\Session\Exceptions\SessionException;
 use Josantonius\Session\Facades\Session as SessionFacade;
+use Josantonius\Session\Exceptions\SessionNotStartedException;
 
 class ReplaceMethodTest extends TestCase
 {
@@ -67,7 +67,7 @@ class ReplaceMethodTest extends TestCase
      */
     public function testShouldFailIfSessionIsUnstarted(): void
     {
-        $this->expectException(SessionException::class);
+        $this->expectException(SessionNotStartedException::class);
 
         $this->session->replace(['foo' => 'val']);
     }

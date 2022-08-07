@@ -13,7 +13,7 @@ namespace Josantonius\Session\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
-use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Exceptions\SessionNotStartedException;
 use Josantonius\Session\Facades\Session as SessionFacade;
 
 class PullMethodTest extends TestCase
@@ -66,7 +66,7 @@ class PullMethodTest extends TestCase
      */
     public function testShouldFailIfSessionIsUnstarted()
     {
-        $this->expectException(SessionException::class);
+        $this->expectException(SessionNotStartedException::class);
 
         $this->session->pull('foo');
     }
