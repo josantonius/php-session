@@ -69,11 +69,11 @@ $session->start(array $options = []): bool
 **@see** <https://php.net/session.configuration>
 para ver la lista de las `$opciones` disponibles y sus valores por defecto.
 
-**@throws** `SessionException` si los _headers_ ya se enviaron.
+**@throws** `HeadersSentException` si los _headers_ ya se enviaron.
 
-**@throws** `SessionException` si la sesión ya está iniciada.
+**@throws** `SessionStartedException` si la sesión ya está iniciada.
 
-**@throws** `SessionException` si hay algún fallo con las opciones.
+**@throws** `WrongSessionOptionException` si hay algún fallo con las opciones.
 
 ### Comprobar si la sesión está iniciada
 
@@ -87,7 +87,7 @@ $session->isStarted(): bool
 $session->set(string $name, mixed $value): void
 ```
 
-**@throws** `SessionException` si la sesión no está iniciada.
+**@throws** `SessionNotStartedException` si la sesión no está iniciada.
 
 ### Obtener un atributo por su nombre
 
@@ -117,7 +117,7 @@ Si los atributos existen se sustituyen, si no existen se crean.
 $session->replace(array $data): void
 ```
 
-**@throws** `SessionException` si la sesión no está iniciada.
+**@throws** `SessionNotStartedException` si la sesión no está iniciada.
 
 ### Eliminar un atributo por su nombre y devolver su valor
 
@@ -127,7 +127,7 @@ Opcionalmente define un valor por defecto cuando el atributo no existe.
 $session->pull(string $name, mixed $default = null): mixed
 ```
 
-**@throws** `SessionException` si la sesión no está iniciada.
+**@throws** `SessionNotStartedException` si la sesión no está iniciada.
 
 ### Eliminar un atributo por su nombre
 
@@ -135,7 +135,7 @@ $session->pull(string $name, mixed $default = null): mixed
 $session->remove(string $name): void
 ```
 
-**@throws** `SessionException` si la sesión no está iniciada.
+**@throws** `SessionNotStartedException` si la sesión no está iniciada.
 
 ### Liberar todas las variables de la sesión
 
@@ -143,7 +143,7 @@ $session->remove(string $name): void
 $session->clear(): void
 ```
 
-**@throws** `SessionException` si la sesión no está iniciada.
+**@throws** `SessionNotStartedException` si la sesión no está iniciada.
 
 ### Obtiene el ID de la sesión
 
@@ -157,7 +157,7 @@ $session->getId(): string
 $session->setId(string $sessionId): void
 ```
 
-**@throws** `SessionException` si la sesión ya está iniciada.
+**@throws** `SessionStartedException` si la sesión ya está iniciada.
 
 ### Actualizar el ID de la sesión actual con uno recién generado
 
@@ -165,7 +165,7 @@ $session->setId(string $sessionId): void
 $session->regenerateId(bool $deleteOldSession = false): bool
 ```
 
-**@throws** `SessionException` si la sesión no está iniciada.
+**@throws** `SessionNotStartedException` si la sesión no está iniciada.
 
 ### Obtener el nombre de la sesión
 
@@ -179,7 +179,7 @@ $session->getName(): string
 $session->setName(string $name): void
 ```
 
-**@throws** `SessionException` si la sesión ya está iniciada.
+**@throws** `SessionStartedException` si la sesión ya está iniciada.
 
 ### Eliminar la sesión
 
@@ -187,7 +187,7 @@ $session->setName(string $name): void
 $session->destroy(): bool
 ```
 
-**@throws** `SessionException` si la sesión no está iniciada.
+**@throws** `SessionNotStartedException` si la sesión no está iniciada.
 
 ## Cómo empezar
 

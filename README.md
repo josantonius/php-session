@@ -69,11 +69,11 @@ $session->start(array $options = []): bool
 **@see** <https://php.net/session.configuration>
 for List of available `$options` and their default values.
 
-**@throws** `SessionException` if headers already sent.
+**@throws** `HeadersSentException` if headers already sent.
 
-**@throws** `SessionException` if session already started.
+**@throws** `SessionStartedException` if session already started.
 
-**@throws** `SessionException` if setting options failed.
+**@throws** `WrongSessionOptionException` if setting options failed.
 
 ### Check if the session is started
 
@@ -87,7 +87,7 @@ $session->isStarted(): bool
 $session->set(string $name, mixed $value): void
 ```
 
-**@throws** `SessionException` if session is unstarted.
+**@throws** `SessionNotStartedException` if session was not started.
 
 ### Gets an attribute by name
 
@@ -117,7 +117,7 @@ If attributes exist they are replaced, if they do not exist they are created.
 $session->replace(array $data): void
 ```
 
-**@throws** `SessionException` if session is unstarted.
+**@throws** `SessionNotStartedException` if session was not started.
 
 ### Deletes an attribute by name and returns its value
 
@@ -127,7 +127,7 @@ Optionally defines a default value when the attribute does not exist.
 $session->pull(string $name, mixed $default = null): mixed
 ```
 
-**@throws** `SessionException` if session is unstarted.
+**@throws** `SessionNotStartedException` if session was not started.
 
 ### Deletes an attribute by name
 
@@ -135,7 +135,7 @@ $session->pull(string $name, mixed $default = null): mixed
 $session->remove(string $name): void
 ```
 
-**@throws** `SessionException` if session is unstarted.
+**@throws** `SessionNotStartedException` if session was not started.
 
 ### Free all session variables
 
@@ -143,7 +143,7 @@ $session->remove(string $name): void
 $session->clear(): void
 ```
 
-**@throws** `SessionException` if session is unstarted.
+**@throws** `SessionNotStartedException` if session was not started.
 
 ### Gets the session ID
 
@@ -157,7 +157,7 @@ $session->getId(): string
 $session->setId(string $sessionId): void
 ```
 
-**@throws** `SessionException` if session already started.
+**@throws** `SessionStartedException` if session already started.
 
 ### Update the current session id with a newly generated one
 
@@ -165,7 +165,7 @@ $session->setId(string $sessionId): void
 $session->regenerateId(bool $deleteOldSession = false): bool
 ```
 
-**@throws** `SessionException` if session is unstarted.
+**@throws** `SessionNotStartedException` if session was not started.
 
 ### Gets the session name
 
@@ -179,7 +179,7 @@ $session->getName(): string
 $session->setName(string $name): void
 ```
 
-**@throws** `SessionException` if session already started.
+**@throws** `SessionStartedException` if session already started.
 
 ### Destroys the session
 
@@ -187,7 +187,7 @@ $session->setName(string $name): void
 $session->destroy(): bool
 ```
 
-**@throws** `SessionException` if session is unstarted.
+**@throws** `SessionNotStartedException` if session was not started.
 
 ## Quick Start
 
