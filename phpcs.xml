@@ -38,8 +38,8 @@
     </rule>
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="90" />
-            <property name="absoluteLineLimit" value="90" />
+            <property name="lineLimit" value="100" />
+            <property name="absoluteLineLimit" value="100" />
         </properties>
     </rule>
 
@@ -130,7 +130,7 @@
     <rule ref="PSR2.Namespaces.NamespaceDeclaration" />
     <rule ref="PSR2.Namespaces.UseDeclaration" />
 
-    
+
     <rule ref="Squiz.ControlStructures.ControlSignature" />
     <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration" />
     <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration.AsNotLower">
