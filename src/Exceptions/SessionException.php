@@ -13,11 +13,9 @@ namespace Josantonius\Session\Exceptions;
 
 /**
  * Session exception manager.
+ *
+ * @deprecated since version v2.0.6
  */
 class SessionException extends \Exception
 {
-    public function __construct(string $message = 'Unknown error')
-    {
-        parent::__construct(rtrim($message, '.') . '.');
-    }
 }
