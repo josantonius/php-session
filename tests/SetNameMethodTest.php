@@ -13,8 +13,8 @@ namespace Josantonius\Session\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
-use Josantonius\Session\Exceptions\SessionException;
 use Josantonius\Session\Facades\Session as SessionFacade;
+use Josantonius\Session\Exceptions\SessionStartedException;
 
 class SetNameMethodTest extends TestCase
 {
@@ -46,7 +46,7 @@ class SetNameMethodTest extends TestCase
     {
         $this->session->start();
 
-        $this->expectException(SessionException::class);
+        $this->expectException(SessionStartedException::class);
 
         $this->session->setName('foo');
     }
