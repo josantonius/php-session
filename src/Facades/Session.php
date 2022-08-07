@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace Josantonius\Session\Facades;
 
-use Josantonius\Session\Exceptions\SessionException;
 use Josantonius\Session\Session as SessionInstance;
+use Josantonius\Session\Exceptions\HeadersSentException;
+use Josantonius\Session\Exceptions\SessionStartedException;
+use Josantonius\Session\Exceptions\SessionNotStartedException;
+use Josantonius\Session\Exceptions\WrongSessionOptionException;
 
 /**
  * Session handler.
@@ -62,9 +65,9 @@ class Session
      *
      * @see https://php.net/session.configuration
      *
-     * @throws SessionException if headers already sent
-     * @throws SessionException if session already started
-     * @throws SessionException If setting options failed
+     * @throws HeadersSentException        if headers already sent.
+     * @throws SessionStartedException     if session already started.
+     * @throws WrongSessionOptionException If setting options failed.
      */
     public static function start(array $options = []): bool
     {
@@ -80,7 +83,7 @@ class Session
     }
 
     /**
-     * Check if an attribute exists in the session.
+     * Checks if an attribute exists in the session.
      */
     public static function has(string $name): bool
     {
@@ -89,6 +92,7 @@ class Session
 
     /**
      * Gets an attribute by name.
+     *
      * Optionally defines a default value when the attribute does not exist.
      */
     public static function get(string $name, mixed $default = null): mixed
@@ -97,9 +101,9 @@ class Session
     }
 
     /**
-     * Sets an attribute by name
+     * Sets an attribute by name.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public static function set(string $name, mixed $value): void
     {
@@ -108,9 +112,10 @@ class Session
 
     /**
      * Sets several attributes at once.
+     *
      * If attributes exist they are replaced, if they do not exist they are created.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public static function replace(array $data): void
     {
@@ -119,9 +124,10 @@ class Session
 
     /**
      * Deletes an attribute by name and returns its value.
+     *
      * Optionally defines a default value when the attribute does not exist.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public static function pull(string $name, mixed $default = null): mixed
     {
@@ -131,7 +137,7 @@ class Session
     /**
      * Deletes an attribute by name.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public static function remove(string $name): void
     {
@@ -141,7 +147,7 @@ class Session
     /**
      * Free all session variables.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public static function clear(): void
     {
@@ -159,7 +165,7 @@ class Session
     /**
      * Sets the session ID.
      *
-     * @throws SessionException if session already started
+     * @throws SessionStartedException if session already started.
      */
     public static function setId(string $sessionId): void
     {
@@ -167,9 +173,9 @@ class Session
     }
 
     /**
-     * Update the current session id with a newly generated one.
+     * Updates the current session id with a newly generated one.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public static function regenerateId(bool $deleteOldSession = false): bool
     {
@@ -187,7 +193,7 @@ class Session
     /**
      * Sets the session name.
      *
-     * @throws SessionException if session already started
+     * @throws SessionStartedException if session already started.
      */
     public static function setName(string $name): void
     {
@@ -197,7 +203,7 @@ class Session
     /**
      * Destroys the session.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public static function destroy(): bool
     {
@@ -205,7 +211,7 @@ class Session
     }
 
     /**
-     * Check if the session is started.
+     * Checks if the session is started.
      */
     public static function isStarted(): bool
     {
