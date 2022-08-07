@@ -13,21 +13,16 @@ declare(strict_types=1);
 
 namespace Josantonius\Session;
 
-use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Exceptions\HeadersSentException;
+use Josantonius\Session\Exceptions\SessionStartedException;
+use Josantonius\Session\Exceptions\SessionNotStartedException;
+use Josantonius\Session\Exceptions\WrongSessionOptionException;
 
 /**
  * Session handler.
  */
 class Session
 {
-    public function __construct()
-    {
-        set_error_handler(
-            fn (int $severity, string $message, string $file) =>
-            $file === __FILE__ && throw new SessionException($message)
-        );
-    }
-
     /**
      * Starts the session.
      *
@@ -62,12 +57,16 @@ class Session
      *
      * @see https://php.net/session.configuration
      *
-     * @throws SessionException if headers already sent
-     * @throws SessionException if session already started
-     * @throws SessionException If setting options failed
+     * @throws HeadersSentException        if headers already sent.
+     * @throws SessionStartedException     if session already started.
+     * @throws WrongSessionOptionException If setting options failed.
      */
     public function start(array $options = []): bool
     {
+        $this->throwExceptionIfHeadersWereSent();
+        $this->throwExceptionIfSessionWasStarted();
+        $this->throwExceptionIfHasWrongOptions($options);
+
         return session_start($options);
     }
 
@@ -80,7 +79,7 @@ class Session
     }
 
     /**
-     * Check if an attribute exists in the session.
+     * Checks if an attribute exists in the session.
      */
     public function has(string $name): bool
     {
@@ -89,6 +88,7 @@ class Session
 
     /**
      * Gets an attribute by name.
+     *
      * Optionally defines a default value when the attribute does not exist.
      */
     public function get(string $name, mixed $default = null): mixed
@@ -99,37 +99,39 @@ class Session
     /**
      * Sets an attribute by name.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public function set(string $name, mixed $value): void
     {
-        $this->failIfSessionWasNotStarted();
+        $this->throwExceptionIfSessionWasNotStarted();
 
         $_SESSION[$name] = $value;
     }
 
     /**
      * Sets several attributes at once.
+     *
      * If attributes exist they are replaced, if they do not exist they are created.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public function replace(array $data): void
     {
-        $this->failIfSessionWasNotStarted();
+        $this->throwExceptionIfSessionWasNotStarted();
 
         $_SESSION = array_merge($_SESSION, $data);
     }
 
     /**
      * Deletes an attribute by name and returns its value.
+     *
      * Optionally defines a default value when the attribute does not exist.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public function pull(string $name, mixed $default = null): mixed
     {
-        $this->failIfSessionWasNotStarted();
+        $this->throwExceptionIfSessionWasNotStarted();
 
         $value = $_SESSION[$name] ?? $default;
 
@@ -141,11 +143,11 @@ class Session
     /**
      * Deletes an attribute by name.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public function remove(string $name): void
     {
-        $this->failIfSessionWasNotStarted();
+        $this->throwExceptionIfSessionWasNotStarted();
 
         unset($_SESSION[$name]);
     }
@@ -153,11 +155,11 @@ class Session
     /**
      * Free all session variables.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public function clear(): void
     {
-        $this->failIfSessionWasNotStarted();
+        $this->throwExceptionIfSessionWasNotStarted();
 
         session_unset();
     }
@@ -173,20 +175,24 @@ class Session
     /**
      * Sets the session ID.
      *
-     * @throws SessionException if session already started
+     * @throws SessionStartedException if session already started.
      */
     public function setId(string $sessionId): void
     {
+        $this->throwExceptionIfSessionWasStarted();
+
         session_id($sessionId);
     }
 
     /**
-     * Update the current session id with a newly generated one.
+     * Updates the current session id with a newly generated one.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public function regenerateId(bool $deleteOldSession = false): bool
     {
+        $this->throwExceptionIfSessionWasNotStarted();
+
         return session_regenerate_id($deleteOldSession);
     }
 
@@ -203,25 +209,29 @@ class Session
     /**
      * Sets the session name.
      *
-     * @throws SessionException if session already started
+     * @throws SessionStartedException if session already started.
      */
     public function setName(string $name): void
     {
+        $this->throwExceptionIfSessionWasStarted();
+
         session_name($name);
     }
 
     /**
      * Destroys the session.
      *
-     * @throws SessionException if session is unstarted
+     * @throws SessionNotStartedException if session was not started.
      */
     public function destroy(): bool
     {
+        $this->throwExceptionIfSessionWasNotStarted();
+
         return session_destroy();
     }
 
     /**
-     * Check if the session is started.
+     * Checks if the session is started.
      */
     public function isStarted(): bool
     {
@@ -229,17 +239,62 @@ class Session
     }
 
     /**
-     * Show warning if the session is not started.
+     * Throw exception if the session have wrong options.
+     *
+     * @throws WrongSessionOptionException If setting options failed.
      */
-    private function failIfSessionWasNotStarted(): void
+    private function throwExceptionIfHasWrongOptions(array $options): void
     {
-        if (!$this->isStarted()) {
-            $method = debug_backtrace()[1]['function'] ?? 'unknown';
+        $validOptions = array_flip([
+            'cache_expire',    'cache_limiter',     'cookie_domain',          'cookie_httponly',
+            'cookie_lifetime', 'cookie_path',       'cookie_samesite',        'cookie_secure',
+            'gc_divisor',      'gc_maxlifetime',    'gc_probability',         'lazy_write',
+            'name',            'read_and_close',    'referer_check',          'save_handler',
+            'save_path',       'serialize_handler', 'sid_bits_per_character', 'sid_length',
+            'trans_sid_hosts', 'trans_sid_tags',    'use_cookies',            'use_only_cookies',
+            'use_strict_mode', 'use_trans_sid',
+        ]);
 
-            trigger_error(
-                'Session->' . $method . '(): Changing $_SESSION when no started session.',
-                E_USER_WARNING
-            );
+        foreach (array_keys($options) as $key) {
+            if (!isset($validOptions[$key])) {
+                throw new WrongSessionOptionException($key);
+            }
         }
+    }
+
+    /**
+     * Throw exception if headers have already been sent.
+     *
+     * @throws HeadersSentException if headers already sent.
+     */
+    private function throwExceptionIfHeadersWereSent(): void
+    {
+        $headersWereSent = (bool) ini_get('session.use_cookies') && headers_sent($file, $line);
+
+        $headersWereSent && throw new HeadersSentException($file, $line);
+    }
+
+    /**
+     * Throw exception if the session has already been started.
+     *
+     * @throws SessionStartedException if session already started.
+     */
+    private function throwExceptionIfSessionWasStarted(): void
+    {
+        $methodName = debug_backtrace()[1]['function'] ?? 'unknown';
+
+        $this->isStarted() && throw new SessionStartedException($methodName);
+    }
+
+    /**
+     * Throw exception if the session was not started.
+     *
+     * @throws SessionNotStartedException if session was not started.
+     */
+    private function throwExceptionIfSessionWasNotStarted(): void
+    {
+        $methodName = debug_backtrace()[1]['function'] ?? 'unknown';
+
+        !$this->isStarted() && throw new SessionNotStartedException($methodName);
     }
 }
