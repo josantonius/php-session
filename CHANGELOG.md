@@ -7,15 +7,16 @@ easily overridden by another error handler.
 
 * Functions were added to perform what was done from the error handler.
 
-* `Josantonius\Session\SessionException` was deprecated and will be removed in the next version.
+* `Josantonius\Session\Exceptions\SessionException` was deprecated and
+will be removed in the next version.
 
 * It is recommended to use the new exceptions added to catch exceptions:
 
-  * `Josantonius\Session\ExceptionsHeadersSentException`;
-  * `Josantonius\Session\SessionNotStartedException`;
-  * `Josantonius\Session\SessionNotStartedException`;
-  * `Josantonius\Session\SessionStartedException`;
-  * `Josantonius\Session\WrongSessionOptionException`;
+  * `Josantonius\Session\Exceptions\HeadersSentException`;
+  * `Josantonius\Session\Exceptions\SessionNotStartedException`;
+  * `Josantonius\Session\Exceptions\SessionNotStartedException`;
+  * `Josantonius\Session\Exceptions\SessionStartedException`;
+  * `Josantonius\Session\Exceptions\WrongSessionOptionException`;
 
 * Documents and comments on these changes were updated.
 
