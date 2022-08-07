@@ -16,7 +16,7 @@ class HeadersSentException extends SessionException
     public function __construct(string $file, int $line)
     {
         parent::__construct(sprintf(
-            'Session->start(): The session was already started in "%s" at line %d',
+            'Session->start(): The headers have already been sent in "%s" at line %d.',
             $file,
             $line
         ));
