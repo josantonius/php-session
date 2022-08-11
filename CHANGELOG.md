@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v2.0.7](https://github.com/josantonius/php-session/releases/tag/v2.0.7) (2022-08-11)
+
+* Improved documentation.
+
 ## [v2.0.6](https://github.com/josantonius/php-session/releases/tag/v2.0.6) (2022-08-07)
 
 * The error handler was removed as it could override a previously created error handler or be
