@@ -17,8 +17,10 @@ PHP library for handling sessions.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Available Methods](#available-methods)
-- [Quick Start](#quick-start)
+- [Available Classes](#available-classes)
+  - [Session Class](#session-class)
+  - [Session Facade](#session-facade)
+- [Exceptions Used](#exceptions-used)
 - [Usage](#usage)
 - [Tests](#tests)
 - [TODO](#todo)
@@ -56,176 +58,337 @@ You can also **clone the complete repository** with Git:
 git clone https://github.com/josantonius/php-session.git
 ```
 
-## Available Methods
+## Available Classes
 
-Available methods in this library:
-
-### Starts the session
+### Session Class
 
 ```php
+use Josantonius\Session\Session;
+```
+
+Create object:
+
+```php
+$session = new Session();
+```
+
+Starts the session:
+
+```php
+/**
+ * @throws HeadersSentException        if headers already sent.
+ * @throws SessionStartedException     if session already started.
+ * @throws WrongSessionOptionException if setting options failed.
+ * 
+ * @see https://php.net/session.configuration for List of available $options.
+ */
 $session->start(array $options = []): bool
 ```
 
-**@see** <https://php.net/session.configuration>
-for List of available `$options` and their default values.
-
-**@throws** `HeadersSentException` if headers already sent.
-
-**@throws** `SessionStartedException` if session already started.
-
-**@throws** `WrongSessionOptionException` if setting options failed.
-
-### Check if the session is started
+Check if the session is started:
 
 ```php
 $session->isStarted(): bool
 ```
 
-### Sets an attribute by name
+Sets an attribute by name:
 
 ```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
 $session->set(string $name, mixed $value): void
 ```
 
-**@throws** `SessionNotStartedException` if session was not started.
-
-### Gets an attribute by name
-
-Optionally defines a default value when the attribute does not exist.
+Gets an attribute by name:
 
 ```php
+/**
+ * Optionally defines a default value when the attribute does not exist.
+ */
 $session->get(string $name, mixed $default = null): mixed
 ```
 
-### Gets all attributes
+Gets all attributes:
 
 ```php
 $session->all(): array
 ```
 
-### Check if an attribute exists in the session
+Check if an attribute exists in the session:
 
 ```php
 $session->has(string $name): bool
 ```
 
-### Sets several attributes at once
-
-If attributes exist they are replaced, if they do not exist they are created.
+Sets several attributes at once:
 
 ```php
+/**
+ * If attributes exist they are replaced, if they do not exist they are created.
+ * 
+ * @throws SessionNotStartedException if session was not started.
+ */
 $session->replace(array $data): void
 ```
 
-**@throws** `SessionNotStartedException` if session was not started.
-
-### Deletes an attribute by name and returns its value
-
-Optionally defines a default value when the attribute does not exist.
+Deletes an attribute by name and returns its value:
 
 ```php
+/**
+ * Optionally defines a default value when the attribute does not exist.
+ * 
+ * @throws SessionNotStartedException if session was not started.
+ */
 $session->pull(string $name, mixed $default = null): mixed
 ```
 
-**@throws** `SessionNotStartedException` if session was not started.
-
-### Deletes an attribute by name
+Deletes an attribute by name:
 
 ```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
 $session->remove(string $name): void
 ```
 
-**@throws** `SessionNotStartedException` if session was not started.
-
-### Free all session variables
+Free all session variables:
 
 ```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
 $session->clear(): void
 ```
 
-**@throws** `SessionNotStartedException` if session was not started.
-
-### Gets the session ID
+Gets the session ID:
 
 ```php
 $session->getId(): string
 ```
 
-### Sets the session ID
+Sets the session ID:
 
 ```php
+/**
+ * @throws SessionStartedException if session already started.
+ */
 $session->setId(string $sessionId): void
 ```
 
-**@throws** `SessionStartedException` if session already started.
-
-### Update the current session id with a newly generated one
+Update the current session ID with a newly generated one:
 
 ```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
 $session->regenerateId(bool $deleteOldSession = false): bool
 ```
 
-**@throws** `SessionNotStartedException` if session was not started.
-
-### Gets the session name
+Gets the session name:
 
 ```php
 $session->getName(): string
 ```
 
-### Sets the session name
+Sets the session name:
 
 ```php
+/**
+ * @throws SessionStartedException if session already started.
+ */
 $session->setName(string $name): void
 ```
 
-**@throws** `SessionStartedException` if session already started.
-
-### Destroys the session
+Destroys the session:
 
 ```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
 $session->destroy(): bool
 ```
 
-**@throws** `SessionNotStartedException` if session was not started.
-
-## Quick Start
-
-To use this library with **Composer**:
-
-### Using objects
-
-```php
-use Josantonius\Session\Session;
-
-$session = new Session();
-```
-
-### Using the facade
-
-Alternatively you can use a facade to access the methods statically:
+### Session Facade
 
 ```php
 use Josantonius\Session\Facades\Session;
+```
+
+Starts the session:
+
+```php
+/**
+ * @throws HeadersSentException        if headers already sent.
+ * @throws SessionStartedException     if session already started.
+ * @throws WrongSessionOptionException if setting options failed.
+ * 
+ * @see https://php.net/session.configuration for List of available $options.
+ */
+Session::start(array $options = []): bool
+```
+
+Check if the session is started:
+
+```php
+Session::isStarted(): bool
+```
+
+Sets an attribute by name:
+
+```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
+Session::set(string $name, mixed $value): void
+```
+
+Gets an attribute by name:
+
+```php
+/**
+ * Optionally defines a default value when the attribute does not exist.
+ */
+Session::get(string $name, mixed $default = null): mixed
+```
+
+Gets all attributes:
+
+```php
+Session::all(): array
+```
+
+Check if an attribute exists in the session:
+
+```php
+Session::has(string $name): bool
+```
+
+Sets several attributes at once:
+
+```php
+/**
+ * If attributes exist they are replaced, if they do not exist they are created.
+ * 
+ * @throws SessionNotStartedException if session was not started.
+ */
+Session::replace(array $data): void
+```
+
+Deletes an attribute by name and returns its value:
+
+```php
+/**
+ * Optionally defines a default value when the attribute does not exist.
+ * 
+ * @throws SessionNotStartedException if session was not started.
+ */
+Session::pull(string $name, mixed $default = null): mixed
+```
+
+Deletes an attribute by name:
+
+```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
+Session::remove(string $name): void
+```
+
+Free all session variables:
+
+```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
+Session::clear(): void
+```
+
+Gets the session ID:
+
+```php
+Session::getId(): string
+```
+
+Sets the session ID:
+
+```php
+/**
+ * @throws SessionStartedException if session already started.
+ */
+Session::setId(string $sessionId): void
+```
+
+Update the current session ID with a newly generated one:
+
+```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
+Session::regenerateId(bool $deleteOldSession = false): bool
+```
+
+Gets the session name:
+
+```php
+Session::getName(): string
+```
+
+Sets the session name:
+
+```php
+/**
+ * @throws SessionStartedException if session already started.
+ */
+Session::setName(string $name): void
+```
+
+Destroys the session:
+
+```php
+/**
+ * @throws SessionNotStartedException if session was not started.
+ */
+Session::destroy(): bool
+```
+
+## Exceptions Used
+
+```php
+use Josantonius\Session\Exceptions\HeadersSentException;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Exceptions\SessionNotStartedException;
+use Josantonius\Session\Exceptions\SessionStartedException;
+use Josantonius\Session\Exceptions\WrongSessionOptionException;
 ```
 
 ## Usage
 
 Example of use for this library:
 
-### - Starts the session
-
-[Using objects](#using-objects):
-
-Without setting options:
+### Starts the session without setting options
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->start();
 ```
 
-Setting options:
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::start();
+```
+
+### Starts the session setting options
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->start([
     // 'cache_expire' => 180,
     // 'cache_limiter' => 'nocache',
@@ -256,243 +419,299 @@ $session->start([
 ]);
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
-Session::start();
+use Josantonius\Session\Facades\Session;
+
+Session::start([
+    'cookie_httponly' => true,
+]);
 ```
 
-### - Check if the session is started
-
-[Using objects](#using-objects):
+### Check if the session is started
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->isStarted();
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::isStarted();
 ```
 
-### - Sets an attribute by name
-
-[Using objects](#using-objects):
+### Sets an attribute by name
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->set('foo', 'bar');
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::set('foo', 'bar');
 ```
 
-### - Gets an attribute by name
-
-[Using objects](#using-objects):
-
-Without default value if attribute does not exist:
+### Gets an attribute by name without setting a default value
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->get('foo'); // null if attribute does not exist
 ```
 
-With default value if attribute does not exist:
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::get('foo'); // null if attribute does not exist
+```
+
+### Gets an attribute by name setting a default value
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->get('foo', false); // false if attribute does not exist
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
-Session::get('foo');
+use Josantonius\Session\Facades\Session;
+
+Session::get('foo', false); // false if attribute does not exist
 ```
 
-### - Gets all attributes
-
-[Using objects](#using-objects):
+### Gets all attributes
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->all();
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::all();
 ```
 
-### - Check if an attribute exists in the session
-
-[Using objects](#using-objects):
+### Check if an attribute exists in the session
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->has('foo');
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::has('foo');
 ```
 
-### - Sets several attributes at once
-
-[Using objects](#using-objects):
+### Sets several attributes at once
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
-### - Deletes an attribute by name and returns its value
-
-[Using objects](#using-objects):
-
-Without default value if attribute does not exist:
+### Deletes an attribute and returns its value or the default value if not exist
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->pull('foo'); // null if attribute does not exist
 ```
 
-With default value if attribute does not exist:
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::pull('foo'); // null if attribute does not exist
+```
+
+### Deletes an attribute and returns its value or the custom value if not exist
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->pull('foo', false); // false if attribute does not exist
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
-Session::pull('foo');
+use Josantonius\Session\Facades\Session;
+
+Session::pull('foo', false); // false if attribute does not exist
 ```
 
-### - Deletes an attribute by name
-
-[Using objects](#using-objects):
+### Deletes an attribute by name
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->remove('foo');
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::remove('foo');
 ```
 
-### - Free all session variables
-
-[Using objects](#using-objects):
+### Free all session variables
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->clear();
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::clear();
 ```
 
-### - Gets the session ID
-
-[Using objects](#using-objects):
+### Gets the session ID
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->getId();
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::getId();
 ```
 
-### - Sets the session ID
-
-[Using objects](#using-objects):
+### Sets the session ID
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->setId('foo');
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::setId('foo');
 ```
 
-### - Update the current session id with a newly generated one
-
-[Using objects](#using-objects):
-
-Regenerate ID without deleting the old session:
+### Update the current session ID with a newly generated one
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->regenerateId();
 ```
 
-Regenerate ID by deleting the old session:
-
 ```php
-$session->regenerateId(true);
-```
+use Josantonius\Session\Facades\Session;
 
-[Using the facade](#using-the-facade):
-
-```php
 Session::regenerateId();
 ```
 
-### - Gets the session name
-
-[Using objects](#using-objects):
+### Update the current session ID with a newly generated one deleting the old session
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
+$session->regenerateId(true);
+```
+
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::regenerateId(true);
+```
+
+### Gets the session name
+
+```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->getName();
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::getName();
 ```
 
-### - Sets the session name
-
-[Using objects](#using-objects):
+### Sets the session name
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->setName('foo');
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::setName('foo');
 ```
 
-### - Destroys the session
-
-[Using objects](#using-objects):
+### Destroys the session
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->destroy();
 ```
 
-[Using the facade](#using-the-facade):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::destroy();
 ```
 

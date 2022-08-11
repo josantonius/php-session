@@ -17,8 +17,10 @@ Biblioteca PHP para manejo de sesiones.
 
 - [Requisitos](#requisitos)
 - [Instalación](#instalación)
-- [Métodos disponibles](#métodos-disponibles)
-- [Cómo empezar](#cómo-empezar)
+- [Clases disponibles](#clases-disponibles)
+  - [Clase Session](#clase-session)
+  - [Fachada Session](#fachada-session)
+- [Excepciones utilizadas](#excepciones-utilizadas)
 - [Uso](#uso)
 - [Tests](#tests)
 - [Tareas pendientes](#tareas-pendientes)
@@ -58,172 +60,335 @@ git clone https://github.com/josantonius/php-session.git
 
 ## Métodos disponibles
 
-Métodos disponibles en esta biblioteca:
-
-### Iniciar la sesión
+### Session Class
 
 ```php
+use Josantonius\Session\Session;
+```
+
+Create object:
+
+```php
+$session = new Session();
+```
+
+Iniciar la sesión:
+
+```php
+/**
+ * @throws HeadersSentException        si los _headers_ ya se enviaron.
+ * @throws SessionStartedException     si la sesión ya está iniciada.
+ * @throws WrongSessionOptionException si hay algún fallo con las opciones.
+ * 
+ * @see https://php.net/session.configuration para ver la lista de opciones disponibles.
+ */
 $session->start(array $options = []): bool
 ```
 
-**@see** <https://php.net/session.configuration>
-para ver la lista de las `$opciones` disponibles y sus valores por defecto.
-
-**@throws** `HeadersSentException` si los _headers_ ya se enviaron.
-
-**@throws** `SessionStartedException` si la sesión ya está iniciada.
-
-**@throws** `WrongSessionOptionException` si hay algún fallo con las opciones.
-
-### Comprobar si la sesión está iniciada
+Comprobar si la sesión fue iniciada:
 
 ```php
 $session->isStarted(): bool
 ```
 
-### Establecer un atributo por su nombre
+Establecer un atributo por su nombre:
 
 ```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
 $session->set(string $name, mixed $value): void
 ```
 
-**@throws** `SessionNotStartedException` si la sesión no está iniciada.
-
-### Obtener un atributo por su nombre
-
-Opcionalmente define un valor por defecto cuando el atributo no existe.
+Obtener un atributo por su nombre:
 
 ```php
+/**
+ * Opcionalmente define un valor por defecto cuando el atributo no existe.
+ */
 $session->get(string $name, mixed $default = null): mixed
 ```
 
-### Obtener todos los atributos
+Obtener todos los atributos:
 
 ```php
 $session->all(): array
 ```
 
-### Comprobar si un atributo existe en la sesión
+Comprobar si un atributo existe en la sesión:
 
 ```php
 $session->has(string $name): bool
 ```
 
-### Establecer múltiples atributos de una vez
-
-Si los atributos existen se sustituyen, si no existen se crean.
+Establecer múltiples atributos de una vez:
 
 ```php
+/**
+ * Si los atributos existen se sustituyen, si no existen se crean.
+ * 
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
 $session->replace(array $data): void
 ```
 
-**@throws** `SessionNotStartedException` si la sesión no está iniciada.
-
-### Eliminar un atributo por su nombre y devolver su valor
-
-Opcionalmente define un valor por defecto cuando el atributo no existe.
+Eliminar un atributo por su nombre y devolver su valor:
 
 ```php
+/**
+ * Opcionalmente define un valor por defecto cuando el atributo no existe.
+ * 
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
 $session->pull(string $name, mixed $default = null): mixed
 ```
 
-**@throws** `SessionNotStartedException` si la sesión no está iniciada.
-
-### Eliminar un atributo por su nombre
+Eliminar un atributo por su nombre:
 
 ```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
 $session->remove(string $name): void
 ```
 
-**@throws** `SessionNotStartedException` si la sesión no está iniciada.
-
-### Liberar todas las variables de la sesión
+Liberar todas las variables de la sesión:
 
 ```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
 $session->clear(): void
 ```
 
-**@throws** `SessionNotStartedException` si la sesión no está iniciada.
-
-### Obtiene el ID de la sesión
+Obtiene el ID de la sesión:
 
 ```php
 $session->getId(): string
 ```
 
-### Establecer el ID de la sesión
+Establecer el ID de la sesión:
 
 ```php
+/**
+ * @throws SessionStartedException si la sesión ya está iniciada.
+ */
 $session->setId(string $sessionId): void
 ```
 
-**@throws** `SessionStartedException` si la sesión ya está iniciada.
-
-### Actualizar el ID de la sesión actual con uno recién generado
+Actualizar el ID de la sesión actual con uno recién generado:
 
 ```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
 $session->regenerateId(bool $deleteOldSession = false): bool
 ```
 
-**@throws** `SessionNotStartedException` si la sesión no está iniciada.
-
-### Obtener el nombre de la sesión
+Obtener el nombre de la sesión:
 
 ```php
 $session->getName(): string
 ```
 
-### Establecer el nombre de la sesión
+Establecer el nombre de la sesión:
 
 ```php
+/**
+ * @throws SessionStartedException si la sesión ya está iniciada.
+ */
 $session->setName(string $name): void
 ```
 
-**@throws** `SessionStartedException` si la sesión ya está iniciada.
-
-### Eliminar la sesión
+Eliminar la sesión:
 
 ```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
 $session->destroy(): bool
 ```
 
-**@throws** `SessionNotStartedException` si la sesión no está iniciada.
-
-## Cómo empezar
-
-### Utilizando objetos
-
-```php
-use Josantonius\Session\Session;
-
-$session = new Session();
-```
-
-### Utilizando la fachada
-
-Alternativamente puedes utilizar la fachada para acceder a los métodos de manera estática:
+### Fachada Session
 
 ```php
 use Josantonius\Session\Facades\Session;
 ```
 
-## Uso
-
-Ejemplo de uso para esta biblioteca:
-
-### - Iniciar la sesión
-
-[Utilizando objetos](#utilizando-objetos):
-
-Sin establecer opciones:
+Iniciar la sesión:
 
 ```php
+/**
+ * @throws HeadersSentException        si los _headers_ ya se enviaron.
+ * @throws SessionStartedException     si la sesión ya está iniciada.
+ * @throws WrongSessionOptionException si hay algún fallo con las opciones.
+ * 
+ * @see https://php.net/session.configuration para ver la lista de opciones disponibles.
+ */
+Session::start(array $options = []): bool
+```
+
+Comprobar si la sesión fue iniciada:
+
+```php
+Session::isStarted(): bool
+```
+
+Establecer un atributo por su nombre:
+
+```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
+Session::set(string $name, mixed $value): void
+```
+
+Obtener un atributo por su nombre:
+
+```php
+/**
+ * Opcionalmente define un valor por defecto cuando el atributo no existe.
+ */
+Session::get(string $name, mixed $default = null): mixed
+```
+
+Obtener todos los atributos:
+
+```php
+Session::all(): array
+```
+
+Comprobar si un atributo existe en la sesión:
+
+```php
+Session::has(string $name): bool
+```
+
+Establecer múltiples atributos de una vez:
+
+```php
+/**
+ * Si los atributos existen se sustituyen, si no existen se crean.
+ * 
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
+Session::replace(array $data): void
+```
+
+Eliminar un atributo por su nombre y devolver su valor:
+
+```php
+/**
+ * Opcionalmente define un valor por defecto cuando el atributo no existe.
+ * 
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
+Session::pull(string $name, mixed $default = null): mixed
+```
+
+Eliminar un atributo por su nombre:
+
+```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
+Session::remove(string $name): void
+```
+
+Liberar todas las variables de la sesión:
+
+```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
+Session::clear(): void
+```
+
+Obtiene el ID de la sesión:
+
+```php
+Session::getId(): string
+```
+
+Establecer el ID de la sesión:
+
+```php
+/**
+ * @throws SessionStartedException si la sesión ya está iniciada.
+ */
+Session::setId(string $sessionId): void
+```
+
+Actualizar el ID de la sesión actual con uno recién generado:
+
+```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
+Session::regenerateId(bool $deleteOldSession = false): bool
+```
+
+Obtener el nombre de la sesión:
+
+```php
+Session::getName(): string
+```
+
+Establecer el nombre de la sesión:
+
+```php
+/**
+ * @throws SessionStartedException si la sesión ya está iniciada.
+ */
+Session::setName(string $name): void
+```
+
+Eliminar la sesión:
+
+```php
+/**
+ * @throws SessionNotStartedException si la sesión no está iniciada.
+ */
+Session::destroy(): bool
+```
+
+## Excepciones utilizadas
+
+```php
+use Josantonius\Session\Exceptions\HeadersSentException;
+use Josantonius\Session\Exceptions\SessionException;
+use Josantonius\Session\Exceptions\SessionNotStartedException;
+use Josantonius\Session\Exceptions\SessionStartedException;
+use Josantonius\Session\Exceptions\WrongSessionOptionException;
+```
+
+## Usage
+
+Ejemplos de uso para esta biblioteca:
+
+### Iniciar la sesión sin establecer opciones
+
+```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->start();
 ```
 
-Estableciendo opciones:
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::start();
+```
+
+### Iniciar la sesión estableciendo opciones
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->start([
     // 'cache_expire' => 180,
     // 'cache_limiter' => 'nocache',
@@ -254,243 +419,299 @@ $session->start([
 ]);
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
-Session::start();
+use Josantonius\Session\Facades\Session;
+
+Session::start([
+    'cookie_httponly' => true,
+]);
 ```
 
-### - Comprobar si la sesión está iniciada
-
-[Utilizando objetos](#utilizando-objetos):
+### Comprobar si la sesión fue iniciada
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->isStarted();
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::isStarted();
 ```
 
-### - Establecer un atributo por su nombre
-
-[Utilizando objetos](#utilizando-objetos):
+### Establecer un atributo por su nombre
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->set('foo', 'bar');
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::set('foo', 'bar');
 ```
 
-### - Obtener un atributo por su nombre
-
-[Utilizando objetos](#utilizando-objetos):
-
-Sin valor por defecto si el atributo no existe:
+### Obtener un atributo por su nombre sin establecer valor por defecto
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->get('foo'); // null si el atributo no existe
 ```
 
-Con valor por defecto si el atributo no existe:
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::get('foo'); // null si el atributo no existe
+```
+
+### Obtener un atributo por su nombre estableciendo valor por defecto
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->get('foo', false); // false si el atributo no existe
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
-Session::get('foo');
+use Josantonius\Session\Facades\Session;
+
+Session::get('foo', false); // false si el atributo no existe
 ```
 
-### - Obtener todos los atributos
-
-[Utilizando objetos](#utilizando-objetos):
+### Obtener todos los atributos
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->all();
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::all();
 ```
 
-### - Comprobar si un atributo existe en la sesión
-
-[Utilizando objetos](#utilizando-objetos):
+### Comprobar si un atributo existe en la sesión
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->has('foo');
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::has('foo');
 ```
 
-### - Establecer múltiples atributos de una vez
-
-[Utilizando objetos](#utilizando-objetos):
+### Establecer múltiples atributos de una vez
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::replace(['foo' => 'bar', 'bar' => 'foo']);
 ```
 
-### - Eliminar un atributo por su nombre y devolver su valor
-
-[Utilizando objetos](#utilizando-objetos):
-
-Sin valor por defecto si el atributo no existe:
+### Elimina un atributo y devuelve su valor o el valor por defecto si no existe
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->pull('foo'); // null si el atributo no existe
 ```
 
-Con valor por defecto si el atributo no existe:
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::pull('foo'); // null si el atributo no existe
+```
+
+### Elimina un atributo y devuelve su valor o el valor personalizado si no existe
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->pull('foo', false); // false si el atributo no existe
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
-Session::pull('foo');
+use Josantonius\Session\Facades\Session;
+
+Session::pull('foo', false); // false si el atributo no existe
 ```
 
-### - Eliminar un atributo por su nombre
-
-[Utilizando objetos](#utilizando-objetos):
+### Eliminar un atributo por su nombre
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->remove('foo');
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::remove('foo');
 ```
 
-### - Liberar todas las variables de la sesión
-
-[Utilizando objetos](#utilizando-objetos):
+### Liberar todas las variables de la sesión
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->clear();
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::clear();
 ```
 
-### - Obtiene el ID de la sesión
-
-[Utilizando objetos](#utilizando-objetos):
+### Obtiene el ID de la sesión
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->getId();
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::getId();
 ```
 
-### - Establecer el ID de la sesión
-
-[Utilizando objetos](#utilizando-objetos):
+### Establecer el ID de la sesión
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->setId('foo');
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::setId('foo');
 ```
 
-### - Actualizar el ID de la sesión actual con uno recién generado
-
-[Utilizando objetos](#utilizando-objetos):
-
-Regenerar el ID sin borrar la sesión anterior:
+### Actualizar el ID de la sesión actual con uno recién generado
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->regenerateId();
 ```
 
-Regenerar el ID borrando la sesión anterior:
-
 ```php
-$session->regenerateId(true);
-```
+use Josantonius\Session\Facades\Session;
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
-```php
 Session::regenerateId();
 ```
 
-### - Obtener el nombre de la sesión
-
-[Utilizando objetos](#utilizando-objetos):
+### Actualizar el ID de la sesión actual por otro y eliminar la sesión anterior
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
+$session->regenerateId(true);
+```
+
+```php
+use Josantonius\Session\Facades\Session;
+
+Session::regenerateId(true);
+```
+
+### Obtener el nombre de la sesión
+
+```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->getName();
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::getName();
 ```
 
-### - Establecer el nombre de la sesión
-
-[Utilizando objetos](#utilizando-objetos):
+### Establecer el nombre de la sesión
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->setName('foo');
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::setName('foo');
 ```
 
-### - Eliminar la sesión
-
-[Utilizando objetos](#utilizando-objetos):
+### Eliminar la sesión
 
 ```php
+use Josantonius\Session\Session;
+
+$session = new Session();
+
 $session->destroy();
 ```
 
-[Utilizando la fachada](#utilizando-la-fachada):
-
 ```php
+use Josantonius\Session\Facades\Session;
+
 Session::destroy();
 ```
 
