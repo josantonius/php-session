@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -30,7 +32,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldRegenerateSessionIdWithoutDeletingOldSession(): void
+    public function test_should_regenerate_session_id_without_deleting_old_session(): void
     {
         $this->session->start();
 
@@ -44,7 +46,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldRegenerateSessionIdDeletingOldSession(): void
+    public function test_should_regenerate_session_id_deleting_old_session(): void
     {
         $this->session->start();
 
@@ -58,7 +60,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailWhenRegenerateIdIfSessionIsUnstarted(): void
+    public function test_should_fail_when_regenerate_id_if_session_is_unstarted(): void
     {
         $this->expectException(SessionNotStartedException::class);
 
@@ -68,7 +70,7 @@ class RegenerateIdMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 
