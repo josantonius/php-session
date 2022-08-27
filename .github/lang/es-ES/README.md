@@ -58,19 +58,11 @@ También puedes **clonar el repositorio** completo con Git:
 git clone https://github.com/josantonius/php-session.git
 ```
 
-## Métodos disponibles
+## Clases disponibles
 
-### Session Class
+### Clase Session
 
-```php
-use Josantonius\Session\Session;
-```
-
-Create object:
-
-```php
-$session = new Session();
-```
+`Josantonius\Session\Session`
 
 Iniciar la sesión:
 
@@ -82,13 +74,13 @@ Iniciar la sesión:
  * 
  * @see https://php.net/session.configuration para ver la lista de opciones disponibles.
  */
-$session->start(array $options = []): bool
+public function start(array $options = []): bool;
 ```
 
 Comprobar si la sesión fue iniciada:
 
 ```php
-$session->isStarted(): bool
+public function isStarted(): bool;
 ```
 
 Establecer un atributo por su nombre:
@@ -97,7 +89,7 @@ Establecer un atributo por su nombre:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-$session->set(string $name, mixed $value): void
+public function set(string $name, mixed $value): void;
 ```
 
 Obtener un atributo por su nombre:
@@ -106,19 +98,19 @@ Obtener un atributo por su nombre:
 /**
  * Opcionalmente define un valor por defecto cuando el atributo no existe.
  */
-$session->get(string $name, mixed $default = null): mixed
+public function get(string $name, mixed $default = null): mixed;
 ```
 
 Obtener todos los atributos:
 
 ```php
-$session->all(): array
+public function all(): array;
 ```
 
 Comprobar si un atributo existe en la sesión:
 
 ```php
-$session->has(string $name): bool
+public function has(string $name): bool;
 ```
 
 Establecer múltiples atributos de una vez:
@@ -129,7 +121,7 @@ Establecer múltiples atributos de una vez:
  * 
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-$session->replace(array $data): void
+public function replace(array $data): void;
 ```
 
 Eliminar un atributo por su nombre y devolver su valor:
@@ -140,7 +132,7 @@ Eliminar un atributo por su nombre y devolver su valor:
  * 
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-$session->pull(string $name, mixed $default = null): mixed
+public function pull(string $name, mixed $default = null): mixed;
 ```
 
 Eliminar un atributo por su nombre:
@@ -149,7 +141,7 @@ Eliminar un atributo por su nombre:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-$session->remove(string $name): void
+public function remove(string $name): void;
 ```
 
 Liberar todas las variables de la sesión:
@@ -158,13 +150,13 @@ Liberar todas las variables de la sesión:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-$session->clear(): void
+public function clear(): void;
 ```
 
 Obtiene el ID de la sesión:
 
 ```php
-$session->getId(): string
+public function getId(): string;
 ```
 
 Establecer el ID de la sesión:
@@ -173,7 +165,7 @@ Establecer el ID de la sesión:
 /**
  * @throws SessionStartedException si la sesión ya está iniciada.
  */
-$session->setId(string $sessionId): void
+public function setId(string $sessionId): void;
 ```
 
 Actualizar el ID de la sesión actual con uno recién generado:
@@ -182,13 +174,13 @@ Actualizar el ID de la sesión actual con uno recién generado:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-$session->regenerateId(bool $deleteOldSession = false): bool
+public function regenerateId(bool $deleteOldSession = false): bool;
 ```
 
 Obtener el nombre de la sesión:
 
 ```php
-$session->getName(): string
+public function getName(): string;
 ```
 
 Establecer el nombre de la sesión:
@@ -197,7 +189,7 @@ Establecer el nombre de la sesión:
 /**
  * @throws SessionStartedException si la sesión ya está iniciada.
  */
-$session->setName(string $name): void
+public function setName(string $name): void;
 ```
 
 Eliminar la sesión:
@@ -206,14 +198,12 @@ Eliminar la sesión:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-$session->destroy(): bool
+public function destroy(): bool;
 ```
 
 ### Fachada Session
 
-```php
-use Josantonius\Session\Facades\Session;
-```
+`Josantonius\Session\Facades\Session`
 
 Iniciar la sesión:
 
@@ -225,13 +215,13 @@ Iniciar la sesión:
  * 
  * @see https://php.net/session.configuration para ver la lista de opciones disponibles.
  */
-Session::start(array $options = []): bool
+public static function start(array $options = []): bool;
 ```
 
 Comprobar si la sesión fue iniciada:
 
 ```php
-Session::isStarted(): bool
+public static function isStarted(): bool;
 ```
 
 Establecer un atributo por su nombre:
@@ -240,7 +230,7 @@ Establecer un atributo por su nombre:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-Session::set(string $name, mixed $value): void
+public static function set(string $name, mixed $value): void;
 ```
 
 Obtener un atributo por su nombre:
@@ -249,19 +239,19 @@ Obtener un atributo por su nombre:
 /**
  * Opcionalmente define un valor por defecto cuando el atributo no existe.
  */
-Session::get(string $name, mixed $default = null): mixed
+public static function get(string $name, mixed $default = null): mixed;
 ```
 
 Obtener todos los atributos:
 
 ```php
-Session::all(): array
+public static function all(): array;
 ```
 
 Comprobar si un atributo existe en la sesión:
 
 ```php
-Session::has(string $name): bool
+public static function has(string $name): bool;
 ```
 
 Establecer múltiples atributos de una vez:
@@ -272,7 +262,7 @@ Establecer múltiples atributos de una vez:
  * 
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-Session::replace(array $data): void
+public static function replace(array $data): void;
 ```
 
 Eliminar un atributo por su nombre y devolver su valor:
@@ -283,7 +273,7 @@ Eliminar un atributo por su nombre y devolver su valor:
  * 
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-Session::pull(string $name, mixed $default = null): mixed
+public static function pull(string $name, mixed $default = null): mixed;
 ```
 
 Eliminar un atributo por su nombre:
@@ -292,7 +282,7 @@ Eliminar un atributo por su nombre:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-Session::remove(string $name): void
+public static function remove(string $name): void;
 ```
 
 Liberar todas las variables de la sesión:
@@ -301,13 +291,13 @@ Liberar todas las variables de la sesión:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-Session::clear(): void
+public static function clear(): void;
 ```
 
 Obtiene el ID de la sesión:
 
 ```php
-Session::getId(): string
+public static function getId(): string;
 ```
 
 Establecer el ID de la sesión:
@@ -316,7 +306,7 @@ Establecer el ID de la sesión:
 /**
  * @throws SessionStartedException si la sesión ya está iniciada.
  */
-Session::setId(string $sessionId): void
+public static function setId(string $sessionId): void;
 ```
 
 Actualizar el ID de la sesión actual con uno recién generado:
@@ -325,13 +315,13 @@ Actualizar el ID de la sesión actual con uno recién generado:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-Session::regenerateId(bool $deleteOldSession = false): bool
+public static function regenerateId(bool $deleteOldSession = false): bool;
 ```
 
 Obtener el nombre de la sesión:
 
 ```php
-Session::getName(): string
+public static function getName(): string;
 ```
 
 Establecer el nombre de la sesión:
@@ -340,7 +330,7 @@ Establecer el nombre de la sesión:
 /**
  * @throws SessionStartedException si la sesión ya está iniciada.
  */
-Session::setName(string $name): void
+public static function setName(string $name): void;
 ```
 
 Eliminar la sesión:
@@ -349,7 +339,7 @@ Eliminar la sesión:
 /**
  * @throws SessionNotStartedException si la sesión no está iniciada.
  */
-Session::destroy(): bool
+public static function destroy(): bool;
 ```
 
 ## Excepciones utilizadas
@@ -362,7 +352,7 @@ use Josantonius\Session\Exceptions\SessionStartedException;
 use Josantonius\Session\Exceptions\WrongSessionOptionException;
 ```
 
-## Usage
+## Uso
 
 Ejemplos de uso para esta biblioteca:
 
