@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -30,7 +32,7 @@ class RemoveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldRemoveAttributeIfExist(): void
+    public function test_should_remove_attribute_if_exist(): void
     {
         $this->session->start();
 
@@ -44,7 +46,7 @@ class RemoveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldRemoveAttributeEvenIfNotExist(): void
+    public function test_should_remove_attribute_even_if_not_exist(): void
     {
         $this->session->start();
 
@@ -56,7 +58,7 @@ class RemoveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailIfSessionIsUnstarted(): void
+    public function test_should_fail_if_session_is_unstarted(): void
     {
         $this->expectException(SessionNotStartedException::class);
 
@@ -66,7 +68,7 @@ class RemoveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 

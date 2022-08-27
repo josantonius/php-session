@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -29,7 +31,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetAllAttributes(): void
+    public function test_should_get_all_attributes(): void
     {
         $this->session->start();
 
@@ -41,7 +43,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetAllAttributesDefinedOutsideLibrary(): void
+    public function test_should_get_all_attributes_defined_outside_library(): void
     {
         session_start();
 
@@ -53,7 +55,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnEmptyArrayWhenUnstartedSession(): void
+    public function test_should_return_empty_array_when_unstarted_session(): void
     {
         $this->assertIsArray($this->session->all());
     }
@@ -61,7 +63,7 @@ class AllMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 

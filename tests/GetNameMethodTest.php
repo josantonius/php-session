@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -29,7 +31,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetSessionName(): void
+    public function test_should_get_session_name(): void
     {
         $this->session->start();
 
@@ -39,7 +41,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldGetSessionNameIfNativeSessionWasStarted(): void
+    public function test_should_get_session_name_if_native_session_was_started(): void
     {
         session_start();
 
@@ -49,7 +51,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnEmptyStringIfSessionIsUnstarted(): void
+    public function test_should_return_empty_string_if_session_is_unstarted(): void
     {
         $this->assertEquals('PHPSESSID', $this->session->getName());
     }
@@ -57,7 +59,7 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 

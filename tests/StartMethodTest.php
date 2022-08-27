@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -32,7 +34,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldStartSession(): void
+    public function test_should_start_session(): void
     {
         $this->assertTrue($this->session->start());
 
@@ -44,7 +46,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldAcceptOptions(): void
+    public function test_should_accept_options(): void
     {
         $this->session->start(['cookie_lifetime' => 8000]);
 
@@ -54,7 +56,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailWithWrongOptions(): void
+    public function test_should_fail_with_wrong_options(): void
     {
         $this->expectException(WrongSessionOptionException::class);
 
@@ -64,7 +66,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailWhenSessionIsAlreadyActive(): void
+    public function test_should_fail_when_session_is_already_active(): void
     {
         $this->session->start();
 
@@ -73,7 +75,7 @@ class StartMethodTest extends TestCase
         $this->session->start();
     }
 
-    public function testShouldFailWhenHeadersSent(): void
+    public function test_should_fail_when_headers_sent(): void
     {
         $this->expectException(HeadersSentException::class);
 
@@ -83,7 +85,7 @@ class StartMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 

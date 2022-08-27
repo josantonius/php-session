@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -29,7 +31,7 @@ class IsActiveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldCheckIfSessionIsActive(): void
+    public function test_should_check_if_session_is_active(): void
     {
         $this->assertFalse($this->session->isStarted());
 
@@ -41,7 +43,7 @@ class IsActiveMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 
