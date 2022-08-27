@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -29,7 +31,7 @@ class HasMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldCheckIfAttributeExists(): void
+    public function test_should_check_if_attribute_exists(): void
     {
         $this->session->start();
 
@@ -43,7 +45,7 @@ class HasMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldCheckAttributeDefinedOutsideLibrary(): void
+    public function test_should_check_attribute_defined_outside_library(): void
     {
         session_start();
 
@@ -55,7 +57,7 @@ class HasMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 

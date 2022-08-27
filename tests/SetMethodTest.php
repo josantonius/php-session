@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -30,7 +32,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldSetAttributeIfSessionWasStarted(): void
+    public function test_should_set_attribute_if_session_was_started(): void
     {
         $this->session->start();
 
@@ -42,7 +44,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldSetAttributeIfNativeSessionWasStarted(): void
+    public function test_should_set_attribute_if_native_session_was_started(): void
     {
         session_start();
 
@@ -54,7 +56,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailIfSessionIsUnstarted(): void
+    public function test_should_fail_if_session_is_unstarted(): void
     {
         $this->expectException(SessionNotStartedException::class);
 
@@ -64,7 +66,7 @@ class SetMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 

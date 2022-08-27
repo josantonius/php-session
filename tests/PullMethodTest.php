@@ -7,6 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 
 namespace Josantonius\Session\Tests;
@@ -30,7 +32,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldPullAttributeAndReturnTheValueIfExists(): void
+    public function test_should_pull_attribute_and_return_the_value_if_exists(): void
     {
         $this->session->start();
 
@@ -44,7 +46,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnDefaultValueIfAttributeNotExists(): void
+    public function test_should_return_default_value_if_attribute_not_exists(): void
     {
         $this->session->start();
 
@@ -54,7 +56,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldReturnCustomDefaultValueIfAttributeNotExists(): void
+    public function test_should_return_custom_default_value_if_attribute_not_exists(): void
     {
         $this->session->start();
 
@@ -64,7 +66,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldFailIfSessionIsUnstarted()
+    public function test_should_fail_if_session_is_unstarted()
     {
         $this->expectException(SessionNotStartedException::class);
 
@@ -74,7 +76,7 @@ class PullMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldBeAvailableFromTheFacade(): void
+    public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
 
