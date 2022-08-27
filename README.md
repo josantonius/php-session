@@ -26,7 +26,7 @@ PHP library for handling sessions.
 - [TODO](#todo)
 - [Changelog](#changelog)
 - [Contribution](#contribution)
-- [Sponsor](#Sponsor)
+- [Sponsor](#sponsor)
 - [License](#license)
 
 ---
@@ -62,15 +62,7 @@ git clone https://github.com/josantonius/php-session.git
 
 ### Session Class
 
-```php
-use Josantonius\Session\Session;
-```
-
-Create object:
-
-```php
-$session = new Session();
-```
+`Josantonius\Session\Session`
 
 Starts the session:
 
@@ -82,13 +74,13 @@ Starts the session:
  * 
  * @see https://php.net/session.configuration for List of available $options.
  */
-$session->start(array $options = []): bool
+public function start(array $options = []): bool;
 ```
 
 Check if the session is started:
 
 ```php
-$session->isStarted(): bool
+public function isStarted(): bool;
 ```
 
 Sets an attribute by name:
@@ -97,7 +89,7 @@ Sets an attribute by name:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-$session->set(string $name, mixed $value): void
+public function set(string $name, mixed $value): void;
 ```
 
 Gets an attribute by name:
@@ -106,19 +98,19 @@ Gets an attribute by name:
 /**
  * Optionally defines a default value when the attribute does not exist.
  */
-$session->get(string $name, mixed $default = null): mixed
+public function get(string $name, mixed $default = null): mixed;
 ```
 
 Gets all attributes:
 
 ```php
-$session->all(): array
+public function all(): array;
 ```
 
 Check if an attribute exists in the session:
 
 ```php
-$session->has(string $name): bool
+public function has(string $name): bool;
 ```
 
 Sets several attributes at once:
@@ -129,7 +121,7 @@ Sets several attributes at once:
  * 
  * @throws SessionNotStartedException if session was not started.
  */
-$session->replace(array $data): void
+public function replace(array $data): void;
 ```
 
 Deletes an attribute by name and returns its value:
@@ -140,7 +132,7 @@ Deletes an attribute by name and returns its value:
  * 
  * @throws SessionNotStartedException if session was not started.
  */
-$session->pull(string $name, mixed $default = null): mixed
+public function pull(string $name, mixed $default = null): mixed;
 ```
 
 Deletes an attribute by name:
@@ -149,7 +141,7 @@ Deletes an attribute by name:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-$session->remove(string $name): void
+public function remove(string $name): void;
 ```
 
 Free all session variables:
@@ -158,13 +150,13 @@ Free all session variables:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-$session->clear(): void
+public function clear(): void;
 ```
 
 Gets the session ID:
 
 ```php
-$session->getId(): string
+public function getId(): string;
 ```
 
 Sets the session ID:
@@ -173,7 +165,7 @@ Sets the session ID:
 /**
  * @throws SessionStartedException if session already started.
  */
-$session->setId(string $sessionId): void
+public function setId(string $sessionId): void;
 ```
 
 Update the current session ID with a newly generated one:
@@ -182,13 +174,13 @@ Update the current session ID with a newly generated one:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-$session->regenerateId(bool $deleteOldSession = false): bool
+public function regenerateId(bool $deleteOldSession = false): bool;
 ```
 
 Gets the session name:
 
 ```php
-$session->getName(): string
+public function getName(): string;
 ```
 
 Sets the session name:
@@ -197,7 +189,7 @@ Sets the session name:
 /**
  * @throws SessionStartedException if session already started.
  */
-$session->setName(string $name): void
+public function setName(string $name): void;
 ```
 
 Destroys the session:
@@ -206,14 +198,12 @@ Destroys the session:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-$session->destroy(): bool
+public function destroy(): bool;
 ```
 
 ### Session Facade
 
-```php
-use Josantonius\Session\Facades\Session;
-```
+`Josantonius\Session\Facades\Session`
 
 Starts the session:
 
@@ -225,13 +215,13 @@ Starts the session:
  * 
  * @see https://php.net/session.configuration for List of available $options.
  */
-Session::start(array $options = []): bool
+public static function start(array $options = []): bool;
 ```
 
 Check if the session is started:
 
 ```php
-Session::isStarted(): bool
+public static function isStarted(): bool;
 ```
 
 Sets an attribute by name:
@@ -240,7 +230,7 @@ Sets an attribute by name:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-Session::set(string $name, mixed $value): void
+public static function set(string $name, mixed $value): void;
 ```
 
 Gets an attribute by name:
@@ -249,19 +239,19 @@ Gets an attribute by name:
 /**
  * Optionally defines a default value when the attribute does not exist.
  */
-Session::get(string $name, mixed $default = null): mixed
+public static function get(string $name, mixed $default = null): mixed;
 ```
 
 Gets all attributes:
 
 ```php
-Session::all(): array
+public static function all(): array;
 ```
 
 Check if an attribute exists in the session:
 
 ```php
-Session::has(string $name): bool
+public static function has(string $name): bool;
 ```
 
 Sets several attributes at once:
@@ -272,7 +262,7 @@ Sets several attributes at once:
  * 
  * @throws SessionNotStartedException if session was not started.
  */
-Session::replace(array $data): void
+public static function replace(array $data): void;
 ```
 
 Deletes an attribute by name and returns its value:
@@ -283,7 +273,7 @@ Deletes an attribute by name and returns its value:
  * 
  * @throws SessionNotStartedException if session was not started.
  */
-Session::pull(string $name, mixed $default = null): mixed
+public static function pull(string $name, mixed $default = null): mixed;
 ```
 
 Deletes an attribute by name:
@@ -292,7 +282,7 @@ Deletes an attribute by name:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-Session::remove(string $name): void
+public static function remove(string $name): void;
 ```
 
 Free all session variables:
@@ -301,13 +291,13 @@ Free all session variables:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-Session::clear(): void
+public static function clear(): void;
 ```
 
 Gets the session ID:
 
 ```php
-Session::getId(): string
+public static function getId(): string;
 ```
 
 Sets the session ID:
@@ -316,7 +306,7 @@ Sets the session ID:
 /**
  * @throws SessionStartedException if session already started.
  */
-Session::setId(string $sessionId): void
+public static function setId(string $sessionId): void;
 ```
 
 Update the current session ID with a newly generated one:
@@ -325,13 +315,13 @@ Update the current session ID with a newly generated one:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-Session::regenerateId(bool $deleteOldSession = false): bool
+public static function regenerateId(bool $deleteOldSession = false): bool;
 ```
 
 Gets the session name:
 
 ```php
-Session::getName(): string
+public static function getName(): string;
 ```
 
 Sets the session name:
@@ -340,7 +330,7 @@ Sets the session name:
 /**
  * @throws SessionStartedException if session already started.
  */
-Session::setName(string $name): void
+public static function setName(string $name): void;
 ```
 
 Destroys the session:
@@ -349,7 +339,7 @@ Destroys the session:
 /**
  * @throws SessionNotStartedException if session was not started.
  */
-Session::destroy(): bool
+public static function destroy(): bool;
 ```
 
 ## Exceptions Used
