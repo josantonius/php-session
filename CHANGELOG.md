@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## [v2.0.8](https://github.com/josantonius/php-session/releases/tag/v2.0.8) (2022-09-29)
+
+* The notation type in the test function names has been changed from camel to snake case for readability.
+
+* Functions were added to document the methods and avoid confusion.
+
+* Disabled the ´CamelCaseMethodName´ rule in ´phpmd.xml´ to avoid warnings about function names in tests.
+
+* The alignment of the asterisks in the comments has been fixed.
+
+* Tests for Windows have been added.
+
+* Tests for PHP 8.2 have been added.
+
 ## [v2.0.7](https://github.com/josantonius/php-session/releases/tag/v2.0.7) (2022-08-11)
 
 * Improved documentation.
