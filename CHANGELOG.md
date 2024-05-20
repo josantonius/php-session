@@ -2,7 +2,7 @@
 
 ## [v2.0.9](https://github.com/josantonius/php-session/releases/tag/v2.0.9) (2024-05-20)
 
-* Tests for PHP 8.3 have been added. 
+* Tests for PHP 8.3 have been added.
 
 ## [v2.0.8](https://github.com/josantonius/php-session/releases/tag/v2.0.8) (2022-09-29)
 
