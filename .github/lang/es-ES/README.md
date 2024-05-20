@@ -35,7 +35,7 @@ Biblioteca PHP para manejo de sesiones.
 
 - Sistema operativo: Linux | Windows.
 
-- Versiones de PHP: 8.0 | 8.1 | 8.2.
+- Versiones de PHP: 8.0 | 8.1 | 8.2 | 8.3.
 
 ## Instalación
 
