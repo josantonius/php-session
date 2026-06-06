@@ -753,7 +753,6 @@ composer tests
 - [ ] Add new feature
 - [ ] Improve tests
 - [ ] Improve documentation
-- [ ] Improve English translation in the README file
 - [ ] Refactor code for disabled code style rules (see phpmd.xml and phpcs.xml)
 - [ ] Show an example of renewing the session lifetime
 - [ ] Feature to enable/disable exceptions?
