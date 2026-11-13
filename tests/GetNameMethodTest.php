@@ -51,9 +51,12 @@ class GetNameMethodTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function test_should_return_empty_string_if_session_is_unstarted(): void
+    public function test_should_get_configured_name_before_session_start(): void
     {
-        $this->assertEquals('PHPSESSID', $this->session->getName());
+        session_name('ConfiguredSession');
+
+        $this->assertSame('ConfiguredSession', $this->session->getName());
+        $this->assertSame(PHP_SESSION_NONE, session_status());
     }
 
     /**
@@ -63,6 +66,9 @@ class GetNameMethodTest extends TestCase
     {
         $facade = new SessionFacade();
 
-        $this->assertEquals('PHPSESSID', $facade->getName());
+        session_name('FacadeSessionName');
+
+        $this->assertSame('FacadeSessionName', $facade->getName());
+        $this->assertSame(PHP_SESSION_NONE, session_status());
     }
 }

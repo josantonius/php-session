@@ -9,8 +9,6 @@
 [![PSR4](https://img.shields.io/badge/PSR-4-9b59b6.svg)](https://www.php-fig.org/psr/psr-4/)
 [![PSR12](https://img.shields.io/badge/PSR-12-1abc9c.svg)](https://www.php-fig.org/psr/psr-12/)
 
-**Translations**: [Español](.github/lang/es-ES/README.md)
-
 PHP library for handling sessions.
 
 ---
@@ -22,6 +20,7 @@ PHP library for handling sessions.
   - [Session Facade](#session-facade)
 - [Exceptions Used](#exceptions-used)
 - [Usage](#usage)
+- [Security Best Practices](#security-best-practices)
 - [Tests](#tests)
 - [TODO](#todo)
 - [Changelog](#changelog)
@@ -35,7 +34,7 @@ PHP library for handling sessions.
 
 - Operating System: Linux | Windows.
 
-- PHP versions: 8.0 | 8.1 | 8.2 | 8.3.
+- PHP: 8.0–8.5.
 
 ## Installation
 
@@ -376,38 +375,21 @@ Session::start();
 
 ### Starts the session setting options
 
+Recommended configuration for an HTTPS application. Adjust it to your application's needs;
+see [Security Best Practices](#security-best-practices).
+
 ```php
 use Josantonius\Session\Session;
 
 $session = new Session();
 
 $session->start([
-    // 'cache_expire' => 180,
-    // 'cache_limiter' => 'nocache',
-    // 'cookie_domain' => '',
+    'use_strict_mode' => true,
+    'use_only_cookies' => true,
+    'use_cookies' => true,
     'cookie_httponly' => true,
-    'cookie_lifetime' => 8000,
-    // 'cookie_path' => '/',
-    'cookie_samesite' => 'Strict',
-    'cookie_secure'   => true,
-    // 'gc_divisor' => 100,
-    // 'gc_maxlifetime' => 1440,
-    // 'gc_probability' => true,
-    // 'lazy_write' => true,
-    // 'name' => 'PHPSESSID',
-    // 'read_and_close' => false,
-    // 'referer_check' => '',
-    // 'save_handler' => 'files',
-    // 'save_path' => '',
-    // 'serialize_handler' => 'php',
-    // 'sid_bits_per_character' => 4,
-    // 'sid_length' => 32,
-    // 'trans_sid_hosts' => $_SERVER['HTTP_HOST'],
-    // 'trans_sid_tags' => 'a=href,area=href,frame=src,form=',
-    // 'use_cookies' => true,
-    // 'use_only_cookies' => true,
-    // 'use_strict_mode' => false,
-    // 'use_trans_sid' => false,
+    'cookie_secure' => true,
+    'cookie_samesite' => 'Lax',
 ]);
 ```
 
@@ -415,7 +397,12 @@ $session->start([
 use Josantonius\Session\Facades\Session;
 
 Session::start([
+    'use_strict_mode' => true,
+    'use_only_cookies' => true,
+    'use_cookies' => true,
     'cookie_httponly' => true,
+    'cookie_secure' => true,
+    'cookie_samesite' => 'Lax',
 ]);
 ```
 
@@ -645,6 +632,9 @@ Session::regenerateId();
 
 ### Update the current session ID with a newly generated one deleting the old session
 
+Immediate deletion can disrupt concurrent requests. Read
+[Security Best Practices](#regenerate-ids-at-authentication-boundaries) before choosing this option.
+
 ```php
 use Josantonius\Session\Session;
 
@@ -706,6 +696,76 @@ use Josantonius\Session\Facades\Session;
 
 Session::destroy();
 ```
+
+## Security Best Practices
+
+The library uses PHP's session configuration, including settings from `php.ini`, `ini_set()` and
+`session_set_cookie_params()`. Options passed to `Session::start()` override those settings; omitted
+options keep their current values. Choose settings that suit your environment and application.
+
+### Session and cookie settings
+
+- Enable `use_strict_mode` to reject uninitialized session IDs. The built-in `files` handler supports
+  it. Custom handlers need ID validation through `SessionUpdateTimestampHandlerInterface::validateId()`
+  or the `validate_sid` callback.
+- Enable `cookie_httponly` to prevent JavaScript from reading the session cookie.
+- Use HTTPS throughout the authenticated application and enable `cookie_secure` so the cookie is
+  sent only over secure connections. Secure cookies generally do not work over plain HTTP.
+- Keep `use_only_cookies` and `use_cookies` enabled to avoid exposing session IDs in URLs.
+
+See PHP's [session security settings](https://www.php.net/manual/en/session.security.ini.php).
+
+Choose `cookie_samesite` according to your application's navigation and authentication flows:
+
+| Value | Behavior and compatibility |
+| --- | --- |
+| `Lax` | Sends cookies on same-site requests and top-level cross-site navigation using safe methods such as GET. Suitable for many applications, but can disrupt cross-site POST callbacks and embedded content. |
+| `Strict` | Sends cookies only on same-site requests. Following a link from another site can initially omit the session cookie. |
+| `None` | Allows cross-site cookies and requires `cookie_secure = true` in modern browsers. Older clients may interpret it differently, and third-party-cookie restrictions can still block it. |
+
+Keep CSRF protection and XSS prevention in place regardless of cookie settings. Check the
+[browser compatibility details](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#samesitesamesite-value)
+for the clients your application supports.
+
+### Optional partitioned cookies (PHP 8.5+)
+
+`cookie_partitioned` enables cookies partitioned by top-level site (CHIPS), useful for some embedded
+services. It requires PHP 8.5+ and `cookie_secure = true`. Omitting it keeps PHP's configured value.
+On older PHP versions, supplying it throws `WrongSessionOptionException`, even as `false`.
+See the [PHP reference](https://www.php.net/manual/en/session.configuration.php#ini.session.cookie-partitioned).
+
+### Regenerate IDs at authentication boundaries
+
+Call `regenerateId()` after verifying credentials or authorizing a privilege change, before saving
+the new identity or privileges. `use_strict_mode` does not replace regeneration. `start()` does not
+regenerate IDs automatically.
+
+With an active `$session` and an `$authenticatedUserId` obtained by verifying credentials:
+
+```php
+if (!$session->regenerateId()) {
+    throw new RuntimeException('Session ID regeneration failed.');
+}
+
+$session->set('user_id', $authenticatedUserId);
+```
+
+`regenerateId()` keeps the old session data; `regenerateId(true)` deletes it immediately, which can
+disrupt concurrent requests or unstable connections. Manage old IDs with timestamps and a short,
+bounded transition period. New privileges must belong only to the new ID, and access through the old
+ID must expire independently of PHP's garbage collection. See PHP's
+[session management guidance](https://www.php.net/manual/en/features.session.security.management.php)
+and [regeneration examples](https://www.php.net/manual/en/function.session-regenerate-id.php).
+
+### PHP versions and changing defaults
+
+PHP defaults can change between releases. The accepted
+[PHP 8.6 RFC](https://wiki.php.net/rfc/session_security_defaults) enables `use_strict_mode` and
+`cookie_httponly` by default and sets `cookie_samesite` to `Lax`. Existing configuration can override
+these values. Set the options your application needs explicitly, especially for custom session IDs
+or cross-site authentication. See [Requirements](#requirements) for compatible PHP versions.
+
+To report a vulnerability privately, see [SECURITY.md](SECURITY.md).
 
 ## Tests
 

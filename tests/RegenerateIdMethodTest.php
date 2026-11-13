@@ -13,12 +13,11 @@
 
 namespace Josantonius\Session\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Josantonius\Session\Session;
 use Josantonius\Session\Facades\Session as SessionFacade;
 use Josantonius\Session\Exceptions\SessionNotStartedException;
 
-class RegenerateIdMethodTest extends TestCase
+class RegenerateIdMethodTest extends SessionTestCase
 {
     private Session $session;
 
@@ -31,30 +30,58 @@ class RegenerateIdMethodTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     * @dataProvider regenerationProvider
      */
-    public function test_should_regenerate_session_id_without_deleting_old_session(): void
-    {
-        $this->session->start();
+    public function test_should_preserve_native_regeneration_semantics(
+        ?bool $deleteOldSession,
+        bool $native
+    ): void {
+        $this->assertTrue($this->session->start(['use_strict_mode' => true]));
+        $this->session->set('cart', ['item' => 2]);
+        $oldId = $this->session->getId();
+        $oldFile = session_save_path() . '/sess_' . $oldId;
 
-        $sessionId = session_id();
+        $regenerate = $native ? 'session_regenerate_id' : [$this->session, 'regenerateId'];
+        $result = $deleteOldSession === null ? $regenerate() : $regenerate($deleteOldSession);
 
-        $this->assertTrue($this->session->regenerateId());
+        $this->assertTrue($result);
+        $newId = $this->session->getId();
+        $this->assertNotSame($oldId, $newId);
+        $this->assertNotSame('', $newId);
+        $this->assertSame(PHP_SESSION_ACTIVE, session_status());
+        $this->assertSame(['cart' => ['item' => 2]], $this->session->all());
+        $this->session->set('authenticated', true);
+        $this->assertTrue(session_write_close());
+        clearstatcache();
+        $this->assertSame($deleteOldSession !== true, is_file($oldFile));
 
-        $this->assertNotEquals($sessionId, session_id());
+        // Verify persistence, not just the in-memory session array.
+        $_SESSION = [];
+        session_id($newId);
+        $this->assertTrue(session_start());
+        $this->assertSame(['cart' => ['item' => 2], 'authenticated' => true], $_SESSION);
+        $this->assertTrue(session_write_close());
+
+        if ($deleteOldSession !== true) {
+            $_SESSION = [];
+            session_id($oldId);
+            $this->assertTrue(session_start());
+            $this->assertSame($oldId, session_id());
+            $this->assertSame(['cart' => ['item' => 2]], $_SESSION);
+        }
     }
 
-    /**
-     * @runInSeparateProcess
-     */
-    public function test_should_regenerate_session_id_deleting_old_session(): void
+    public function regenerationProvider(): array
     {
-        $this->session->start();
-
-        $sessionId = session_id();
-
-        $this->assertTrue($this->session->regenerateId());
-
-        $this->assertNotEquals($sessionId, session_id());
+        return [
+            'wrapper default retains old data' => [null, false],
+            'wrapper false retains old data' => [false, false],
+            'wrapper true deletes old data' => [true, false],
+            'native default retains old data' => [null, true],
+            'native false retains old data' => [false, true],
+            'native true deletes old data' => [true, true],
+        ];
     }
 
     /**

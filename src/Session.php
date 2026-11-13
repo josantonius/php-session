@@ -24,42 +24,16 @@ use Josantonius\Session\Exceptions\WrongSessionOptionException;
 class Session
 {
     /**
-     * Starts the session.
+     * Starts the session with the supplied PHP options.
      *
-     * List of available $options with their default values:
-     *
-     * * cache_expire: "180"
-     * * cache_limiter: "nocache"
-     * * cookie_domain: ""
-     * * cookie_httponly: "0"
-     * * cookie_lifetime: "0"
-     * * cookie_path: "/"
-     * * cookie_samesite: ""
-     * * cookie_secure: "0"
-     * * gc_divisor: "100"
-     * * gc_maxlifetime: "1440"
-     * * gc_probability: "1"
-     * * lazy_write: "1"
-     * * name: "PHPSESSID"
-     * * read_and_close: "0"
-     * * referer_check: ""
-     * * save_handler: "files"
-     * * save_path: ""
-     * * serialize_handler: "php"
-     * * sid_bits_per_character: "4"
-     * * sid_length: "32"
-     * * trans_sid_hosts: $_SERVER['HTTP_HOST']
-     * * trans_sid_tags: "a=href,area=href,frame=src,form="
-     * * use_cookies: "1"
-     * * use_only_cookies: "1"
-     * * use_strict_mode: "0"
-     * * use_trans_sid: "0"
+     * Omitted options keep their current PHP values.
+     * cookie_partitioned is accepted only on PHP 8.5 or later.
      *
      * @see https://php.net/session.configuration
      *
      * @throws HeadersSentException        if headers already sent.
      * @throws SessionStartedException     if session already started.
-     * @throws WrongSessionOptionException If setting options failed.
+     * @throws WrongSessionOptionException if an option name is not supported.
      */
     public function start(array $options = []): bool
     {
@@ -254,6 +228,10 @@ class Session
             'trans_sid_hosts', 'trans_sid_tags',    'use_cookies',            'use_only_cookies',
             'use_strict_mode', 'use_trans_sid',
         ]);
+
+        if (PHP_VERSION_ID >= 80500) {
+            $validOptions['cookie_partitioned'] = true;
+        }
 
         foreach (array_keys($options) as $key) {
             if (!isset($validOptions[$key])) {

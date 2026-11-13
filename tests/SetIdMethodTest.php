@@ -34,6 +34,8 @@ class SetIdMethodTest extends TestCase
      */
     public function test_should_set_session_id(): void
     {
+        ini_set('session.use_strict_mode', '0');
+
         $this->session->setId('foo');
 
         $this->session->start();
@@ -59,6 +61,8 @@ class SetIdMethodTest extends TestCase
     public function test_should_be_available_from_the_facade(): void
     {
         $facade = new SessionFacade();
+
+        ini_set('session.use_strict_mode', '0');
 
         $facade->setId('foo');
 

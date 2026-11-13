@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## Unreleased
+
+* Added support for the `cookie_partitioned` session option (PHP 8.5+).
+  Earlier PHP versions continue to reject this option with `WrongSessionOptionException`.
+
+* Added PHP 8.4 and 8.5 to the CI test matrix.
+
+* Expanded tests for session configuration, cookie attributes, strict mode, session names and
+  ID regeneration, including comparisons with native PHP.
+
+* Added security recommendations for session configuration and ID regeneration, and a `SECURITY.md`
+  with private reporting instructions.
+
+* Updated CI to use `actions/checkout@v7` and `codecov/codecov-action@v5`, with explicit Xdebug coverage.
+
+* Raised development requirements to PHPUnit 9.6.39 and PHP_CodeSniffer 3.13.6, and removed an
+  obsolete PHP_CodeSniffer rule.
+
+* Simplified the facade factory and temporary test directories without changing the public API.
+
+* Removed Spanish documentation translations. Documentation is now maintained in English only.
+
 ## [v2.0.9](https://github.com/josantonius/php-session/releases/tag/v2.0.9) (2024-05-20)
 
 * Tests for PHP 8.3 have been added.
