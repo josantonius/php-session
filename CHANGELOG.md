@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## [v2.1.0](https://github.com/josantonius/php-session/releases/tag/v2.1.0) (2026-11-14)
 
 * Added support for the `cookie_partitioned` session option (PHP 8.5+).
   Earlier PHP versions continue to reject this option with `WrongSessionOptionException`.
