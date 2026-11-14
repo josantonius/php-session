@@ -10,3 +10,9 @@ php-session.code-workspace
 .repository.md
 .phpunit.result.cache
 coverage.xml
+/.nia/
+/.agents/
+/.codex/
+/AGENTS.md
+/sgconfig.yml
+/package.json
